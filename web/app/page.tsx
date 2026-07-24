@@ -124,8 +124,10 @@ export default function Home() {
               projects={SAMARQAND_PROJECTS}
               selectedProject={selectedProject}
               onSelectProject={(proj) => {
-                setSelectedProject(proj);
-                showToast(`Ob'ekt Tanlandi: ${proj.name}`);
+                if (proj) {
+                  setSelectedProject(proj);
+                  showToast(`Ob'ekt Tanlandi: ${proj.name}`);
+                }
               }}
               theme="light"
             />

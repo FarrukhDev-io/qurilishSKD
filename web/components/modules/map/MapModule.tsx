@@ -3,12 +3,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { ProjectData } from '../../../data/samarqandProjects';
 import { getLightModeBadgeStyle } from '../../../services/gisService';
-import { Layers, Filter, Activity, Info, ChevronDown, ChevronUp, AlertCircle, ShieldAlert, CheckCircle2, Building2 } from 'lucide-react';
+import { Layers, Filter, Activity, Info, ChevronDown, ChevronUp, AlertCircle, ShieldAlert, CheckCircle2, Building2, X } from 'lucide-react';
 
 export interface MapModuleProps {
   projects: ProjectData[];
   selectedProject: ProjectData;
-  onSelectProject: (proj: ProjectData) => void;
+  onSelectProject: (proj: ProjectData | null) => void;
   theme?: 'light' | 'dark';
 }
 
@@ -23,7 +23,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
 
   const [filterStatus, setFilterStatus] = useState<'all' | 'red_flag' | 'unesco_warning' | 'on_schedule'>('all');
   const [activeLayer, setActiveLayer] = useState<'optical' | 'insar' | 'unesco'>('optical');
-  const [isLegendOpen, setIsLegendOpen] = useState(true);
+  const [isLegendOpen, setIsLegendOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -40,12 +40,15 @@ export const MapModule: React.FC<MapModuleProps> = ({
       });
 
       if (!mapInstanceRef.current && container) {
-        // Initialize Map in Canvas Mode for 60 FPS performance
+        // Initialize Map in Canvas Mode & Full Mobile Touch Support
         const map = L.map(container, {
           center: [39.658, 66.98],
           zoom: 12,
           zoomControl: false,
           preferCanvas: true, // ⚡ Canvas Mode
+          touchZoom: true,
+          dragging: true,
+          bounceAtZoomLimits: true,
         });
 
         L.control.zoom({ position: 'bottomright' }).addTo(map);
@@ -110,12 +113,12 @@ export const MapModule: React.FC<MapModuleProps> = ({
           html: `
             <div class="relative flex items-center justify-center">
               ${project.status === 'red_flag' ? `<span class="absolute inline-flex h-8 w-8 rounded-full opacity-75 animate-ping" style="background-color: ${color}"></span>` : ''}
-              <div class="relative w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-md border-2 border-white cursor-pointer hover:scale-125 transition-transform" style="background-color: ${color}">
+              <div class="relative w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-md border-2 border-white cursor-pointer hover:scale-125 transition-transform" style="background-color: ${color}">
               </div>
             </div>
           `,
-          iconSize: [26, 26],
-          iconAnchor: [13, 13],
+          iconSize: [28, 28],
+          iconAnchor: [14, 14],
         });
 
         // Add Marker
@@ -131,8 +134,8 @@ export const MapModule: React.FC<MapModuleProps> = ({
             renderer: L.canvas(), // Canvas Mode
             color: polyColor,
             fillColor: polyColor,
-            fillOpacity: selectedProject.id === project.id ? 0.35 : 0.18,
-            weight: selectedProject.id === project.id ? 2.5 : 1.5,
+            fillOpacity: selectedProject && selectedProject.id === project.id ? 0.35 : 0.18,
+            weight: selectedProject && selectedProject.id === project.id ? 2.5 : 1.5,
           }).addTo(layerGroup);
 
           polygon.on('click', () => {
@@ -144,32 +147,33 @@ export const MapModule: React.FC<MapModuleProps> = ({
   }, [projects, filterStatus, activeLayer, selectedProject, onSelectProject]);
 
   return (
-    <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6 text-[#0F172A]">
+    <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4 sm:space-y-6 text-[#0F172A] overflow-x-hidden">
       
       {/* 1. SECTION HEADER VA SPACIOUS UI */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
-          <h2 className="text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5">
+          <h2 className="text-lg sm:text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5 flex-wrap gap-1">
             <span>SAMARQAND GIS MONITORINGI</span>
             <span className="bg-[#95E616] text-[#0F172A] px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider shadow-xs">
               SENTINEL-1/2 RADAR
             </span>
           </h2>
-          <p className="text-sm text-slate-500 font-bold mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 font-bold mt-1">
             Canvas Mode 60 FPS GIS xarita va Sentinel InSAR radar poydevor cho'kish monitoringi
           </p>
         </div>
 
-        {/* Status Filter Capsule Pills */}
-        <div className="flex items-center space-x-2 flex-wrap gap-2">
-          <span className="text-xs text-slate-500 font-bold flex items-center space-x-1">
+        {/* Status Filter Capsule Pills (Gorizontal Scrollable) */}
+        <div className="flex items-center space-x-2 w-full md:w-auto">
+          <span className="text-xs text-slate-500 font-bold hidden sm:flex items-center space-x-1 shrink-0">
             <Filter className="w-4 h-4" />
             <span>Filter:</span>
           </span>
-          <div className="flex items-center space-x-1.5 bg-slate-100 p-1.5 rounded-full border border-slate-200 text-sm">
+
+          <div className="flex items-center space-x-1.5 bg-slate-100 p-1.5 rounded-full border border-slate-200 text-sm overflow-x-auto no-scrollbar w-full md:w-auto py-1">
             <button
               onClick={() => setFilterStatus('all')}
-              className={`px-4 py-2 rounded-full text-xs font-extrabold transition-all cursor-pointer ${
+              className={`px-4 py-2.5 rounded-full text-xs font-extrabold transition-all cursor-pointer whitespace-nowrap min-h-[44px] flex items-center ${
                 filterStatus === 'all'
                   ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
                   : 'text-slate-600 hover:text-slate-900'
@@ -179,7 +183,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
             </button>
             <button
               onClick={() => setFilterStatus('red_flag')}
-              className={`px-4 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer ${
+              className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${
                 filterStatus === 'red_flag'
                   ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
                   : 'text-slate-600 hover:text-rose-600'
@@ -190,7 +194,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
             </button>
             <button
               onClick={() => setFilterStatus('unesco_warning')}
-              className={`px-4 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer ${
+              className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${
                 filterStatus === 'unesco_warning'
                   ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
                   : 'text-slate-600 hover:text-amber-600'
@@ -201,7 +205,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
             </button>
             <button
               onClick={() => setFilterStatus('on_schedule')}
-              className={`px-4 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer ${
+              className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${
                 filterStatus === 'on_schedule'
                   ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
                   : 'text-slate-600 hover:text-[#65A30D]'
@@ -214,82 +218,79 @@ export const MapModule: React.FC<MapModuleProps> = ({
         </div>
       </div>
 
-      {/* 2. LEAFLET MAP CONTAINER */}
-      <div className="relative w-full h-[580px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50">
+      {/* 2. LEAFLET MAP CONTAINER (Responsive Height) */}
+      <div className="relative w-full h-[380px] sm:h-[480px] lg:h-[540px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50">
         
-        {/* Layer Switcher Pill Overlay */}
-        <div className="absolute top-4 left-4 z-20 flex items-center space-x-1 bg-white/95 backdrop-blur-md p-1.5 rounded-full border border-slate-200 shadow-sm">
+        {/* Layer Switcher Pill Overlay (Horizontal Scroll on Mobile) */}
+        <div className="absolute top-3 left-3 z-20 flex items-center space-x-1 bg-white/95 backdrop-blur-md p-1 sm:p-1.5 rounded-full border border-slate-200 shadow-sm max-w-[calc(100%-60px)] sm:max-w-none overflow-x-auto no-scrollbar">
           <button
             onClick={() => setActiveLayer('optical')}
-            className={`px-4 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer ${
+            className={`px-3 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
               activeLayer === 'optical'
                 ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <Layers className="w-4 h-4" />
+            <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span>Sentinel-2 Optik</span>
           </button>
           
           <button
             onClick={() => setActiveLayer('insar')}
-            className={`px-4 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer ${
+            className={`px-3 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
               activeLayer === 'insar'
                 ? 'bg-rose-500 text-white shadow-md'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <Activity className="w-4 h-4" />
-            <span>Sentinel-1 InSAR Radar</span>
+            <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span>Sentinel-1 InSAR</span>
           </button>
 
           <button
             onClick={() => setActiveLayer('unesco')}
-            className={`px-4 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer ${
+            className={`px-3 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
               activeLayer === 'unesco'
                 ? 'bg-amber-500 text-white shadow-md'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <Building2 className="w-4 h-4" />
-            <span>YUNESKO Bufer Zonasi</span>
+            <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span>YUNESKO Zonasi</span>
           </button>
         </div>
 
         {/* 3. CLEAN MAP VISUAL LEGEND (Top Right) */}
-        <div className="absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-xs max-w-xs transition-all">
+        <div className="absolute top-3 right-3 z-20 bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-xs max-w-[160px] sm:max-w-xs transition-all">
           <button
             onClick={() => setIsLegendOpen(!isLegendOpen)}
-            className="w-full px-4 py-2.5 bg-slate-50 flex items-center justify-between font-extrabold text-slate-800 border-b border-slate-200 hover:bg-slate-100 transition-colors"
+            className="w-full px-3 py-2 sm:px-4 sm:py-2.5 bg-slate-50 flex items-center justify-between font-extrabold text-slate-800 border-b border-slate-200 hover:bg-slate-100 transition-colors min-h-[38px]"
           >
-            <span className="flex items-center space-x-2">
-              <Info className="w-4 h-4 text-[#82C91E]" />
-              <span>GIS Xarita Legendasi</span>
+            <span className="flex items-center space-x-1.5">
+              <Info className="w-3.5 h-3.5 text-[#82C91E] shrink-0" />
+              <span className="hidden sm:inline">GIS Xarita Legendasi</span>
+              <span className="sm:hidden">Legenda</span>
             </span>
             {isLegendOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
 
           {isLegendOpen && (
-            <div className="p-3.5 space-y-2.5 text-xs text-slate-700 font-bold">
+            <div className="p-3 space-y-2 text-[11px] sm:text-xs text-slate-700 font-bold">
               <div className="flex items-center space-x-2">
-                <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
-                <span>Red Flag: Kechikish Xavfi (-14%)</span>
+                <AlertCircle className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+                <span>Red Flag: Kechikish (-14%)</span>
               </div>
               <div className="flex items-center space-x-2">
-                <ShieldAlert className="w-4 h-4 text-amber-500 shrink-0" />
-                <span>YUNESKO Ogohlantirish (Balandlik)</span>
+                <ShieldAlert className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                <span>YUNESKO Balandlik</span>
               </div>
               <div className="flex items-center space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-[#82C91E] shrink-0" />
-                <span>Reja bo'yicha ketayotgan ob'ekt</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#82C91E] shrink-0" />
+                <span>Reja bo'yicha</span>
               </div>
-              <div className="flex items-center space-x-2 pt-2 border-t border-slate-100">
-                <Building2 className="w-4 h-4 text-amber-600 shrink-0" />
-                <span>YUNESKO Tarixiy Bufer Chegarasi</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Activity className="w-4 h-4 text-rose-600 shrink-0" />
-                <span>Sentinel-1 InSAR Radar (&lt; -5mm)</span>
+              <div className="flex items-center space-x-2 pt-1 border-t border-slate-100">
+                <Activity className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+                <span>InSAR Radar (&lt; -5mm)</span>
               </div>
             </div>
           )}
@@ -298,51 +299,62 @@ export const MapModule: React.FC<MapModuleProps> = ({
         {/* Leaflet Map Canvas Container */}
         <div ref={mapContainerRef} className="w-full h-full z-10" />
 
-        {/* Selected Project InSAR Radar Details Drawer (Bottom Left Overlay) */}
+        {/* 📱 RESPONSIVE BOTTOM-SHEET DRAWER (Mobile Bottom Drawer / Desktop Floating Card) */}
         {selectedProject && (
-          <div className="absolute bottom-4 left-4 right-4 z-20 md:right-auto md:w-96 bg-white/95 backdrop-blur-md p-5 rounded-3xl border border-slate-200 shadow-xl space-y-3.5">
+          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 z-20 md:right-auto md:w-96 bg-white/98 backdrop-blur-md p-4 sm:p-5 rounded-3xl border border-slate-200 shadow-2xl space-y-3 max-h-[75vh] overflow-y-auto animate-fadeIn">
             
+            {/* Mobile Handle Bar */}
+            <div className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto md:hidden mb-1"></div>
+
             <div className="flex items-start justify-between">
               <div>
-                <span className="text-[11px] uppercase tracking-wider font-extrabold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                <span className="text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                   {selectedProject.category}
                 </span>
-                <h3 className="text-base font-extrabold text-[#0F172A] mt-1.5 line-clamp-1">{selectedProject.name}</h3>
+                <h3 className="text-sm sm:text-base font-extrabold text-[#0F172A] mt-1 line-clamp-1">{selectedProject.name}</h3>
                 <p className="text-xs text-slate-500 font-bold">{selectedProject.contractor}</p>
               </div>
               
-              <div className={`px-3 py-1 rounded-full text-xs shrink-0 ${getLightModeBadgeStyle(selectedProject.status).badgeClass}`}>
-                <span>{selectedProject.statusText}</span>
+              <div className="flex items-center space-x-2 shrink-0">
+                <div className={`px-2.5 py-1 rounded-full text-xs ${getLightModeBadgeStyle(selectedProject.status).badgeClass}`}>
+                  <span>{selectedProject.statusText}</span>
+                </div>
+                <button
+                  onClick={() => onSelectProject(null)}
+                  className="p-1 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+                >
+                  <X className="w-4 h-4" />
+                </button>
               </div>
             </div>
 
-            {/* InSAR Radar Poydevor Cho'kish Paneli (-8.5mm xavfli cho'kish kartasi) */}
-            <div className={`p-3.5 rounded-2xl border text-xs flex items-start space-x-3 shadow-xs ${
+            {/* InSAR Radar Poydevor Cho'kish Paneli */}
+            <div className={`p-3 sm:p-3.5 rounded-2xl border text-xs flex items-start space-x-3 shadow-xs ${
               selectedProject.insarDeformation.status === 'danger'
                 ? 'bg-rose-50 border-rose-200 text-rose-900'
                 : selectedProject.insarDeformation.status === 'warning'
                 ? 'bg-amber-50 border-amber-200 text-amber-900'
                 : 'bg-[#F7FEE7] border-[#82C91E]/40 text-[#0F172A]'
             }`}>
-              <Activity className={`w-5 h-5 shrink-0 mt-0.5 ${
+              <Activity className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 ${
                 selectedProject.insarDeformation.status === 'danger' ? 'text-rose-600' : 'text-[#82C91E]'
               }`} />
               <div className="space-y-0.5">
                 <div className="font-extrabold flex items-center justify-between">
-                  <span>Sentinel-1 InSAR Radar Poydevor:</span>
-                  <span className="font-mono text-sm ml-2 font-black text-rose-700">{selectedProject.insarDeformation.valueMm} mm</span>
+                  <span>Sentinel-1 InSAR Radar:</span>
+                  <span className="font-mono text-xs sm:text-sm ml-2 font-black text-rose-700">{selectedProject.insarDeformation.valueMm} mm</span>
                 </div>
-                <p className="text-xs text-slate-700 font-medium leading-relaxed">{selectedProject.insarDeformation.details}</p>
+                <p className="text-[11px] sm:text-xs text-slate-700 font-medium leading-relaxed">{selectedProject.insarDeformation.details}</p>
               </div>
             </div>
 
             {/* UNESCO Height Check */}
             {selectedProject.unescoZone && (
-              <div className="p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs">
+              <div className="p-2.5 sm:p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs">
                 <div className="flex items-center justify-between font-extrabold">
-                  <span className="flex items-center space-x-1.5">
+                  <span className="flex items-center space-x-1">
                     <Building2 className="w-4 h-4 text-amber-600" />
-                    <span>YUNESKO Balandlik Limiti: {selectedProject.maxAllowedHeight}m</span>
+                    <span>YUNESKO Limiti: {selectedProject.maxAllowedHeight}m</span>
                   </span>
                   <span className="text-rose-600 font-mono font-black">Joriy: {selectedProject.currentHeight}m</span>
                 </div>
@@ -353,9 +365,9 @@ export const MapModule: React.FC<MapModuleProps> = ({
             <div className="space-y-1.5">
               <div className="flex justify-between text-xs font-extrabold">
                 <span className="text-slate-500">Reja: <span className="text-[#0F172A]">{selectedProject.plannedProgress}%</span></span>
-                <span className="text-slate-500">AI Sentinel Amaldagi: <span className="text-[#65A30D]">{selectedProject.actualProgress}%</span></span>
+                <span className="text-slate-500">AI Sentinel: <span className="text-[#65A30D]">{selectedProject.actualProgress}%</span></span>
               </div>
-              <div className="relative w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+              <div className="relative w-full h-2.5 sm:h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
                 <div
                   className="absolute top-0 bottom-0 left-0 bg-slate-300 rounded-full"
                   style={{ width: `${selectedProject.plannedProgress}%` }}
@@ -372,12 +384,12 @@ export const MapModule: React.FC<MapModuleProps> = ({
             </div>
 
             {/* Quick Metrics Grid */}
-            <div className="grid grid-cols-2 gap-2 text-xs pt-1">
-              <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex justify-between">
+            <div className="grid grid-cols-2 gap-2 text-xs pt-0.5">
+              <div className="bg-slate-50 p-2.5 rounded-2xl border border-slate-200 flex justify-between">
                 <span className="text-slate-500 font-bold">Byudjet:</span>
                 <span className="font-extrabold text-emerald-600">{selectedProject.budget}</span>
               </div>
-              <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex justify-between">
+              <div className="bg-slate-50 p-2.5 rounded-2xl border border-slate-200 flex justify-between">
                 <span className="text-slate-500 font-bold">AI Sur'at:</span>
                 <span className="font-extrabold text-[#65A30D]">{selectedProject.aiVelocity}</span>
               </div>
