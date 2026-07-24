@@ -45,25 +45,25 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
   };
 
   return (
-    <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6 text-[#0F172A] transition-all">
+    <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6 text-[#0F172A] transition-all overflow-x-hidden">
       
       {/* 1. SECTION HEADER VA SPACIOUS UI */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
-          <h2 className="text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5">
+          <h2 className="text-lg sm:text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5 flex-wrap gap-1">
             <span>SMART CROWD-SOURCING & FUQAROLIK NAZORATI</span>
             <span className="bg-[#95E616] text-[#0F172A] px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider shadow-xs">
               AI PHOTO SCANNER
             </span>
           </h2>
-          <p className="text-sm text-slate-500 font-bold mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 font-bold mt-1">
             Fuqarolik nazorati, GPS Geofence EXIF Match va YOLOv8 Computer Vision foto skaneri
           </p>
         </div>
 
         <button
           onClick={onOpenReportModal}
-          className="px-6 py-3 rounded-full text-sm font-extrabold bg-[#82C91E] text-white hover:bg-[#65A30D] shadow-md shadow-[#82C91E]/30 transition-all flex items-center space-x-2 active:scale-95 cursor-pointer"
+          className="px-6 py-3 rounded-full text-xs sm:text-sm font-extrabold bg-[#82C91E] text-white hover:bg-[#65A30D] shadow-md shadow-[#82C91E]/30 transition-all flex items-center justify-center space-x-2 active:scale-95 cursor-pointer min-h-[44px]"
         >
           <UploadCloud className="w-5 h-5 text-white" />
           <span>Yangi Muammo Yuborish</span>
@@ -71,20 +71,20 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
       </div>
 
       {/* 2. AUTO-CLUSTERING INDICATOR FEED CARD */}
-      <div className="p-5 rounded-3xl bg-[#F7FEE7] border border-[#82C91E]/40 shadow-xs flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center space-x-3.5">
+      <div className="p-4 sm:p-5 rounded-3xl bg-[#F7FEE7] border border-[#82C91E]/40 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-start sm:items-center space-x-3.5">
           <div className="p-3 rounded-2xl bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30 shrink-0">
             <Users className="w-6 h-6 text-white" />
           </div>
           <div>
-            <div className="flex items-center space-x-2.5">
-              <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-white text-[#65A30D] border border-[#82C91E]/30 shadow-xs">
+            <div className="flex items-center space-x-2 flex-wrap gap-1">
+              <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold uppercase bg-white text-[#65A30D] border border-[#82C91E]/30 shadow-xs">
                 AI Auto-Clustering Active
               </span>
-              <span className="text-sm font-mono font-extrabold text-[#0F172A]">#CLK-8821 • 5 ta biriktirilgan murojaat</span>
+              <span className="text-xs sm:text-sm font-mono font-extrabold text-[#0F172A]">#CLK-8821 • 5 ta biriktirilgan murojaat</span>
             </div>
-            <p className="text-sm font-extrabold text-[#0F172A] mt-1 flex items-center space-x-1.5">
-              <AlertTriangle className="w-4 h-4 text-amber-600 inline mr-1" />
+            <p className="text-xs sm:text-sm font-extrabold text-[#0F172A] mt-1 flex items-center space-x-1.5">
+              <AlertTriangle className="w-4 h-4 text-amber-600 inline mr-1 shrink-0" />
               <span>5 ta fuqaro murojaati 1 ta Klaster Murojaatga biriktirildi (#CLK-8821)</span>
             </p>
             <p className="text-xs text-slate-600 font-bold mt-0.5">
@@ -114,15 +114,15 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           <div className="space-y-2.5">
             <button
               onClick={() => { setSelectedSample('fence'); handleScan(); }}
-              className={`w-full p-4 rounded-2xl text-left transition-all border cursor-pointer ${
+              className={`w-full p-4 rounded-2xl text-left transition-all border cursor-pointer min-h-[44px] ${
                 selectedSample === 'fence'
                   ? 'bg-[#F7FEE7] border-[#82C91E] text-[#0F172A] shadow-sm'
                   : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
               }`}
             >
-              <div className="flex justify-between items-center text-sm font-extrabold">
+              <div className="flex justify-between items-center text-xs sm:text-sm font-extrabold">
                 <span className="flex items-center space-x-2">
-                  <Construction className="w-4 h-4 text-rose-500" />
+                  <Construction className="w-4 h-4 text-rose-500 shrink-0" />
                   <span>Xavfsizlik To'sig'i Yo'qligi</span>
                 </span>
                 <span className="text-xs text-rose-600 font-mono font-black">96.8%</span>
@@ -132,15 +132,15 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
 
             <button
               onClick={() => { setSelectedSample('waste'); handleScan(); }}
-              className={`w-full p-4 rounded-2xl text-left transition-all border cursor-pointer ${
+              className={`w-full p-4 rounded-2xl text-left transition-all border cursor-pointer min-h-[44px] ${
                 selectedSample === 'waste'
                   ? 'bg-[#F7FEE7] border-[#82C91E] text-[#0F172A] shadow-sm'
                   : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
               }`}
             >
-              <div className="flex justify-between items-center text-sm font-extrabold">
+              <div className="flex justify-between items-center text-xs sm:text-sm font-extrabold">
                 <span className="flex items-center space-x-2">
-                  <Trash2 className="w-4 h-4 text-amber-500" />
+                  <Trash2 className="w-4 h-4 text-amber-500 shrink-0" />
                   <span>Noqonuniy Qurilish Chiqindisi</span>
                 </span>
                 <span className="text-xs text-amber-600 font-mono font-black">93.4%</span>
@@ -150,15 +150,15 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
 
             <button
               onClick={() => { setSelectedSample('height'); handleScan(); }}
-              className={`w-full p-4 rounded-2xl text-left transition-all border cursor-pointer ${
+              className={`w-full p-4 rounded-2xl text-left transition-all border cursor-pointer min-h-[44px] ${
                 selectedSample === 'height'
                   ? 'bg-[#F7FEE7] border-[#82C91E] text-[#0F172A] shadow-sm'
                   : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
               }`}
             >
-              <div className="flex justify-between items-center text-sm font-extrabold">
+              <div className="flex justify-between items-center text-xs sm:text-sm font-extrabold">
                 <span className="flex items-center space-x-2">
-                  <Building2 className="w-4 h-4 text-rose-500" />
+                  <Building2 className="w-4 h-4 text-rose-500 shrink-0" />
                   <span>YUNESKO Balandlik Me'yori</span>
                 </span>
                 <span className="text-xs text-rose-600 font-mono font-black">98.9%</span>
@@ -167,7 +167,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
             </button>
           </div>
 
-          <div className="p-4.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
             <div className="flex items-center space-x-2 text-[#65A30D] font-extrabold">
               <ShieldCheck className="w-4 h-4 text-[#82C91E]" />
               <span>GPS Geofence & EXIF Verification</span>
@@ -179,16 +179,16 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
         </div>
 
         {/* Right: AI Scanner Canvas Frame */}
-        <div className="lg:col-span-2 relative h-[410px] rounded-3xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm flex flex-col justify-between p-6">
+        <div className="lg:col-span-2 relative h-[360px] sm:h-[410px] rounded-3xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm flex flex-col justify-between p-4 sm:p-6">
           
           {/* Top Status Bar & EXIF Verified Badge */}
           <div className="relative z-10 flex items-center justify-between flex-wrap gap-2">
-            <span className="bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 rounded-full px-4 py-1.5 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs">
+            <span className="bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 rounded-full px-3.5 py-1.5 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs">
               <MapPin className="w-4 h-4 text-[#82C91E]" />
               <span>{current.location}</span>
             </span>
 
-            <span className="px-3.5 py-1.5 rounded-full bg-white text-slate-800 border border-slate-200 text-xs font-mono font-extrabold shadow-xs">
+            <span className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white text-slate-800 border border-slate-200 text-xs font-mono font-extrabold shadow-xs">
               YOLOv8 AI Scanner Active
             </span>
           </div>
@@ -201,20 +201,19 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           {/* AI Bounding Box Overlay */}
           <div className="relative z-10 my-auto text-center">
             <div
-              className="relative mx-auto rounded-3xl border-2 border-[#82C91E] bg-white/95 backdrop-blur-md p-6 shadow-xl transition-all duration-300"
-              style={{ width: '88%', minHeight: '190px' }}
+              className="relative mx-auto rounded-3xl border-2 border-[#82C91E] bg-white/95 backdrop-blur-md p-4 sm:p-6 shadow-xl transition-all duration-300 w-full sm:w-[88%] min-h-[170px]"
             >
-              <div className="absolute -top-3.5 left-5 px-4 py-1 bg-[#82C91E] text-white font-mono text-xs font-black rounded-full shadow-sm flex items-center space-x-1">
+              <div className="absolute -top-3.5 left-4 sm:left-5 px-3 sm:px-4 py-1 bg-[#82C91E] text-white font-mono text-[10px] sm:text-xs font-black rounded-full shadow-sm flex items-center space-x-1">
                 <Camera className="w-3.5 h-3.5 inline mr-1" />
                 <span>YOLOv8 Detection Box • {current.confidence} AI Confidence</span>
               </div>
 
-              <div className="flex flex-col justify-center items-center h-full pt-4 space-y-3">
-                <span className="text-base font-extrabold text-[#0F172A] flex items-center space-x-2">
-                  <AlertCircle className="w-5 h-5 text-rose-500 inline mr-1" />
+              <div className="flex flex-col justify-center items-center h-full pt-4 space-y-2.5 sm:space-y-3">
+                <span className="text-sm sm:text-base font-extrabold text-[#0F172A] flex items-center space-x-2">
+                  <AlertCircle className="w-5 h-5 text-rose-500 inline mr-1 shrink-0" />
                   <span>{current.violation}</span>
                 </span>
-                <span className="px-4 py-1.5 rounded-full bg-rose-50 text-rose-700 font-mono text-xs border border-rose-200 font-black">
+                <span className="px-4 py-1 rounded-full bg-rose-50 text-rose-700 font-mono text-xs border border-rose-200 font-black">
                   Status: {current.status}
                 </span>
               </div>
@@ -222,7 +221,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           </div>
 
           {/* Bottom Bar Info */}
-          <div className="relative z-10 flex items-center justify-between text-xs text-slate-500 font-mono pt-3 border-t border-slate-200 font-bold">
+          <div className="relative z-10 flex items-center justify-between text-[11px] sm:text-xs text-slate-500 font-mono pt-2.5 border-t border-slate-200 font-bold flex-wrap gap-1">
             <span>Model: YOLOv8x-Seg Fine-tuned</span>
             <span className="text-[#65A30D] font-extrabold">Auto-Forwarded to Inspeksiya API</span>
           </div>
