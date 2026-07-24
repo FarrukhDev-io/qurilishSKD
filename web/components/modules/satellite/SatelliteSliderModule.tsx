@@ -86,7 +86,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
           </div>
 
           {/* DUAL-VIEW MODE SWITCHER KAPSULA PILL */}
-          <div className="flex items-center space-x-1.5 bg-slate-100 p-1 sm:p-1.5 rounded-full border border-slate-200 text-xs sm:text-sm overflow-x-auto no-scrollbar">
+          <div className="flex items-center space-x-1.5 bg-slate-50 p-1 sm:p-1.5 rounded-full border border-slate-200/80 text-xs sm:text-sm overflow-x-auto no-scrollbar">
             <button
               onClick={() => setViewMode('slider')}
               className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${

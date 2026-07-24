@@ -234,7 +234,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
 
         {/* Filter Pills */}
         <div className="flex items-center space-x-2 w-full md:w-auto" role="group" aria-label="Loyiha filtrlari">
-          <div className="flex items-center space-x-1.5 bg-slate-100 p-1.5 rounded-full border border-slate-200 overflow-x-auto no-scrollbar w-full md:w-auto py-1">
+          <div className="flex items-center space-x-1.5 bg-slate-50 p-1 sm:p-1.5 rounded-full border border-slate-200/80 overflow-x-auto no-scrollbar w-full md:w-auto">
             {([
               { key: 'all' as const, label: `Barchasi (${totalCount})`, icon: null },
               { key: 'red_flag' as const, label: `Kechikayotgan (${redFlagCount})`, icon: <AlertCircle className="w-4 h-4 text-rose-500" /> },
