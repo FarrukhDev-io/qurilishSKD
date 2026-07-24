@@ -100,7 +100,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Progress Comparison */}
-        <div className="lg:col-span-2 p-5 sm:p-6 rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm space-y-5">
+        <div className="lg:col-span-2 p-5 sm:p-6 rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm space-y-5 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
           <div className="border-b border-slate-200/80 pb-3.5">
             <h3 className="text-base sm:text-lg font-extrabold text-[#0F172A] flex items-center space-x-2">
               <BarChart3 className="w-5 h-5 text-[#82C91E] shrink-0" />
@@ -118,7 +118,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs sm:text-sm">
                     <div className="flex items-center space-x-2 flex-wrap gap-1">
                       <span className="font-extrabold text-[#0F172A]">{project.name}</span>
-                      <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${
+                      <span className={`px-2.5 py-0.5 rounded-full text-xs font-extrabold ${
                         project.status === 'red_flag'
                           ? 'bg-rose-50 text-rose-700 border border-rose-200'
                           : project.status === 'unesco_warning'

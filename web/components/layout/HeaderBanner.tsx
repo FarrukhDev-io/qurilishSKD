@@ -81,7 +81,7 @@ export const HeaderBanner: React.FC<HeaderBannerProps> = React.memo(function Hea
 
             <div className="text-center px-3">
               <p className="text-xs sm:text-sm text-slate-500 font-extrabold uppercase tracking-wider">{current.stat2Label}</p>
-              <p className="text-2xl sm:text-3xl font-extrabold text-[#82C91E] mt-1">{current.stat2Val}</p>
+              <p className="text-[#65A30D] text-2xl sm:text-3xl font-extrabold mt-1">{current.stat2Val}</p>
             </div>
 
             <div className="h-10 w-px bg-slate-200" />

@@ -273,7 +273,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
                 onClick={() => setActiveLayer(key)}
                 aria-pressed={activeLayer === key}
                 aria-label={label}
-                className={`px-3.5 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
+                className={`px-3.5 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${
                   activeLayer === key
                     ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -291,7 +291,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
             <button
               onClick={() => setIsLegendOpen(!isLegendOpen)}
               aria-expanded={isLegendOpen}
-              className="w-full px-3 py-2 sm:px-4 sm:py-2.5 bg-slate-50 flex items-center justify-between font-extrabold text-slate-800 border-b border-slate-200 hover:bg-slate-100 transition-colors min-h-[38px]"
+              className="w-full px-3 py-2 sm:px-4 sm:py-2.5 bg-slate-50 flex items-center justify-between font-extrabold text-slate-800 border-b border-slate-200 hover:bg-slate-100 transition-colors min-h-[44px]"
             >
               <span className="flex items-center space-x-1.5">
                 <Info className="w-3.5 h-3.5 text-[#82C91E] shrink-0" />
@@ -301,7 +301,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
             </button>
 
             {isLegendOpen && (
-              <div className="p-3 space-y-2 text-[11px] sm:text-xs text-slate-700 font-bold">
+              <div className="p-3 space-y-2 text-xs text-slate-700 font-bold">
                 <div className="flex items-center space-x-2">
                   <CheckCircle2 className="w-4 h-4 text-[#82C91E] shrink-0" />
                   <span>0mm dan -2mm: Barqaror poydevor</span>
@@ -327,8 +327,8 @@ export const MapModule: React.FC<MapModuleProps> = ({
           />
         </div>
 
-        {/* 2. DEDICATED PROJECT DETAILS SIDE PANEL (COMPLETELY OUTSIDE MAP) */}
-        <div className="w-full lg:w-[380px] shrink-0 bg-slate-50/90 rounded-3xl border border-slate-200 p-5 space-y-4 shadow-sm flex flex-col justify-between min-h-[420px]">
+        {/* 2. DEDICATED PROJECT DETAILS SIDE PANEL (EQUAL HEIGHT LG:H-[560PX] WITH CUSTOM SCROLLBAR) */}
+        <div className="w-full lg:w-[380px] shrink-0 bg-slate-50/90 rounded-3xl border border-slate-200 p-5 space-y-4 shadow-sm flex flex-col justify-between lg:h-[560px] overflow-y-auto custom-scrollbar">
           {selectedProject ? (
             <div className="space-y-4 animate-fadeIn">
               
@@ -336,10 +336,10 @@ export const MapModule: React.FC<MapModuleProps> = ({
               <div className="flex items-start justify-between gap-2 border-b border-slate-200/80 pb-3.5">
                 <div>
                   <div className="flex items-center space-x-2 flex-wrap gap-1">
-                    <span className="text-[10px] uppercase tracking-wider font-mono font-black px-2.5 py-0.5 rounded-full bg-white text-slate-700 border border-slate-200">
+                    <span className="text-xs uppercase tracking-wider font-mono font-black px-2.5 py-0.5 rounded-full bg-white text-slate-700 border border-slate-200">
                       ID: {selectedProject.id.toUpperCase()}
                     </span>
-                    <span className="text-[10px] uppercase font-extrabold px-2.5 py-0.5 rounded-full bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/30">
+                    <span className="text-xs uppercase font-extrabold px-2.5 py-0.5 rounded-full bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/30">
                       {selectedProject.category}
                     </span>
                   </div>
@@ -350,7 +350,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
                 <button
                   onClick={() => onSelectProject(null)}
                   aria-label="Loyihani yopish"
-                  className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 cursor-pointer shrink-0 transition-colors"
+                  className="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 cursor-pointer shrink-0 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -393,7 +393,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
                     <span>Sentinel-1 InSAR:</span>
                     <span className="font-mono text-sm font-black text-rose-700">{selectedProject.insarDeformation.valueMm} mm</span>
                   </div>
-                  <div className="text-[11px] font-bold">
+                  <div className="text-xs font-bold">
                     {selectedProject.insarDeformation.status === 'danger' ? (
                       <span className="flex items-center space-x-1 text-rose-700">
                         <AlertCircle className="w-3.5 h-3.5 shrink-0" />
@@ -413,8 +413,12 @@ export const MapModule: React.FC<MapModuleProps> = ({
               {/* Pudratchi va Byudjet Grid */}
               <div className="grid grid-cols-2 gap-2 text-xs pt-1">
                 <div className="bg-white p-3 rounded-2xl border border-slate-200">
-                  <span className="text-slate-500 font-bold block text-[11px]">Pudratchi:</span>
+                  <span className="text-slate-500 font-bold block text-xs">Pudratchi:</span>
                   <span className="font-extrabold text-[#0F172A] truncate block mt-0.5">{selectedProject.contractor}</span>
+                </div>
+                <div className="bg-white p-3 rounded-2xl border border-slate-200">
+                  <span className="text-slate-500 font-bold block text-xs">Ajratilgan Byudjet:</span>
+                  <span className="font-extrabold text-[#65A30D] truncate block mt-0.5">{selectedProject.budget || '$1.2M'}</span>
                 </div>
               </div>
 

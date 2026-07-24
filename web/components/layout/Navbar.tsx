@@ -97,7 +97,7 @@ export const Navbar = React.memo(function Navbar({
             <div className="hidden sm:flex items-center slot-3d-inset p-1.5 text-xs sm:text-sm font-extrabold gap-1">
               <button
                 onClick={() => setActiveRole('hokimiyat')}
-                className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer min-h-[36px] ${
+                className={`px-3.5 py-2 rounded-full transition-all cursor-pointer min-h-[44px] ${
                   activeRole === 'hokimiyat'
                     ? 'pill-3d-active'
                     : 'text-slate-600 hover:text-slate-900 font-extrabold'
@@ -107,7 +107,7 @@ export const Navbar = React.memo(function Navbar({
               </button>
               <button
                 onClick={() => setActiveRole('fuqaro')}
-                className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer min-h-[36px] ${
+                className={`px-3.5 py-2 rounded-full transition-all cursor-pointer min-h-[44px] ${
                   activeRole === 'fuqaro'
                     ? 'pill-3d-active'
                     : 'text-slate-600 hover:text-slate-900 font-extrabold'
@@ -117,7 +117,7 @@ export const Navbar = React.memo(function Navbar({
               </button>
               <button
                 onClick={() => setActiveRole('pudratchi')}
-                className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer min-h-[36px] ${
+                className={`px-3.5 py-2 rounded-full transition-all cursor-pointer min-h-[44px] ${
                   activeRole === 'pudratchi'
                     ? 'pill-3d-active'
                     : 'text-slate-600 hover:text-slate-900 font-extrabold'
@@ -165,8 +165,8 @@ export const Navbar = React.memo(function Navbar({
           
           {/* Module Navigation Links */}
           <div className="flex flex-col space-y-2">
-            <span className="text-[11px] font-black uppercase text-slate-400 px-2 tracking-wider">Modullarga O'tish</span>
-            
+            <span className="text-xs badge-micro font-black text-slate-400 px-2 tracking-wider">Modullarga O'tish</span>
+
             <button
               onClick={() => { setActiveTab('map'); setIsMobileMenuOpen(false); }}
               className={`w-full flex items-center space-x-3 px-4 py-3 rounded-2xl text-sm font-extrabold min-h-[44px] transition-all cursor-pointer ${
@@ -218,7 +218,7 @@ export const Navbar = React.memo(function Navbar({
 
           {/* Role Switcher Pills in Mobile Menu */}
           <div className="space-y-2 pt-2 border-t border-slate-200">
-            <span className="text-[11px] font-black uppercase text-slate-400 px-2 tracking-wider">Foydalanuvchi Roli</span>
+            <span className="text-xs badge-micro font-black text-slate-400 px-2 tracking-wider">Foydalanuvchi Roli</span>
             <div className="grid grid-cols-3 gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
               <button
                 onClick={() => setActiveRole('hokimiyat')}

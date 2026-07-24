@@ -78,7 +78,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           </div>
           <div>
             <div className="flex items-center space-x-2 flex-wrap gap-1">
-              <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold uppercase bg-white text-[#82C91E] border border-[#82C91E]/30 shadow-xs">
+              <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-white text-[#82C91E] border border-[#82C91E]/30 shadow-xs">
                 AI Auto-Clustering Active
               </span>
               <span className="text-xs sm:text-sm font-mono font-extrabold text-[#0F172A]">#CLK-8821 • 5 ta biriktirilgan murojaat</span>
@@ -203,7 +203,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
             <div
               className="relative mx-auto rounded-3xl border-2 border-[#82C91E] bg-white/95 backdrop-blur-md p-4 sm:p-6 shadow-xl transition-all duration-300 w-full sm:w-[88%] min-h-[170px]"
             >
-              <div className="absolute -top-3.5 left-4 sm:left-5 px-3 sm:px-4 py-1 bg-[#82C91E] text-white font-mono text-[10px] sm:text-xs font-black rounded-full shadow-sm flex items-center space-x-1">
+              <div className="absolute -top-3.5 left-4 sm:left-5 px-3 sm:px-4 py-1 bg-[#82C91E] text-white font-mono text-xs font-black rounded-full shadow-sm flex items-center space-x-1">
                 <Camera className="w-3.5 h-3.5 inline mr-1" />
                 <span>YOLOv8 Detection Box • {current.confidence} AI Confidence</span>
               </div>
@@ -221,7 +221,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           </div>
 
           {/* Bottom Bar Info */}
-          <div className="relative z-10 flex items-center justify-between text-[11px] sm:text-xs text-slate-500 font-mono pt-2.5 border-t border-slate-200 font-bold flex-wrap gap-1">
+          <div className="relative z-10 flex items-center justify-between text-xs text-slate-500 font-mono pt-2.5 border-t border-slate-200 font-bold flex-wrap gap-1">
             <span>Model: YOLOv8x-Seg Fine-tuned</span>
             <span className="text-[#82C91E] font-extrabold">Auto-Forwarded to Inspeksiya API</span>
           </div>

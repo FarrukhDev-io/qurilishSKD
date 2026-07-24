@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { X, FileText, Download, CheckCircle2, ShieldCheck, Sparkles, AlertTriangle } from 'lucide-react';
 import { EXECUTIVE_STATS, SAMARQAND_PROJECTS } from '../../data/samarqandProjects';
+import { GisService } from '../../services/gisService';
 import confetti from 'canvas-confetti';
 
 interface ReportModalProps {
@@ -13,6 +14,9 @@ interface ReportModalProps {
 export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isDownloaded, setIsDownloaded] = useState(false);
+
+  const allProjects = GisService.generateExtendedGisProjects(SAMARQAND_PROJECTS);
+  const delayedProjects = allProjects.filter(p => p.status !== 'on_schedule');
 
   if (!isOpen) return null;
 
@@ -81,25 +85,25 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => 
             {/* Document Body */}
             <div className="space-y-4">
               <p className="leading-relaxed text-slate-600 font-bold text-xs sm:text-sm">
-                Ushbu hisobot Sentinel-2A/2B optik va Sentinel-1 InSAR radar yo'ldoshlarining so'nggi tasvirlari hamda YOLOv8 sun'iy intellekt modellarining avtomatik tahlili asosida shakllantirildi.
+                Ushbu hisobot Sentinel-2A/2B optik va Sentinel-1 InSAR radar yo'ldoshlarining so'nggi tasvirlari hamda YOLOv8 sun'iy intellekt modellarining avtomatik tahlili asosida shakllantirildi (Jami {allProjects.length} ta ob'ekt).
               </p>
 
               {/* Summary Stats Table */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-2">
                 <div className="p-3 sm:p-3.5 rounded-2xl bg-white border border-slate-200 shadow-xs">
-                  <span className="text-slate-500 text-[11px] sm:text-xs font-bold">Ob'ektlar Soni:</span>
-                  <p className="font-extrabold text-[#0F172A] text-sm sm:text-base mt-0.5">{EXECUTIVE_STATS.totalProjects} ta</p>
+                  <span className="text-slate-500 text-xs font-bold">Ob'ektlar Soni:</span>
+                  <p className="font-extrabold text-[#0F172A] text-sm sm:text-base mt-0.5">{allProjects.length} ta</p>
                 </div>
                 <div className="p-3 sm:p-3.5 rounded-2xl bg-[#F7FEE7] border border-[#82C91E]/40 shadow-xs">
-                  <span className="text-slate-500 text-[11px] sm:text-xs font-bold">Jami Byudjet:</span>
+                  <span className="text-slate-500 text-xs font-bold">Jami Byudjet:</span>
                   <p className="font-extrabold text-[#82C91E] text-sm sm:text-base mt-0.5">{EXECUTIVE_STATS.monitoredBudget}</p>
                 </div>
                 <div className="p-3 sm:p-3.5 rounded-2xl bg-rose-50 border border-rose-200 shadow-xs">
-                  <span className="text-slate-500 text-[11px] sm:text-xs font-bold">Red Flaglar:</span>
-                  <p className="font-extrabold text-rose-700 text-sm sm:text-base mt-0.5">{EXECUTIVE_STATS.redFlagsCount} ta</p>
+                  <span className="text-slate-500 text-xs font-bold">Red Flaglar:</span>
+                  <p className="font-extrabold text-rose-700 text-sm sm:text-base mt-0.5">{delayedProjects.length} ta</p>
                 </div>
                 <div className="p-3 sm:p-3.5 rounded-2xl bg-purple-50 border border-purple-200 shadow-xs">
-                  <span className="text-slate-500 text-[11px] sm:text-xs font-bold">AI Aniqligi:</span>
+                  <span className="text-slate-500 text-xs font-bold">AI Aniqligi:</span>
                   <p className="font-extrabold text-purple-700 text-sm sm:text-base mt-0.5">{EXECUTIVE_STATS.aiModelConfidence}</p>
                 </div>
               </div>
@@ -108,10 +112,10 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => 
               <div className="pt-3 space-y-2.5">
                 <h5 className="font-extrabold text-[#0F172A] uppercase tracking-wide text-xs flex items-center space-x-1.5">
                   <AlertTriangle className="w-4 h-4 text-rose-500 mr-1 shrink-0" />
-                  <span>Kechikayotgan va Ogohlantirish Olgan Ob'ektlar:</span>
+                  <span>Kechikayotgan va Ogohlantirish Olgan Ob'ektlar ({delayedProjects.length} ta):</span>
                 </h5>
-                <div className="space-y-2">
-                  {SAMARQAND_PROJECTS.filter(p => p.status !== 'on_schedule').map(p => (
+                <div className="space-y-2 max-h-[220px] overflow-y-auto pr-1 custom-scrollbar">
+                  {delayedProjects.map(p => (
                     <div key={p.id} className="p-3 sm:p-3.5 rounded-2xl bg-rose-50 border border-rose-200 flex justify-between items-center text-xs">
                       <div>
                         <p className="font-extrabold text-rose-800 text-xs sm:text-sm">{p.name}</p>
