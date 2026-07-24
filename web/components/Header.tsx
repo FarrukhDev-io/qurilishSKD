@@ -41,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Role Navigation Tabs (Startup Base Capsule Pills) */}
+          {/* Role Navigation Tabs (Startup Base Capsule Pills with Lucide Icons) */}
           <div className="hidden lg:flex items-center bg-slate-100 p-1.5 rounded-full border border-slate-200 shadow-inner">
             <button
               onClick={() => setActiveRole('hokimiyat')}
@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <Building2 className="w-4 h-4" />
-              <span>🏛 Hokimiyat & Inspeksiya</span>
+              <span>Hokimiyat & Inspeksiya</span>
             </button>
 
             <button
@@ -64,7 +64,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <Users className="w-4 h-4" />
-              <span>👥 Fuqarolar Portali</span>
+              <span>Fuqarolar Portali</span>
             </button>
 
             <button
@@ -76,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <UserCheck className="w-4 h-4" />
-              <span>🏗 Pudratchi Kabineti</span>
+              <span>Pudratchi Kabineti</span>
             </button>
           </div>
 
@@ -85,7 +85,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={onOpenReportModal}
-              className="flex items-center space-x-2 px-4 py-2.5 rounded-full text-xs font-extrabold bg-rose-50 text-rose-600 border border-rose-200 hover:bg-rose-100 transition-all shadow-sm active:scale-95"
+              className="flex items-center space-x-2 px-4 py-2.5 rounded-full text-xs font-extrabold bg-rose-50 text-rose-600 border border-rose-200 hover:bg-rose-100 transition-all shadow-sm active:scale-95 cursor-pointer"
             >
               <AlertTriangle className="w-4 h-4 text-rose-500" />
               <span className="hidden sm:inline">Muammo Bildirish</span>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, FileText, Download, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
+import { X, FileText, Download, CheckCircle2, ShieldCheck, Sparkles, AlertTriangle } from 'lucide-react';
 import { EXECUTIVE_STATS, SAMARQAND_PROJECTS } from '../data/samarqandProjects';
 import confetti from 'canvas-confetti';
 
@@ -68,7 +68,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => 
               </div>
               <div className="text-right">
                 <span className="px-3 py-1 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-mono text-[10px] font-extrabold shadow-xs">
-                  № UP-2026/07-42
+                  UP-2026/07-42
                 </span>
                 <p className="text-[10px] text-slate-500 font-bold mt-1">Sana: 2026-yil 24-iyul</p>
               </div>
@@ -102,8 +102,9 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => 
 
               {/* Red Flag Details */}
               <div className="pt-3 space-y-2">
-                <h5 className="font-extrabold text-[#0F172A] uppercase tracking-wide text-[11px]">
-                  🚨 Kechikayotgan va Ogohlantirish Olgan Ob'ektlar:
+                <h5 className="font-extrabold text-[#0F172A] uppercase tracking-wide text-[11px] flex items-center space-x-1.5">
+                  <AlertTriangle className="w-4 h-4 text-rose-500 mr-1" />
+                  <span>Kechikayotgan va Ogohlantirish Olgan Ob'ektlar:</span>
                 </h5>
                 <div className="space-y-2">
                   {SAMARQAND_PROJECTS.filter(p => p.status !== 'on_schedule').map(p => (

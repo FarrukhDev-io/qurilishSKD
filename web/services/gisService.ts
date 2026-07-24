@@ -11,7 +11,7 @@ export type FilterStatus = 'all' | 'red_flag' | 'unesco_warning' | 'on_schedule'
 export type MapLayerType = 'optical' | 'insar' | 'unesco';
 
 export const UNESCO_BUFFER_ZONE: UnescoBufferZone = {
-  name: '🏛 YUNESKO Tarixiy Markaz Bufer Zonasi',
+  name: 'YUNESKO Tarixiy Markaz Bufer Zonasi',
   description: 'Samarqandning Registon, Go\'ri Amir va Shohi Zinda atrofidagi 1-darajali madaniy meros muhofaza hududi',
   maxAllowedHeightMeters: 12,
   coordinates: [
@@ -104,7 +104,7 @@ export class GisService {
         contractor: contractors[i % contractors.length],
         budget: `$${(5 + (i * 0.8)).toFixed(1)}M`,
         status,
-        statusText: status === 'red_flag' ? '🔴 Red Flag: Cho\'kish Xavfi' : status === 'unesco_warning' ? '🟡 YUNESKO Balandlik Ogohlantirish' : '🟢 Reja bo\'yicha',
+        statusText: status === 'red_flag' ? 'Red Flag: Cho\'kish Xavfi' : status === 'unesco_warning' ? 'YUNESKO Balandlik Ogohlantirish' : 'Reja bo\'yicha',
         plannedProgress: Math.min(98, 40 + (i * 1.3)),
         actualProgress: status === 'red_flag' ? Math.max(20, 30 + (i * 1.1) - 12) : Math.min(95, 42 + (i * 1.3)),
         aiVelocity: `+${(1.2 + (i % 3) * 0.4).toFixed(1)}%/hafta`,
@@ -198,19 +198,19 @@ export function getLightModeBadgeStyle(status: 'red_flag' | 'unesco_warning' | '
     case 'red_flag':
       return {
         badgeClass: 'bg-rose-50 text-rose-700 border border-rose-200 font-extrabold shadow-sm',
-        label: '🔴 Red Flag (Kechikish)',
+        label: 'Red Flag (Kechikish)',
         dotColor: '#EF4444',
       };
     case 'unesco_warning':
       return {
         badgeClass: 'bg-amber-50 text-amber-700 border border-amber-200 font-extrabold shadow-sm',
-        label: '🟡 YUNESKO Ogoh.',
+        label: 'YUNESKO Ogoh.',
         dotColor: '#F59E0B',
       };
     case 'on_schedule':
       return {
         badgeClass: 'bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-extrabold shadow-sm',
-        label: '🟢 Rejada',
+        label: 'Rejada',
         dotColor: '#82C91E',
       };
   }

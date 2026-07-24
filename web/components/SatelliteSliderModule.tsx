@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ProjectData } from '../data/samarqandProjects';
-import { Sliders, Cpu, Grid2X2, RefreshCw, AlertCircle, Calendar } from 'lucide-react';
+import { Sliders, Cpu, Grid2X2, RefreshCw, AlertCircle, Snowflake, Sun } from 'lucide-react';
 import { useSatelliteData } from '../hooks/useSatelliteData';
 
 export interface SatelliteSliderModuleProps {
@@ -49,9 +49,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
   return (
     <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6 text-[#0F172A] transition-all">
       
-      {/* ---------------------------------------------------- */}
-      {/* Header Controls & Mode Switcher (Light Mode Minimalist) */}
-      {/* ---------------------------------------------------- */}
+      {/* Header Controls & Mode Switcher */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
           <h2 className="text-lg font-extrabold text-[#0F172A] flex items-center space-x-2">
@@ -83,7 +81,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
             </select>
           </div>
 
-          {/* Dual-View Mode Switcher (Capsule Pills) */}
+          {/* Dual-View Mode Switcher */}
           <div className="flex items-center space-x-1 bg-slate-100 p-1 rounded-full border border-slate-200">
             <button
               onClick={() => setViewMode('slider')}
@@ -124,9 +122,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
         </div>
       </div>
 
-      {/* ---------------------------------------------------- */}
-      {/* ⚡ VIEW MODE 1: INTERACTIVE SPLIT COMPARISON SLIDER */}
-      {/* ---------------------------------------------------- */}
+      {/* VIEW MODE 1: INTERACTIVE SPLIT COMPARISON SLIDER */}
       {viewMode === 'slider' && (
         <div
           ref={containerRef}
@@ -138,7 +134,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
           onTouchEnd={handleTouchEnd}
           className="relative w-full h-[460px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-100 select-none touch-none"
         >
-          {/* BASELINE IMAGE (January 2026) - Underneath Layer */}
+          {/* BASELINE IMAGE */}
           <div className="absolute inset-0 w-full h-full">
             {isLoadingBaseline && (
               <div className="absolute inset-0 z-20 flex items-center justify-center bg-slate-50/80 backdrop-blur-xs animate-pulse">
@@ -166,13 +162,14 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
 
             {/* Baseline Metadata Badge */}
             <div className="absolute top-4 left-4 z-10">
-              <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-[#0F172A] border border-slate-200 font-mono text-xs font-extrabold shadow-sm">
-                ❄️ {satelliteData.baselineDate} (Baseline Pass)
+              <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-[#0F172A] border border-slate-200 font-mono text-xs font-extrabold shadow-sm flex items-center space-x-1">
+                <Snowflake className="w-3.5 h-3.5 text-cyan-600 mr-1" />
+                <span>{satelliteData.baselineDate} (Baseline Pass)</span>
               </span>
             </div>
           </div>
 
-          {/* LATEST PASS IMAGE (July 2026) - Clipped Top Layer (60 FPS RAF Accelerated) */}
+          {/* LATEST PASS IMAGE */}
           <div
             className="absolute inset-0 h-full overflow-hidden z-10 transition-none"
             style={{
@@ -206,19 +203,20 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
 
             {/* Latest Pass Metadata Badge */}
             <div className="absolute top-4 left-4 z-10 flex items-center space-x-2 min-w-[320px]">
-              <span className="px-3.5 py-1.5 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-mono text-xs font-extrabold shadow-sm">
-                ☀️ {satelliteData.latestPassDate}
+              <span className="px-3.5 py-1.5 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-mono text-xs font-extrabold shadow-sm flex items-center space-x-1">
+                <Sun className="w-3.5 h-3.5 text-amber-500 mr-1" />
+                <span>{satelliteData.latestPassDate}</span>
               </span>
               <span className="px-3 py-1 rounded-full bg-white/95 text-slate-700 border border-slate-200 font-mono text-[11px] font-bold shadow-sm">
                 Cloud: {satelliteData.cloudCover}%
               </span>
             </div>
 
-            {/* 🎨 Light Mode Minimalist AI Computer Vision Bounding Box Overlay */}
+            {/* AI Computer Vision Bounding Box Overlay */}
             {showAiOverlay && (
               <div className="absolute inset-0 z-20 pointer-events-none p-6 flex flex-col justify-center items-center">
                 
-                {/* Minimalist AI Detection Box with Lime Accent */}
+                {/* Minimalist AI Detection Box */}
                 <div className="relative w-80 h-52 border-2 border-[#82C91E] rounded-2xl bg-white/90 backdrop-blur-sm p-4 shadow-md">
                   <div className="absolute -top-3 left-4 px-3 py-0.5 bg-[#82C91E] text-white font-mono text-[10px] font-extrabold rounded-full uppercase tracking-wider shadow-sm">
                     YOLOv8 + SAM Segment Box ({satelliteData.aiModelConfidence}%)
@@ -250,7 +248,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
             )}
           </div>
 
-          {/* ⚡ 60 FPS SLIDER HANDLE CONTROLLER (Lime Accent) */}
+          {/* ⚡ 60 FPS SLIDER HANDLE CONTROLLER */}
           <div
             className="absolute top-0 bottom-0 z-30 w-1 bg-[#82C91E] cursor-ew-resize flex items-center justify-center shadow-md"
             style={{
@@ -259,7 +257,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
             }}
           >
             <div className="w-9 h-9 rounded-full bg-[#82C91E] text-white border-2 border-white flex items-center justify-center shadow-lg font-bold text-xs hover:scale-110 transition-transform">
-              ↔
+              <Sliders className="w-4 h-4 text-white rotate-90" />
             </div>
           </div>
 
@@ -277,9 +275,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
         </div>
       )}
 
-      {/* ---------------------------------------------------- */}
-      {/* 🎨 VIEW MODE 2: DUAL-VIEW (SIDE-BY-SIDE GRID) */}
-      {/* ---------------------------------------------------- */}
+      {/* VIEW MODE 2: DUAL-VIEW (SIDE-BY-SIDE GRID) */}
       {viewMode === 'side_by_side' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           
@@ -291,8 +287,9 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
               className="absolute inset-0 w-full h-full object-cover filter brightness-95 contrast-105"
             />
             <div className="relative z-10 flex justify-between items-center">
-              <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-[#0F172A] border border-slate-200 font-mono text-xs font-extrabold shadow-sm">
-                ❄️ Baseline: {satelliteData.baselineDate}
+              <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-[#0F172A] border border-slate-200 font-mono text-xs font-extrabold shadow-sm flex items-center space-x-1">
+                <Snowflake className="w-3.5 h-3.5 text-cyan-600 mr-1" />
+                <span>Baseline: {satelliteData.baselineDate}</span>
               </span>
               <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-slate-900/80 text-white font-bold">
                 Resolution: 10m/px
@@ -319,8 +316,9 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
               className="absolute inset-0 w-full h-full object-cover filter brightness-100 contrast-115"
             />
             <div className="relative z-10 flex justify-between items-center">
-              <span className="px-3.5 py-1.5 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-mono text-xs font-extrabold shadow-sm">
-                ☀️ Current: {satelliteData.latestPassDate}
+              <span className="px-3.5 py-1.5 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-mono text-xs font-extrabold shadow-sm flex items-center space-x-1">
+                <Sun className="w-3.5 h-3.5 text-amber-500 mr-1" />
+                <span>Current: {satelliteData.latestPassDate}</span>
               </span>
               <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-white/95 text-slate-700 border border-slate-200 font-bold shadow-sm">
                 Cloud: {satelliteData.cloudCover}%
@@ -363,9 +361,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
         </div>
       )}
 
-      {/* ---------------------------------------------------- */}
-      {/* Bottom Key Metrics Summary Bar (Light Mode Minimalist) */}
-      {/* ---------------------------------------------------- */}
+      {/* Bottom Key Metrics Summary Bar */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
         <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
           <span className="text-[11px] text-slate-500 font-bold">Boshlang'ich Sana:</span>

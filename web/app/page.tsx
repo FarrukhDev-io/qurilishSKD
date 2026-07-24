@@ -22,7 +22,7 @@ export default function Home() {
 
   // Demo Toast Notification State
   const [toastMessage, setToastMessage] = useState<string | null>(
-    "🚀 SKDqurilish Demo Active: Modullarni o'tkazish uchun [M], [S], [C], [A] tugmalarini bosing!"
+    "SKDqurilish Demo Active: Modullarni o'tkazish uchun [M], [S], [C], [A] tugmalarini bosing!"
   );
 
   const showToast = useCallback((msg: string) => {
@@ -42,16 +42,16 @@ export default function Home() {
     setActiveTab(tab);
     switch (tab) {
       case 'map':
-        showToast("🗺 Modul 1: GIS Xarita & Radar Progress — 42 ta ob'ekt Canvas 60 FPS rejimi faol");
+        showToast("Modul 1: GIS Xarita & Radar Progress — 42 ta ob'ekt Canvas 60 FPS rejimi faol");
         break;
       case 'slider':
-        showToast("🔍 Modul 2: Before/After Satellite Slider — 2026-Yanvar vs 2026-Iyul taqqoslovi");
+        showToast("Modul 2: Before/After Satellite Slider — 2026-Yanvar vs 2026-Iyul taqqoslovi");
         break;
       case 'crowd':
-        showToast("📸 Modul 3: Smart Crowd-Sourcing Scanner — EXIF Match Verified & AI Auto-Clustering");
+        showToast("Modul 3: Smart Crowd-Sourcing Scanner — EXIF Match Verified & AI Auto-Clustering");
         break;
       case 'analytics':
-        showToast("📊 Modul 4: Executive Analytics — 94.2% AI Model Aniqligi & Rasmiy PDF Hisobot");
+        showToast("Modul 4: Executive Analytics — 94.2% AI Model Aniqligi & Rasmiy PDF Hisobot");
         break;
     }
   }, [showToast]);
@@ -101,7 +101,7 @@ export default function Home() {
         activeRole={activeRole}
         setActiveRole={(role) => {
           setActiveRole(role);
-          showToast(`👤 Rol O'zgardi: ${role === 'hokimiyat' ? 'Hokimiyat & Inspeksiya' : role === 'fuqaro' ? 'Fuqarolar Portali' : 'Pudratchi Kabineti'}`);
+          showToast(`Rol O'zgardi: ${role === 'hokimiyat' ? 'Hokimiyat & Inspeksiya' : role === 'fuqaro' ? 'Fuqarolar Portali' : 'Pudratchi Kabineti'}`);
         }}
         onOpenReportModal={() => setIsReportModalOpen(true)}
         onOpenPdfModal={() => setIsPdfModalOpen(true)}
@@ -239,7 +239,7 @@ export default function Home() {
           <div className="px-4 py-2 rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 text-xs font-extrabold text-[#0F172A] flex items-center space-x-2 shadow-xs">
             <CheckCircle2 className="w-4 h-4 text-[#82C91E]" />
             <span>
-              Joriy Rol: <strong className="text-[#65A30D]">{activeRole === 'hokimiyat' ? '🏛 Hokimiyat & Inspeksiya' : activeRole === 'fuqaro' ? '👥 Fuqarolar Portali' : '🏗 Pudratchi Kabineti'}</strong>
+              Joriy Rol: <strong className="text-[#65A30D]">{activeRole === 'hokimiyat' ? 'Hokimiyat & Inspeksiya' : activeRole === 'fuqaro' ? 'Fuqarolar Portali' : 'Pudratchi Kabineti'}</strong>
             </span>
           </div>
 
@@ -253,7 +253,7 @@ export default function Home() {
               selectedProject={selectedProject}
               onSelectProject={(proj) => {
                 setSelectedProject(proj);
-                showToast(`📍 Ob'ekt Tanlandi: ${proj.name}`);
+                showToast(`Ob'ekt Tanlandi: ${proj.name}`);
               }}
               theme="light"
             />
@@ -267,7 +267,7 @@ export default function Home() {
               selectedProject={selectedProject}
               onSelectProject={(proj) => {
                 setSelectedProject(proj);
-                showToast(`🛰 Yo'ldosh Tasviri Tanlandi: ${proj.name}`);
+                showToast(`Yo'ldosh Tasviri Tanlandi: ${proj.name}`);
               }}
               theme="light"
             />

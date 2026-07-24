@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Camera, MapPin, CheckCircle2, AlertTriangle, Users, Sparkles, ShieldCheck } from 'lucide-react';
+import { Camera, MapPin, CheckCircle2, AlertTriangle, Users, ShieldCheck, Construction, Trash2, Building2, AlertCircle, ShieldAlert } from 'lucide-react';
 
 interface CrowdSourceModuleProps {
   onOpenReportModal: () => void;
@@ -14,23 +14,23 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
   const sampleData = {
     fence: {
       title: "Xavfsizlik To'sig'i Yo'qligi",
-      location: "Registon Bufer Zonasi • EXIF Match Verified ✓",
+      location: "Registon Bufer Zonasi • EXIF Match Verified",
       confidence: "96.8%",
-      violation: "🔴 [x] Xavfsizlik to'sig'i va himoya to'ri o'rnatilmagan",
+      violation: "Xavfsizlik to'sig'i va himoya to'ri o'rnatilmagan",
       status: "Yuqori Xavf (Red Flag)"
     },
     waste: {
       title: "Noqonuniy Qurilish Chiqindisi",
-      location: "Silk Road Samarkand 2-Zona • EXIF Match Verified ✓",
+      location: "Silk Road Samarkand 2-Zona • EXIF Match Verified",
       confidence: "93.4%",
-      violation: "🟡 [x] Qurilish chiqindilari ruxsat etilmagan joyda to'plangan",
+      violation: "Qurilish chiqindilari ruxsat etilmagan joyda to'plangan",
       status: "O'rta Xavf"
     },
     height: {
       title: "YUNESKO Balandlik Me'yori Buzilishi",
-      location: "Tarixiy Markaz Bufer Zonasi • EXIF Match Verified ✓",
+      location: "Tarixiy Markaz Bufer Zonasi • EXIF Match Verified",
       confidence: "98.9%",
-      violation: "🚨 [x] Maksimal ruxsat berilgan 12m balandlikdan 2.8m oshib ketgan",
+      violation: "Maksimal ruxsat berilgan 12m balandlikdan 2.8m oshib ketgan",
       status: "YUNESKO Qoidabuzarligi"
     }
   };
@@ -68,7 +68,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
         </button>
       </div>
 
-      {/* 2. Auto-Clustering Indicator Feed Card */}
+      {/* Auto-Clustering Indicator Feed Card */}
       <div className="p-4 rounded-2xl bg-[#F7FEE7] border border-[#82C91E]/40 shadow-xs flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center space-x-3">
           <div className="p-2.5 rounded-full bg-[#82C91E] text-white shadow-sm">
@@ -81,8 +81,9 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
               </span>
               <span className="text-xs font-mono font-extrabold text-[#0F172A]">#CLK-8821</span>
             </div>
-            <p className="text-xs font-extrabold text-[#0F172A] mt-1">
-              ⚠️ 5 ta fuqaro murojaati 1 ta Klaster Murojaatga biriktirildi (#CLK-8821)
+            <p className="text-xs font-extrabold text-[#0F172A] mt-1 flex items-center space-x-1">
+              <AlertTriangle className="w-4 h-4 text-amber-600 inline mr-1" />
+              <span>5 ta fuqaro murojaati 1 ta Klaster Murojaatga biriktirildi (#CLK-8821)</span>
             </p>
             <p className="text-[11px] text-slate-600 font-medium mt-0.5">
               Joylashuv: Registon Bufer Zonasi • Bir xil geo-poligonda 5 marta foto signal tushgan
@@ -103,8 +104,9 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
         
         {/* Left: Sample Selector */}
         <div className="space-y-4">
-          <h3 className="text-xs font-extrabold text-slate-500 uppercase tracking-wider">
-            📸 Namuna Foto Qoidabuzarliklar:
+          <h3 className="text-xs font-extrabold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
+            <Camera className="w-4 h-4 text-[#82C91E]" />
+            <span>Namuna Foto Qoidabuzarliklar:</span>
           </h3>
 
           <div className="space-y-2">
@@ -117,7 +119,10 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
               }`}
             >
               <div className="flex justify-between items-center text-xs font-extrabold">
-                <span>🚧 Xavfsizlik To'sig'i Yo'qligi</span>
+                <span className="flex items-center space-x-1.5">
+                  <Construction className="w-4 h-4 text-rose-500" />
+                  <span>Xavfsizlik To'sig'i Yo'qligi</span>
+                </span>
                 <span className="text-[10px] text-rose-600 font-mono font-bold">96.8%</span>
               </div>
               <p className="text-[11px] text-slate-500 mt-1 font-medium">Registon Bufer Zonasi, qurilish maydoni</p>
@@ -132,7 +137,10 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
               }`}
             >
               <div className="flex justify-between items-center text-xs font-extrabold">
-                <span>🗑 Noqonuniy Qurilish Chiqindisi</span>
+                <span className="flex items-center space-x-1.5">
+                  <Trash2 className="w-4 h-4 text-amber-500" />
+                  <span>Noqonuniy Qurilish Chiqindisi</span>
+                </span>
                 <span className="text-[10px] text-amber-600 font-mono font-bold">93.4%</span>
               </div>
               <p className="text-[11px] text-slate-500 mt-1 font-medium">Silk Road Samarkand, 2-Zona</p>
@@ -147,7 +155,10 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
               }`}
             >
               <div className="flex justify-between items-center text-xs font-extrabold">
-                <span>🏛 YUNESKO Balandlik Me'yori</span>
+                <span className="flex items-center space-x-1.5">
+                  <Building2 className="w-4 h-4 text-rose-500" />
+                  <span>YUNESKO Balandlik Me'yori</span>
+                </span>
                 <span className="text-[10px] text-rose-600 font-mono font-bold">98.9%</span>
               </div>
               <p className="text-[11px] text-slate-500 mt-1 font-medium">Tarixiy markaz, 12m limit oshilgan</p>
@@ -196,7 +207,10 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
               </div>
 
               <div className="flex flex-col justify-center items-center h-full pt-3 space-y-2">
-                <span className="text-sm font-extrabold text-[#0F172A]">{current.violation}</span>
+                <span className="text-sm font-extrabold text-[#0F172A] flex items-center space-x-1.5">
+                  <AlertCircle className="w-4 h-4 text-rose-500 inline mr-1" />
+                  <span>{current.violation}</span>
+                </span>
                 <span className="px-3 py-1 rounded-full bg-rose-50 text-rose-700 font-mono text-xs border border-rose-200 font-bold">
                   Status: {current.status}
                 </span>

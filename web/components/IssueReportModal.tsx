@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, AlertTriangle, MapPin, CheckCircle2, Sparkles, Camera } from 'lucide-react';
+import { X, AlertTriangle, MapPin, CheckCircle2, Sparkles, Camera, Construction, Trash2, Building2, Volume2, ShieldAlert } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface IssueReportModalProps {
@@ -12,7 +12,7 @@ interface IssueReportModalProps {
 export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onClose }) => {
   const [category, setCategory] = useState('xavfsizlik');
   const [description, setDescription] = useState('');
-  const [locationName] = useState('Registon Bufer Zonasi • GPS EXIF Match Verified ✓');
+  const [locationName] = useState('Registon Bufer Zonasi • GPS EXIF Match Verified');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [aiVerified, setAiVerified] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -98,10 +98,10 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
                 onChange={(e) => setCategory(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 font-bold focus:outline-none focus:border-[#82C91E] transition-colors"
               >
-                <option value="xavfsizlik">🚧 Xavfsizlik to'sig'i yoki kaska yo'qligi</option>
-                <option value="chiqindi">🗑 Ruxsat etilmagan qurilish chiqindisi</option>
-                <option value="balandlik">🏛 YUNESKO balandlik normasi buzilishi</option>
-                <option value="shovqin">🔊 Shovqin yoki noqonuniy tungi ishlar</option>
+                <option value="xavfsizlik">Xavfsizlik to'sig'i yoki kaska yo'qligi</option>
+                <option value="chiqindi">Ruxsat etilmagan qurilish chiqindisi</option>
+                <option value="balandlik">YUNESKO balandlik normasi buzilishi</option>
+                <option value="shovqin">Shovqin yoki noqonuniy tungi ishlar</option>
               </select>
             </div>
 
@@ -120,8 +120,9 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
                       </span>
                       <span className="text-xs font-mono font-extrabold text-[#65A30D]">96.8% Ishonch</span>
                     </div>
-                    <p className="text-[11px] text-slate-700 font-medium">
-                      🔴 [x] Xavfsizlik to'sig'i mavjud emas (Registon Bufer Zonasi poligonida aniqlandi).
+                    <p className="text-[11px] text-slate-700 font-medium flex items-center space-x-1">
+                      <AlertTriangle className="w-3.5 h-3.5 text-rose-500 inline mr-1" />
+                      <span>Xavfsizlik to'sig'i mavjud emas (Registon Bufer Zonasi poligonida aniqlandi).</span>
                     </p>
                   </div>
                 ) : isAnalyzing ? (
@@ -138,9 +139,10 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
                     <button
                       type="button"
                       onClick={handleSimulateScan}
-                      className="px-4 py-2 rounded-full text-xs font-extrabold bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 hover:bg-[#ECFCCB] transition-all cursor-pointer"
+                      className="px-4 py-2 rounded-full text-xs font-extrabold bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 hover:bg-[#ECFCCB] transition-all cursor-pointer inline-flex items-center space-x-1.5"
                     >
-                      📸 Namuna Rasmni AI bilan Skaner Qilish
+                      <Camera className="w-4 h-4 text-[#82C91E]" />
+                      <span>Namuna Rasmni AI bilan Skaner Qilish</span>
                     </button>
                   </>
                 )}
@@ -160,13 +162,14 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
               />
             </div>
 
-            {/* Submit Button (Startup Base Style) */}
+            {/* Submit Button */}
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full py-3 rounded-full font-extrabold text-xs bg-[#82C91E] hover:bg-[#65A30D] text-white transition-all shadow-md shadow-[#82C91E]/30 active:scale-95 cursor-pointer"
+                className="w-full py-3 rounded-full font-extrabold text-xs bg-[#82C91E] hover:bg-[#65A30D] text-white transition-all shadow-md shadow-[#82C91E]/30 active:scale-95 cursor-pointer flex items-center justify-center space-x-2"
               >
-                🚨 Murojaatni Yuborish
+                <AlertTriangle className="w-4 h-4" />
+                <span>Murojaatni Yuborish</span>
               </button>
             </div>
 

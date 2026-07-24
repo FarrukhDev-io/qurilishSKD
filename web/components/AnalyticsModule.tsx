@@ -13,12 +13,10 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
   return (
     <div className="space-y-6 text-[#0F172A]">
       
-      {/* ---------------------------------------------------- */}
-      {/* 2. Executive KPI Cards (Light Mode Minimalist) */}
-      {/* ---------------------------------------------------- */}
+      {/* Executive KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        {/* 1. Ob'ektlar Soni (Toza oq karta border-slate-200) */}
+        {/* 1. Ob'ektlar Soni */}
         <div className="relative p-5 rounded-3xl bg-white border border-slate-200 shadow-sm transition-all hover:shadow-md">
           <div className="flex items-center space-x-2 text-slate-500 text-xs font-bold uppercase tracking-wider">
             <Building2 className="w-4 h-4 text-[#82C91E]" />
@@ -33,7 +31,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
           <p className="text-xs text-slate-500 mt-2 font-medium">Samarqand shahri va tumanlari bo'yicha</p>
         </div>
 
-        {/* 2. Red Flag Kechikish (Och qizil bg-rose-50 border-rose-200 text-rose-700) */}
+        {/* 2. Red Flag Kechikish */}
         <div className="relative p-5 rounded-3xl bg-rose-50 border border-rose-200 text-rose-700 shadow-sm transition-all hover:shadow-md">
           <div className="flex items-center space-x-2 text-rose-600 text-xs font-bold uppercase tracking-wider">
             <AlertOctagon className="w-4 h-4 text-rose-600" />
@@ -48,7 +46,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
           <p className="text-xs text-rose-600/80 mt-2 font-medium">AI Sentinel-2 tomondan aniqlangan</p>
         </div>
 
-        {/* 3. Kuzatilayotgan Byudjet (Och yashil bg-[#F7FEE7] border-[#82C91E]/30 text-[#65A30D]) */}
+        {/* 3. Kuzatilayotgan Byudjet */}
         <div className="relative p-5 rounded-3xl bg-[#F7FEE7] border border-[#82C91E]/40 text-[#65A30D] shadow-sm transition-all hover:shadow-md">
           <div className="flex items-center space-x-2 text-[#65A30D] text-xs font-bold uppercase tracking-wider">
             <DollarSign className="w-4 h-4 text-[#82C91E]" />
@@ -63,7 +61,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
           <p className="text-xs text-slate-600 mt-2 font-medium">Davlat va investitsion loyihalar summasi</p>
         </div>
 
-        {/* 4. AI Model Aniqligi (Och binafsha bg-purple-50 border-purple-200 text-purple-700) */}
+        {/* 4. AI Model Aniqligi */}
         <div className="relative p-5 rounded-3xl bg-purple-50 border border-purple-200 text-purple-700 shadow-sm transition-all hover:shadow-md">
           <div className="flex items-center space-x-2 text-purple-600 text-xs font-bold uppercase tracking-wider">
             <Activity className="w-4 h-4 text-purple-600" />
@@ -80,9 +78,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
 
       </div>
 
-      {/* ---------------------------------------------------- */}
       {/* Main Charts & Analytics Grid */}
-      {/* ---------------------------------------------------- */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Planned vs AI Sentinel Progress Bars (2 Cols) */}
@@ -171,11 +167,11 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
         {/* Side Panel: Crowd-Source & YUNESKO Bufer Zonasi Warning Card */}
         <div className="space-y-6">
           
-          {/* YUNESKO Bufer Zonasi Ogohlantirish Kartasi (Och sariq bg-amber-50 border-amber-200 text-amber-900) */}
+          {/* YUNESKO Bufer Zonasi Ogohlantirish Kartasi */}
           <div className="p-5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 shadow-sm space-y-3">
             <div className="flex items-center space-x-2 text-amber-800 font-extrabold text-xs">
               <AlertOctagon className="w-4 h-4 text-amber-600" />
-              <span>🏛 YUNESKO Bufer Zonasi Ogohlantirish Paneli</span>
+              <span>YUNESKO Bufer Zonasi Ogohlantirish Paneli</span>
             </div>
             <p className="text-xs text-amber-900/90 leading-relaxed font-medium">
               Registon va Tarixiy Markaz atrofidagi 3 ta ob'ektda ruxsat berilgan 12m balandlik me'yori buzilishi Sentinel-2A yo'ldosh 3D modellashtirish orqali qayd etildi.
@@ -226,9 +222,10 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
             </p>
             <button
               onClick={onOpenPdfModal}
-              className="w-full py-3 rounded-full text-xs font-extrabold bg-[#82C91E] hover:bg-[#65A30D] text-white transition-all shadow-md shadow-[#82C91E]/30 cursor-pointer active:scale-95"
+              className="w-full py-3 rounded-full text-xs font-extrabold bg-[#82C91E] hover:bg-[#65A30D] text-white transition-all shadow-md shadow-[#82C91E]/30 cursor-pointer active:scale-95 flex items-center justify-center space-x-2"
             >
-              📄 AI PDF Hisobot Generatsiya Qilish
+              <FileText className="w-4 h-4" />
+              <span>AI PDF Hisobot Generatsiya Qilish</span>
             </button>
           </div>
 
