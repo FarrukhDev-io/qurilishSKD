@@ -29,6 +29,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
   const mapInstanceRef = useRef<ReturnType<typeof import('leaflet')['map']> | null>(null);
   const layerGroupRef = useRef<ReturnType<typeof import('leaflet')['layerGroup']> | null>(null);
   const tileLayerRef = useRef<ReturnType<typeof import('leaflet')['tileLayer']> | null>(null);
+  const labelLayerRef = useRef<ReturnType<typeof import('leaflet')['tileLayer']> | null>(null);
   const isInitializedRef = useRef(false);
 
   const [filterStatus, setFilterStatus] = useState<'all' | 'red_flag' | 'unesco_warning' | 'on_schedule'>('all');
@@ -41,32 +42,38 @@ export const MapModule: React.FC<MapModuleProps> = ({
   const unescoCount = projects.filter((p) => p.status === 'unesco_warning').length;
   const onScheduleCount = projects.filter((p) => p.status === 'on_schedule').length;
 
-  // Tile URL Helper
+  // High-Definition HD Tile URL Helper (Esri 4K Satellite + CartoDB Retina)
   const getTileConfig = useCallback((layer: 'optical' | 'insar' | 'standard') => {
     switch (layer) {
       case 'standard':
         return {
-          url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          subdomains: 'abc',
-          attribution: '&copy; OpenStreetMap contributors',
+          url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+          subdomains: 'abcd',
+          attribution: '&copy; OpenStreetMap &copy; CARTO Voyager HD',
+          maxZoom: 20,
+          hasLabels: false,
         };
       case 'insar':
         return {
-          url: 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
+          url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
           subdomains: 'abcd',
-          attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+          attribution: '&copy; OpenStreetMap &copy; CARTO Dark Radar',
+          maxZoom: 20,
+          hasLabels: false,
         };
       case 'optical':
       default:
         return {
-          url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-          subdomains: 'abcd',
-          attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+          url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+          subdomains: '',
+          attribution: 'Tiles &copy; Esri World Imagery HD Satellite',
+          maxZoom: 19,
+          hasLabels: true,
         };
     }
   }, []);
 
-  // Map Initialization
+  // Map Initialization (60 FPS Hardware Acceleration)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const container = mapContainerRef.current;
@@ -91,7 +98,10 @@ export const MapModule: React.FC<MapModuleProps> = ({
         preferCanvas: true,
         touchZoom: true,
         dragging: true,
-        bounceAtZoomLimits: true,
+        bounceAtZoomLimits: false,
+        fadeAnimation: true,
+        markerZoomAnimation: true,
+        zoomAnimation: true,
       });
 
       L.control.zoom({ position: 'bottomleft' }).addTo(mapInstance);
@@ -100,13 +110,23 @@ export const MapModule: React.FC<MapModuleProps> = ({
       const tl = L.tileLayer(tileConfig.url, {
         attribution: tileConfig.attribution,
         subdomains: tileConfig.subdomains as any,
+        maxZoom: tileConfig.maxZoom || 19,
+        keepBuffer: 8,
+        updateWhenIdle: false,
+      }).addTo(mapInstance);
+
+      // Labels Overlay for Satellite Mode
+      const labelLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd',
         maxZoom: 19,
+        pane: 'shadowPane',
       }).addTo(mapInstance);
 
       const layerGroup = L.layerGroup().addTo(mapInstance);
 
       mapInstanceRef.current = mapInstance;
       tileLayerRef.current = tl;
+      labelLayerRef.current = labelLayer;
       layerGroupRef.current = layerGroup;
       isInitializedRef.current = true;
     });
@@ -117,6 +137,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
         mapInstanceRef.current = null;
         layerGroupRef.current = null;
         tileLayerRef.current = null;
+        labelLayerRef.current = null;
         isInitializedRef.current = false;
       }
     };
@@ -133,19 +154,33 @@ export const MapModule: React.FC<MapModuleProps> = ({
       if (tileLayerRef.current) {
         map.removeLayer(tileLayerRef.current);
       }
+      if (labelLayerRef.current) {
+        map.removeLayer(labelLayerRef.current);
+      }
 
       const tileConfig = getTileConfig(activeLayer);
       const newTileLayer = L.tileLayer(tileConfig.url, {
         attribution: tileConfig.attribution,
         subdomains: tileConfig.subdomains as any,
-        maxZoom: 19,
+        maxZoom: tileConfig.maxZoom || 19,
+        keepBuffer: 8,
+        updateWhenIdle: false,
       }).addTo(map);
+
+      if (tileConfig.hasLabels) {
+        const newLabelLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+          subdomains: 'abcd',
+          maxZoom: 19,
+          pane: 'shadowPane',
+        }).addTo(map);
+        labelLayerRef.current = newLabelLayer;
+      }
 
       tileLayerRef.current = newTileLayer;
     });
   }, [activeLayer, getTileConfig]);
 
-  // Markers & Polygons Update
+  // Markers & Polygons Update (GPU Composited 60 FPS)
   useEffect(() => {
     if (!isInitializedRef.current) return;
 
@@ -190,8 +225,8 @@ export const MapModule: React.FC<MapModuleProps> = ({
           className: 'custom-map-marker',
           html: `
             <div class="relative flex items-center justify-center">
-              ${project.status === 'red_flag' || isSelected ? `<span class="absolute inline-flex h-9 w-9 rounded-full opacity-75 animate-ping" style="background-color:${markerColor}"></span>` : ''}
-              <div class="relative rounded-full flex items-center justify-center text-white shadow-lg border-2 border-white cursor-pointer hover:scale-125 transition-all duration-200" style="width:${isSelected ? '32px' : '26px'}; height:${isSelected ? '32px' : '26px'}; background-color:${markerColor}"></div>
+              ${project.status === 'red_flag' || isSelected ? `<span class="absolute inline-flex h-9 w-9 rounded-full custom-map-marker-pulse" style="background-color:${markerColor}"></span>` : ''}
+              <div class="relative rounded-full flex items-center justify-center text-white shadow-lg border-2 border-white cursor-pointer transition-all duration-150" style="width:${isSelected ? '32px' : '26px'}; height:${isSelected ? '32px' : '26px'}; background-color:${markerColor}"></div>
             </div>`,
           iconSize: isSelected ? [32, 32] : [26, 26],
           iconAnchor: isSelected ? [16, 16] : [13, 13],

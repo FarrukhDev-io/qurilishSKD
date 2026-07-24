@@ -314,5 +314,18 @@ button, a, select, [role="button"], .card-3d, .btn-3d-lime, .pill-3d-active {
   background-color: #94a3b8;
 }
 
+/* ─── High Performance GPU Map Marker Pulse ─── */
+@keyframes markerPulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.4); opacity: 0.35; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.custom-map-marker-pulse {
+  animation: markerPulse 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  will-change: transform, opacity;
+}
+
+
 
 

@@ -4,6 +4,7 @@ import React from 'react';
 import { ProjectData } from '../../../data/samarqandProjects';
 import { Sliders, Cpu, Grid2X2, RefreshCw, AlertCircle, Snowflake, Sun } from 'lucide-react';
 import { useSatelliteData } from '../../../hooks/useSatelliteData';
+import { BASELINE_SATELLITE_SVG, LATEST_SATELLITE_SVG } from '../../../services/satelliteService';
 
 export interface SatelliteSliderModuleProps {
   projects?: ProjectData[];
@@ -50,32 +51,32 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
     <div className="p-4 sm:p-6 card-3d space-y-6 text-[#0F172A] overflow-x-hidden">
       
       {/* 1. SECTION HEADER VA SPACIOUS UI */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-        <div>
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+        <div className="min-w-0 flex-1">
           <h2 className="text-lg sm:text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5 flex-wrap gap-1">
             <span>SUN'IY YO'LDOSH TASVIRLARI TAHLILI</span>
-            <span className="pill-3d-active px-3 py-1 text-xs font-black uppercase tracking-wider">
+            <span className="pill-3d-active px-3 py-1 text-xs font-black uppercase tracking-wider shrink-0">
               BEFORE / AFTER SLIDER
             </span>
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 font-bold mt-1">
-            {satelliteData.baselineDate} (Boshlang'ich Holat) vs {satelliteData.latestPassDate} va AI segmentation masks
+          <p className="text-xs sm:text-sm text-slate-500 font-bold mt-1 truncate">
+            {satelliteData.baselineDate} (Boshlang'ich Holat) vs {satelliteData.latestPassDate}
           </p>
         </div>
 
-        {/* Controls & Mode Switcher (Horizontal Scrollable on Mobile) */}
-        <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar max-w-full py-1">
+        {/* Controls & Mode Switcher */}
+        <div className="flex items-center flex-wrap gap-2 sm:gap-2.5 shrink-0">
           
           {/* Select Project Dropdown */}
-          <div className="flex items-center space-x-2 px-3.5 py-2 rounded-full slot-3d-inset text-xs sm:text-sm min-h-[44px]">
-            <span className="text-xs text-slate-500 font-bold">Ob'ekt:</span>
+          <div className="flex items-center space-x-2 px-3.5 py-2 rounded-full slot-3d-inset text-xs sm:text-sm min-h-[42px] max-w-full sm:max-w-[280px]">
+            <span className="text-xs text-slate-500 font-bold shrink-0">Ob'ekt:</span>
             <select
               value={selectedProject.id}
               onChange={(e) => {
                 const found = projects.find((p) => p.id === e.target.value);
                 if (found) onSelectProject(found);
               }}
-              className="bg-transparent text-xs font-extrabold text-[#65A30D] focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs font-extrabold text-[#65A30D] focus:outline-none cursor-pointer truncate w-full"
             >
               {projects.map((p) => (
                 <option key={p.id} value={p.id} className="bg-white text-slate-900">
@@ -86,43 +87,43 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
           </div>
 
           {/* DUAL-VIEW MODE SWITCHER KAPSULA PILL */}
-          <div className="flex items-center space-x-1.5 slot-3d-inset p-1 sm:p-1.5 text-xs sm:text-sm overflow-x-auto no-scrollbar">
+          <div className="flex items-center space-x-1 slot-3d-inset p-1 text-xs sm:text-sm">
             <button
               onClick={() => setViewMode('slider')}
-              className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${
+              className={`px-3.5 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
                 viewMode === 'slider'
                   ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <Sliders className="w-4 h-4" />
-              <span>Slider Rejimi</span>
+              <Sliders className="w-3.5 h-3.5" />
+              <span>Slider</span>
             </button>
 
             <button
               onClick={() => setViewMode('side_by_side')}
-              className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${
+              className={`px-3.5 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
                 viewMode === 'side_by_side'
                   ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <Grid2X2 className="w-4 h-4" />
-              <span>Side-by-Side Rejimi</span>
+              <Grid2X2 className="w-3.5 h-3.5" />
+              <span>Side-by-Side</span>
             </button>
           </div>
 
           {/* AI Segmentation Toggle Pill */}
           <button
             onClick={() => setShowAiOverlay(!showAiOverlay)}
-            className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all border cursor-pointer min-h-[44px] ${
+            className={`px-3.5 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all border cursor-pointer min-h-[38px] whitespace-nowrap ${
               showAiOverlay
                 ? 'bg-[#F7FEE7] text-[#65A30D] border-[#82C91E]/40 shadow-xs'
                 : 'bg-slate-100 text-slate-500 border-slate-200'
             }`}
           >
-            <Cpu className="w-4 h-4 text-[#65A30D]" />
-            <span>AI Overlay: {showAiOverlay ? 'ON' : 'OFF'}</span>
+            <Cpu className="w-3.5 h-3.5 text-[#65A30D]" />
+            <span>AI: {showAiOverlay ? 'ON' : 'OFF'}</span>
           </button>
 
         </div>
@@ -142,29 +143,23 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
               </div>
             )}
             
-            {hasBaselineError ? (
-              <div className="w-full h-full flex flex-col items-center justify-center bg-slate-800 p-6 text-center space-y-2">
-                <AlertCircle className="w-10 h-10 text-amber-400" />
-                <span className="text-sm font-bold text-slate-300">Boshlang'ich Sentinel-2 Tasviri</span>
-              </div>
-            ) : (
-              <img
-                src={satelliteData.baselineImageUrl}
-                alt="Baseline Pass"
-                onLoad={() => setIsLoadingBaseline(false)}
-                onError={() => {
-                  setIsLoadingBaseline(false);
-                  setHasBaselineError(true);
-                }}
-                className="w-full h-full object-cover filter brightness-95 contrast-105"
-              />
-            )}
+            <img
+              src={hasBaselineError ? BASELINE_SATELLITE_SVG : satelliteData.baselineImageUrl}
+              alt="Baseline Pass"
+              onLoad={() => setIsLoadingBaseline(false)}
+              onError={(e) => {
+                setIsLoadingBaseline(false);
+                setHasBaselineError(false);
+                e.currentTarget.src = BASELINE_SATELLITE_SVG;
+              }}
+              className="w-full h-full object-cover filter brightness-95 contrast-105"
+            />
 
-            {/* Baseline Metadata Badge */}
-            <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
-              <span className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/95 text-[#0F172A] border border-slate-200 font-mono text-xs font-extrabold shadow-sm flex items-center space-x-1.5">
-                <Snowflake className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-600 mr-1" />
-                <span>{satelliteData.baselineDate} (Baseline)</span>
+            {/* Baseline Metadata Badge (Positioned at TOP-RIGHT so it is never covered by Latest Pass clip) */}
+            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10">
+              <span className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-slate-900/90 text-cyan-300 border border-cyan-500/40 font-mono text-xs font-extrabold shadow-md flex items-center space-x-1.5 backdrop-blur-md">
+                <Snowflake className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 mr-1" />
+                <span>BEFORE: {satelliteData.baselineDate} (Baseline)</span>
               </span>
             </div>
           </div>
@@ -183,31 +178,25 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
               </div>
             )}
 
-            {hasLatestError ? (
-              <div className="w-full h-full flex flex-col items-center justify-center bg-slate-100 p-6 text-center space-y-2">
-                <AlertCircle className="w-10 h-10 text-[#82C91E]" />
-                <span className="text-sm font-bold text-slate-700">Sentinel-2A O'tish Tasviri</span>
-              </div>
-            ) : (
-              <img
-                src={satelliteData.latestImageUrl}
-                alt="Latest Pass"
-                onLoad={() => setIsLoadingLatest(false)}
-                onError={() => {
-                  setIsLoadingLatest(false);
-                  setHasLatestError(true);
-                }}
-                className="w-full h-full object-cover filter brightness-100 contrast-115"
-              />
-            )}
+            <img
+              src={hasLatestError ? LATEST_SATELLITE_SVG : satelliteData.latestImageUrl}
+              alt="Latest Pass"
+              onLoad={() => setIsLoadingLatest(false)}
+              onError={(e) => {
+                setIsLoadingLatest(false);
+                setHasLatestError(false);
+                e.currentTarget.src = LATEST_SATELLITE_SVG;
+              }}
+              className="w-full h-full object-cover filter brightness-100 contrast-115"
+            />
 
-            {/* Latest Pass Metadata Badge */}
+            {/* Latest Pass Metadata Badge (Positioned at TOP-LEFT) */}
             <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center space-x-2 flex-wrap gap-1">
-              <span className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-mono text-xs font-extrabold shadow-sm flex items-center space-x-1.5">
+              <span className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-mono text-xs font-extrabold shadow-md flex items-center space-x-1.5 backdrop-blur-md">
                 <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 mr-1" />
-                <span>{satelliteData.latestPassDate}</span>
+                <span>AFTER: {satelliteData.latestPassDate}</span>
               </span>
-              <span className="hidden sm:inline-flex px-3.5 py-1.5 rounded-full bg-white/95 text-slate-700 border border-slate-200 font-mono text-xs font-bold shadow-sm">
+              <span className="hidden sm:inline-flex px-3.5 py-1.5 rounded-full bg-white/95 text-slate-700 border border-slate-200 font-mono text-xs font-bold shadow-md">
                 Cloud: {satelliteData.cloudCover}%
               </span>
             </div>
@@ -284,11 +273,14 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
             <img
               src={satelliteData.baselineImageUrl}
               alt="Baseline"
+              onError={(e) => {
+                e.currentTarget.src = BASELINE_SATELLITE_SVG;
+              }}
               className="absolute inset-0 w-full h-full object-cover filter brightness-95 contrast-105"
             />
             <div className="relative z-10 flex justify-between items-center">
-              <span className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/95 text-[#0F172A] border border-slate-200 font-mono text-xs font-extrabold shadow-sm flex items-center space-x-1.5">
-                <Snowflake className="w-3.5 h-3.5 text-cyan-600 mr-1" />
+              <span className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-slate-900/90 text-cyan-300 border border-cyan-500/40 font-mono text-xs font-extrabold shadow-sm flex items-center space-x-1.5 backdrop-blur-md">
+                <Snowflake className="w-3.5 h-3.5 text-cyan-400 mr-1" />
                 <span>Baseline: {satelliteData.baselineDate}</span>
               </span>
               <span className="text-xs font-mono px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-slate-900/80 text-white font-bold">
@@ -313,6 +305,9 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
             <img
               src={satelliteData.latestImageUrl}
               alt="Latest Pass"
+              onError={(e) => {
+                e.currentTarget.src = LATEST_SATELLITE_SVG;
+              }}
               className="absolute inset-0 w-full h-full object-cover filter brightness-100 contrast-115"
             />
             <div className="relative z-10 flex justify-between items-center">
