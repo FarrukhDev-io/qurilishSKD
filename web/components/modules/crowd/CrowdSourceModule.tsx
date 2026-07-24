@@ -78,7 +78,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           </div>
           <div>
             <div className="flex items-center space-x-2 flex-wrap gap-1">
-              <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold uppercase bg-white text-[#65A30D] border border-[#82C91E]/30 shadow-xs">
+              <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold uppercase bg-white text-[#82C91E] border border-[#82C91E]/30 shadow-xs">
                 AI Auto-Clustering Active
               </span>
               <span className="text-xs sm:text-sm font-mono font-extrabold text-[#0F172A]">#CLK-8821 • 5 ta biriktirilgan murojaat</span>
@@ -94,7 +94,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
         </div>
 
         <div className="flex items-center space-x-2 shrink-0">
-          <span className="px-4 py-2 rounded-full bg-white text-[#65A30D] border border-[#82C91E]/40 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs">
+          <span className="px-4 py-2 rounded-full bg-white text-[#82C91E] border border-[#82C91E]/40 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs">
             <CheckCircle2 className="w-4 h-4 text-[#82C91E]" />
             <span>Inspeksiyaga Yuborilgan</span>
           </span>
@@ -168,7 +168,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           </div>
 
           <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
-            <div className="flex items-center space-x-2 text-[#65A30D] font-extrabold">
+            <div className="flex items-center space-x-2 text-[#82C91E] font-extrabold">
               <ShieldCheck className="w-4 h-4 text-[#82C91E]" />
               <span>GPS Geofence & EXIF Verification</span>
             </div>
@@ -183,7 +183,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           
           {/* Top Status Bar & EXIF Verified Badge */}
           <div className="relative z-10 flex items-center justify-between flex-wrap gap-2">
-            <span className="bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 rounded-full px-3.5 py-1.5 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs">
+            <span className="bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40 rounded-full px-3.5 py-1.5 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs">
               <MapPin className="w-4 h-4 text-[#82C91E]" />
               <span>{current.location}</span>
             </span>
@@ -223,7 +223,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           {/* Bottom Bar Info */}
           <div className="relative z-10 flex items-center justify-between text-[11px] sm:text-xs text-slate-500 font-mono pt-2.5 border-t border-slate-200 font-bold flex-wrap gap-1">
             <span>Model: YOLOv8x-Seg Fine-tuned</span>
-            <span className="text-[#65A30D] font-extrabold">Auto-Forwarded to Inspeksiya API</span>
+            <span className="text-[#82C91E] font-extrabold">Auto-Forwarded to Inspeksiya API</span>
           </div>
 
         </div>

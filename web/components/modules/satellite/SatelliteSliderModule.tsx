@@ -75,7 +75,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
                 const found = projects.find((p) => p.id === e.target.value);
                 if (found) onSelectProject(found);
               }}
-              className="bg-transparent text-xs font-extrabold text-[#65A30D] focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs font-extrabold text-[#82C91E] focus:outline-none cursor-pointer"
             >
               {projects.map((p) => (
                 <option key={p.id} value={p.id} className="bg-white text-slate-900">
@@ -117,7 +117,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
             onClick={() => setShowAiOverlay(!showAiOverlay)}
             className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all border cursor-pointer min-h-[44px] ${
               showAiOverlay
-                ? 'bg-[#F7FEE7] text-[#65A30D] border-[#82C91E]/40 shadow-xs'
+                ? 'bg-[#F7FEE7] text-[#82C91E] border-[#82C91E]/40 shadow-xs'
                 : 'bg-slate-100 text-slate-500 border-slate-200'
             }`}
           >
@@ -209,7 +209,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
 
             {/* Latest Pass Metadata Badge */}
             <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center space-x-2 flex-wrap gap-1">
-              <span className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-mono text-[11px] sm:text-xs font-extrabold shadow-sm flex items-center space-x-1.5">
+              <span className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40 font-mono text-[11px] sm:text-xs font-extrabold shadow-sm flex items-center space-x-1.5">
                 <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 mr-1" />
                 <span>{satelliteData.latestPassDate}</span>
               </span>
@@ -231,7 +231,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
                   <div className="flex flex-col justify-center h-full space-y-2 sm:space-y-2.5 text-xs font-mono text-[#0F172A] pt-2">
                     <div className="flex justify-between items-center border-b border-slate-200 pb-1.5 sm:pb-2">
                       <span className="text-slate-500 font-bold">Poydevor Hajm O'sishi:</span>
-                      <strong className="text-[#65A30D] font-black text-xs sm:text-sm">+{satelliteData.volumeGrowthPct}%</strong>
+                      <strong className="text-[#82C91E] font-black text-xs sm:text-sm">+{satelliteData.volumeGrowthPct}%</strong>
                     </div>
                     <div className="flex justify-between items-center border-b border-slate-200 pb-1.5 sm:pb-2">
                       <span className="text-slate-500 font-bold">Qurilish Maydoni:</span>
@@ -309,7 +309,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
               </div>
               <div className="flex justify-between text-slate-600 font-bold">
                 <span>InSAR Indeksi:</span>
-                <span className="font-mono text-[#65A30D] font-black">0.0 mm</span>
+                <span className="font-mono text-[#82C91E] font-black">0.0 mm</span>
               </div>
             </div>
           </div>
@@ -322,7 +322,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
               className="absolute inset-0 w-full h-full object-cover filter brightness-100 contrast-115"
             />
             <div className="relative z-10 flex justify-between items-center">
-              <span className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-mono text-[11px] sm:text-xs font-extrabold shadow-sm flex items-center space-x-1.5">
+              <span className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40 font-mono text-[11px] sm:text-xs font-extrabold shadow-sm flex items-center space-x-1.5">
                 <Sun className="w-3.5 h-3.5 text-amber-500 mr-1" />
                 <span>Current: {satelliteData.latestPassDate}</span>
               </span>
@@ -334,13 +334,13 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
             {/* AI Overlay inside Side-by-Side View */}
             {showAiOverlay && (
               <div className="relative z-10 my-auto p-3.5 sm:p-4 rounded-2xl border border-[#82C91E]/40 bg-white/95 backdrop-blur-md text-xs space-y-1.5 shadow-sm">
-                <div className="text-[11px] sm:text-xs font-extrabold text-[#65A30D] uppercase tracking-wider border-b border-slate-100 pb-1 mb-1 flex items-center space-x-1">
+                <div className="text-[11px] sm:text-xs font-extrabold text-[#82C91E] uppercase tracking-wider border-b border-slate-100 pb-1 mb-1 flex items-center space-x-1">
                   <Cpu className="w-3.5 h-3.5 mr-1" />
                   <span>AI Computer Vision Live Detection</span>
                 </div>
                 <div className="flex justify-between text-slate-600 font-bold">
                   <span>Hajm O'sishi:</span>
-                  <span className="font-mono text-[#65A30D] font-black">+{satelliteData.volumeGrowthPct}%</span>
+                  <span className="font-mono text-[#82C91E] font-black">+{satelliteData.volumeGrowthPct}%</span>
                 </div>
                 <div className="flex justify-between text-slate-600 font-bold">
                   <span>Poydevor Maydoni:</span>
@@ -377,12 +377,12 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
 
         <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200">
           <span className="text-[11px] sm:text-xs text-slate-500 font-bold">So'nggi Yo'ldosh Tasviri:</span>
-          <p className="text-sm sm:text-base font-extrabold text-[#65A30D] mt-0.5">{satelliteData.latestPassDate}</p>
+          <p className="text-sm sm:text-base font-extrabold text-[#82C91E] mt-0.5">{satelliteData.latestPassDate}</p>
         </div>
 
         <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200">
           <span className="text-[11px] sm:text-xs text-slate-500 font-bold">AI Sur'at Bahosi:</span>
-          <p className="text-sm sm:text-base font-extrabold text-[#65A30D] mt-0.5">{selectedProject.aiVelocity}</p>
+          <p className="text-sm sm:text-base font-extrabold text-[#82C91E] mt-0.5">{selectedProject.aiVelocity}</p>
         </div>
 
         <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200">

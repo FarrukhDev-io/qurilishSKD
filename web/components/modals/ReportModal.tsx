@@ -40,7 +40,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => 
         {/* Header */}
         <div className="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-slate-200 bg-slate-50 shrink-0">
           <div className="flex items-center space-x-3.5">
-            <div className="p-2 sm:p-2.5 rounded-2xl bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 shadow-xs">
+            <div className="p-2 sm:p-2.5 rounded-2xl bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40 shadow-xs">
               <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-[#82C91E]" />
             </div>
             <div>
@@ -66,12 +66,12 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => 
                 <h4 className="text-xs sm:text-base font-extrabold text-[#0F172A] uppercase tracking-wider">
                   O'ZBEKISTON RESPUBLIKASI SAMARQAND VILOYATI HOKIMLIGI
                 </h4>
-                <p className="text-xs text-[#65A30D] font-extrabold mt-1">
+                <p className="text-xs text-[#82C91E] font-extrabold mt-1">
                   UrbanPulse Samarqand — AI & Satellite Progress Monitoring Platformasi
                 </p>
               </div>
               <div className="sm:text-right">
-                <span className="px-3.5 py-1 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 font-mono text-xs font-extrabold shadow-xs inline-block">
+                <span className="px-3.5 py-1 rounded-full bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40 font-mono text-xs font-extrabold shadow-xs inline-block">
                   UP-2026/07-42
                 </span>
                 <p className="text-xs text-slate-500 font-bold mt-1">Sana: 2026-yil 24-iyul</p>
@@ -92,7 +92,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => 
                 </div>
                 <div className="p-3 sm:p-3.5 rounded-2xl bg-[#F7FEE7] border border-[#82C91E]/40 shadow-xs">
                   <span className="text-slate-500 text-[11px] sm:text-xs font-bold">Jami Byudjet:</span>
-                  <p className="font-extrabold text-[#65A30D] text-sm sm:text-base mt-0.5">{EXECUTIVE_STATS.monitoredBudget}</p>
+                  <p className="font-extrabold text-[#82C91E] text-sm sm:text-base mt-0.5">{EXECUTIVE_STATS.monitoredBudget}</p>
                 </div>
                 <div className="p-3 sm:p-3.5 rounded-2xl bg-rose-50 border border-rose-200 shadow-xs">
                   <span className="text-slate-500 text-[11px] sm:text-xs font-bold">Red Flaglar:</span>
@@ -125,7 +125,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => 
 
               {/* Digital Signature Badge */}
               <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-500 font-bold gap-2">
-                <div className="flex items-center space-x-2 text-[#65A30D]">
+                <div className="flex items-center space-x-2 text-[#82C91E]">
                   <ShieldCheck className="w-4 h-4 text-[#82C91E] shrink-0" />
                   <span>Raqamli AI Shtamp: Hash #99A-481D-2026-SAMARQAND</span>
                 </div>
@@ -149,7 +149,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => 
 
           <div className="flex items-center space-x-3">
             {isDownloaded ? (
-              <div className="flex items-center space-x-2 text-xs sm:text-sm text-[#65A30D] font-extrabold px-5 py-3 rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 shadow-xs min-h-[44px]">
+              <div className="flex items-center space-x-2 text-xs sm:text-sm text-[#82C91E] font-extrabold px-5 py-3 rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 shadow-xs min-h-[44px]">
                 <CheckCircle2 className="w-5 h-5 text-[#82C91E]" />
                 <span>PDF Yuklab Olindi!</span>
               </div>

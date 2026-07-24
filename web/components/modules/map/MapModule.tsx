@@ -335,7 +335,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
                   <span className="text-[10px] uppercase tracking-wider font-mono font-black px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                     ID: {selectedProject.id.toUpperCase()}
                   </span>
-                  <span className="text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-0.5 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/30">
+                  <span className="text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-0.5 rounded-full bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/30">
                     {selectedProject.category}
                   </span>
                 </div>
@@ -359,7 +359,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
             <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
               <div className="flex justify-between items-center text-xs font-extrabold">
                 <span className="text-slate-600">Rejadagi Progress: <strong className="text-slate-900">{selectedProject.plannedProgress}%</strong></span>
-                <span className="text-[#65A30D]">AI Sentinel Amaldagi: <strong className="text-[#65A30D]">{selectedProject.actualProgress}%</strong></span>
+                <span className="text-[#82C91E]">AI Sentinel Amaldagi: <strong className="text-[#82C91E]">{selectedProject.actualProgress}%</strong></span>
               </div>
               <div className="relative w-full h-3 bg-slate-200 rounded-full overflow-hidden border border-slate-300">
                 <div
@@ -400,7 +400,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
                       <span>-5mm va undan ko'p: XAVFLI CHO'KISH (Red Flag Alert)</span>
                     </span>
                   ) : (
-                    <span className="text-[#65A30D] flex items-center space-x-1">
+                    <span className="text-[#82C91E] flex items-center space-x-1">
                       <CheckCircle2 className="w-3.5 h-3.5 inline mr-1 text-[#82C91E]" />
                       <span>0mm dan -2mm gacha: Barqaror poydevor</span>
                     </span>

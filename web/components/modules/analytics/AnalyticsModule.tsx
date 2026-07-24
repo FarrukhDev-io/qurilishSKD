@@ -48,7 +48,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
             </div>
             <div className="mt-3 flex items-baseline justify-between">
               <span className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">{EXECUTIVE_STATS.totalProjects} ta</span>
-              <span className="text-xs font-extrabold text-[#65A30D] bg-[#F7FEE7] border border-[#82C91E]/30 px-2.5 py-0.5 rounded-full flex items-center shadow-xs">
+              <span className="text-xs font-extrabold text-[#82C91E] bg-[#F7FEE7] border border-[#82C91E]/30 px-2.5 py-0.5 rounded-full flex items-center shadow-xs">
                 <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" /> +12% bu chorak
               </span>
             </div>
@@ -71,14 +71,14 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
           </div>
 
           {/* KPI 3: Kuzatilayotgan Byudjet */}
-          <div className="relative p-5 rounded-3xl bg-[#F7FEE7] border border-[#82C91E]/40 text-[#65A30D] shadow-sm transition-all hover:shadow-md">
-            <div className="flex items-center space-x-2 text-[#65A30D] text-xs font-bold uppercase tracking-wider">
+          <div className="relative p-5 rounded-3xl bg-[#F7FEE7] border border-[#82C91E]/40 text-[#82C91E] shadow-sm transition-all hover:shadow-md">
+            <div className="flex items-center space-x-2 text-[#82C91E] text-xs font-bold uppercase tracking-wider">
               <DollarSign className="w-4 h-4 text-[#82C91E]" />
               <span>Kuzatilayotgan Byudjet</span>
             </div>
             <div className="mt-3 flex items-baseline justify-between">
               <span className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">{EXECUTIVE_STATS.monitoredBudget}</span>
-              <span className="text-xs font-extrabold text-[#65A30D] bg-white border border-[#82C91E]/30 px-2.5 py-0.5 rounded-full shadow-xs">
+              <span className="text-xs font-extrabold text-[#82C91E] bg-white border border-[#82C91E]/30 px-2.5 py-0.5 rounded-full shadow-xs">
                 100% Shaffof
               </span>
             </div>
@@ -139,7 +139,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
                           ? 'bg-rose-50 text-rose-700 border border-rose-200'
                           : project.status === 'unesco_warning'
                           ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                          : 'bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40'
+                          : 'bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40'
                       }`}>
                         {project.statusText}
                       </span>
@@ -147,9 +147,9 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
 
                     <div className="font-mono text-xs sm:text-sm flex items-center space-x-3 font-extrabold justify-between sm:justify-end">
                       <span className="text-slate-500">Reja: <strong className="text-slate-800">{project.plannedProgress}%</strong></span>
-                      <span className="text-[#65A30D]">AI Amal: <strong className="text-[#65A30D]">{project.actualProgress}%</strong></span>
+                      <span className="text-[#82C91E]">AI Amal: <strong className="text-[#82C91E]">{project.actualProgress}%</strong></span>
                       <span className={`px-2.5 py-0.5 rounded-full text-xs font-black ${
-                        diff < 0 ? 'bg-rose-100 text-rose-700 border border-rose-200' : 'bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40'
+                        diff < 0 ? 'bg-rose-100 text-rose-700 border border-rose-200' : 'bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40'
                       }`}>
                         {diff > 0 ? `+${diff}%` : `${diff}%`}
                       </span>
@@ -218,17 +218,17 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
 
               <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
                 <span className="text-xs text-slate-600 font-bold">Hal qilingan murojaatlar:</span>
-                <span className="text-sm font-extrabold text-[#65A30D] font-mono">{EXECUTIVE_STATS.resolvedIssues} ta (83.7%)</span>
+                <span className="text-sm font-extrabold text-[#82C91E] font-mono">{EXECUTIVE_STATS.resolvedIssues} ta (83.7%)</span>
               </div>
 
               <div className="p-3.5 rounded-2xl bg-[#F7FEE7] border border-[#82C91E]/40 flex items-center justify-between">
-                <span className="text-xs text-[#65A30D] font-extrabold">AI Birlashtirgan Klasterlar:</span>
-                <span className="text-sm font-extrabold text-[#65A30D] font-mono">14 ta Klaster</span>
+                <span className="text-xs text-[#82C91E] font-extrabold">AI Birlashtirgan Klasterlar:</span>
+                <span className="text-sm font-extrabold text-[#82C91E] font-mono">14 ta Klaster</span>
               </div>
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
-              <div className="flex items-center space-x-2 text-xs font-extrabold text-[#65A30D]">
+              <div className="flex items-center space-x-2 text-xs font-extrabold text-[#82C91E]">
                 <ShieldCheck className="w-4 h-4 text-[#82C91E] shrink-0" />
                 <span>Smart Geofence & EXIF Proof</span>
               </div>

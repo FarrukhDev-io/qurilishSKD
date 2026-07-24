@@ -15,7 +15,7 @@ export const HeaderBanner: React.FC = () => {
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
               
               {/* Sentinel-2 Live Pulse Badge */}
-              <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 text-xs font-extrabold text-[#65A30D] shadow-xs">
+              <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 text-xs font-extrabold text-[#82C91E] shadow-xs">
                 <span className="flex h-2.5 w-2.5 relative">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#82C91E] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#82C91E]"></span>
@@ -64,7 +64,7 @@ export const HeaderBanner: React.FC = () => {
             <div className="hidden sm:block h-10 w-px bg-slate-200"></div>
             <div className="px-1 sm:px-3">
               <p className="text-[10px] sm:text-[11px] text-slate-500 font-extrabold uppercase tracking-wider">Sentinel Pass</p>
-              <p className="text-xl sm:text-2xl font-extrabold text-[#65A30D] mt-0.5">154+</p>
+              <p className="text-xl sm:text-2xl font-extrabold text-[#82C91E] mt-0.5">154+</p>
             </div>
           </div>
         </div>

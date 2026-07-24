@@ -72,14 +72,14 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
 
         {submitted ? (
           <div className="p-8 text-center space-y-4">
-            <div className="w-16 h-16 mx-auto rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 flex items-center justify-center text-[#65A30D] shadow-sm">
+            <div className="w-16 h-16 mx-auto rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 flex items-center justify-center text-[#82C91E] shadow-sm">
               <CheckCircle2 className="w-9 h-9 text-[#82C91E] animate-bounce" />
             </div>
             <h4 className="text-xl font-extrabold text-[#0F172A]">Murojaatingiz Qabul Qilindi!</h4>
             <p className="text-xs text-slate-600 font-bold leading-relaxed">
               Murojaatingiz AI tomonidan tasdiqlandi va mas'ul Samarqand Qurilish Nazorati inspektoriga avtomatik yo'naltirildi.
             </p>
-            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-mono font-extrabold text-[#65A30D]">
+            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-mono font-extrabold text-[#82C91E]">
               Murojaat ID: #CLK-8821 (1 ta Klaster Murojaatga biriktirildi)
             </div>
           </div>
@@ -87,7 +87,7 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
           <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-4 text-sm font-sans overflow-y-auto flex-1">
             
             {/* GPS Geofence & EXIF Badge */}
-            <div className="bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 rounded-full px-4 py-2 text-xs font-extrabold flex items-center justify-between shadow-xs">
+            <div className="bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40 rounded-full px-4 py-2 text-xs font-extrabold flex items-center justify-between shadow-xs">
               <div className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4 text-[#82C91E] shrink-0" />
                 <span>{locationName}</span>
@@ -117,12 +117,12 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
                 
                 {aiVerified ? (
                   <div className="w-full p-4 rounded-2xl bg-[#F7FEE7] border border-[#82C91E]/40 text-left space-y-1.5">
-                    <div className="flex items-center justify-between text-[#65A30D] font-extrabold">
+                    <div className="flex items-center justify-between text-[#82C91E] font-extrabold">
                       <span className="flex items-center space-x-1.5">
                         <Sparkles className="w-4 h-4 text-[#82C91E]" />
                         <span>AI YOLOv8 Skaner Natijasi:</span>
                       </span>
-                      <span className="text-xs font-mono font-black text-[#65A30D]">96.8% Ishonch</span>
+                      <span className="text-xs font-mono font-black text-[#82C91E]">96.8% Ishonch</span>
                     </div>
                     <p className="text-xs text-slate-700 font-bold flex items-center space-x-1">
                       <AlertTriangle className="w-4 h-4 text-rose-500 inline mr-1.5 shrink-0" />
@@ -132,7 +132,7 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
                 ) : isAnalyzing ? (
                   <div className="py-5 space-y-2.5">
                     <Sparkles className="w-7 h-7 mx-auto text-[#82C91E] animate-spin" />
-                    <p className="text-xs text-[#65A30D] font-extrabold">AI Computer Vision Rasm Tahlil Qilmoqda...</p>
+                    <p className="text-xs text-[#82C91E] font-extrabold">AI Computer Vision Rasm Tahlil Qilmoqda...</p>
                   </div>
                 ) : (
                   <>
@@ -148,7 +148,7 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
                     <button
                       type="button"
                       onClick={handleSimulateScan}
-                      className="px-5 py-2.5 rounded-full text-xs font-extrabold bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 hover:bg-[#ECFCCB] transition-all cursor-pointer inline-flex items-center space-x-2 shadow-xs min-h-[44px]"
+                      className="px-5 py-2.5 rounded-full text-xs font-extrabold bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40 hover:bg-[#F7FEE7] transition-all cursor-pointer inline-flex items-center space-x-2 shadow-xs min-h-[44px]"
                     >
                       <Camera className="w-4 h-4 text-[#82C91E]" />
                       <span>Namuna Rasmni AI bilan Skaner Qilish</span>
