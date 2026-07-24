@@ -179,16 +179,16 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
         </div>
 
         {/* Right: AI Scanner Canvas Frame */}
-        <div className="lg:col-span-2 relative h-[360px] sm:h-[410px] rounded-3xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm flex flex-col justify-between p-4 sm:p-6">
+        <div className="lg:col-span-2 relative h-[320px] sm:h-[410px] rounded-3xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm flex flex-col justify-between p-4 sm:p-6">
           
           {/* Top Status Bar & EXIF Verified Badge */}
           <div className="relative z-10 flex items-center justify-between flex-wrap gap-2">
-            <span className="bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40 rounded-full px-3.5 py-1.5 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs">
-              <MapPin className="w-4 h-4 text-[#82C91E]" />
-              <span>{current.location}</span>
+            <span className="bg-[#F7FEE7] text-[#82C91E] border border-[#82C91E]/40 rounded-full px-3.5 py-1.5 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs max-w-full truncate">
+              <MapPin className="w-4 h-4 text-[#82C91E] shrink-0" />
+              <span className="truncate">{current.location}</span>
             </span>
 
-            <span className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white text-slate-800 border border-slate-200 text-xs font-mono font-extrabold shadow-xs">
+            <span className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white text-slate-800 border border-slate-200 text-xs font-mono font-extrabold shadow-xs shrink-0">
               YOLOv8 AI Scanner Active
             </span>
           </div>
@@ -199,13 +199,13 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           )}
 
           {/* AI Bounding Box Overlay */}
-          <div className="relative z-10 my-auto text-center">
+          <div className="relative z-10 my-auto text-center w-full">
             <div
-              className="relative mx-auto rounded-3xl border-2 border-[#82C91E] bg-white/95 backdrop-blur-md p-4 sm:p-6 shadow-xl transition-all duration-300 w-full sm:w-[88%] min-h-[170px]"
+              className="relative mx-auto rounded-3xl border-2 border-[#82C91E] bg-white/95 backdrop-blur-md p-4 sm:p-6 shadow-xl transition-all duration-300 w-full sm:w-[88%] min-h-[160px]"
             >
-              <div className="absolute -top-3.5 left-4 sm:left-5 px-3 sm:px-4 py-1 bg-[#82C91E] text-white font-mono text-xs font-black rounded-full shadow-sm flex items-center space-x-1">
-                <Camera className="w-3.5 h-3.5 inline mr-1" />
-                <span>YOLOv8 Detection Box • {current.confidence} AI Confidence</span>
+              <div className="absolute -top-3.5 left-4 sm:left-5 px-3 sm:px-4 py-1 bg-[#82C91E] text-white font-mono text-xs font-black rounded-full shadow-sm flex items-center space-x-1 max-w-[90%] truncate">
+                <Camera className="w-3.5 h-3.5 inline mr-1 shrink-0" />
+                <span className="truncate">YOLOv8 Detection Box • {current.confidence} AI Confidence</span>
               </div>
 
               <div className="flex flex-col justify-center items-center h-full pt-4 space-y-2.5 sm:space-y-3">

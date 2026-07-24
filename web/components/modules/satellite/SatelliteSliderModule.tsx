@@ -280,7 +280,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
           
           {/* Baseline Imagery Card */}
-          <div className="relative h-[340px] sm:h-[410px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-white flex flex-col justify-between p-4 sm:p-5">
+          <div className="relative h-[300px] sm:h-[380px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-white flex flex-col justify-between p-4 sm:p-5">
             <img
               src={satelliteData.baselineImageUrl}
               alt="Baseline"
@@ -309,7 +309,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
           </div>
 
           {/* Current Pass Imagery Card */}
-          <div className="relative h-[340px] sm:h-[410px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-white flex flex-col justify-between p-4 sm:p-5">
+          <div className="relative h-[300px] sm:h-[380px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-white flex flex-col justify-between p-4 sm:p-5">
             <img
               src={satelliteData.latestImageUrl}
               alt="Latest Pass"

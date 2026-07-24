@@ -259,7 +259,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
       <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
 
         {/* 1. CLEAN MAP CONTAINER */}
-        <div className="flex-1 relative w-full h-[320px] sm:h-[480px] lg:h-[560px] rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50">
+        <div className="flex-1 relative w-full h-[340px] sm:h-[440px] lg:h-[560px] rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50">
 
           {/* Layer Switcher (Top Right) */}
           <div className="absolute top-3 right-3 z-20 flex items-center space-x-1.5 bg-white/95 backdrop-blur-md p-1.5 rounded-full border border-slate-200 shadow-md" role="group" aria-label="Xarita qatlami">

@@ -34,8 +34,8 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
           </button>
         </div>
 
-        {/* 2. CLEAN KPI CARDS GRID (NO OVER-INFORMING SUBTEXTS) */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
+        {/* 2. CLEAN KPI CARDS GRID (GRID-COLS-1 SM:GRID-COLS-2 LG:GRID-COLS-4) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
           
           {/* KPI 1 */}
           <div className="p-4.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2">

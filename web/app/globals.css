@@ -43,6 +43,16 @@ body {
   color: var(--text-primary);
   font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+button, a, select, [role="button"], .card-3d, .btn-3d-lime, .pill-3d-active {
+  touch-action: manipulation;
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
 }
 
 /* Global Grid Surface Background Pattern Overlay */

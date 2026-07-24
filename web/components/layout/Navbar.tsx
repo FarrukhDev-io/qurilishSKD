@@ -29,15 +29,15 @@ export const Navbar = React.memo(function Navbar({
         <div className="flex items-center justify-between h-20 gap-3">
           
           {/* 1. Chap tomonda: Yirik QurilishSKD Logo va Samarqand Pill Badge */}
-          <div className="flex items-center space-x-2.5 sm:space-x-3 shrink-0">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#82C91E] flex items-center justify-center border border-white/40 shadow-[0_8px_16px_rgba(130,201,30,0.35)] transition-all btn-3d-lime">
-              <Satellite className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+          <div className="flex items-center space-x-1.5 sm:space-x-3 shrink-0 max-w-[70vw] sm:max-w-none">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl bg-[#82C91E] flex items-center justify-center border border-white/40 shadow-[0_8px_16px_rgba(130,201,30,0.35)] transition-all btn-3d-lime shrink-0">
+              <Satellite className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="text-2xl sm:text-3xl font-black tracking-tight text-[#0F172A]" aria-label="Qurilish SKD - Samarqand Qurilish Monitoring Platformasi">
+            <div className="flex items-center space-x-1.5 sm:space-x-2 truncate">
+              <div className="text-xl sm:text-3xl font-black tracking-tight text-[#0F172A] truncate" aria-label="Qurilish SKD - Samarqand Qurilish Monitoring Platformasi">
                 Qurilish<span className="text-[#82C91E]"> SKD</span>
               </div>
-              <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 text-xs sm:text-sm font-black uppercase bg-[#95E616] text-[#0F172A] rounded-full tracking-wider shadow-xs border border-white/50">
+              <span className="hidden min-[380px]:inline-block px-2 py-0.5 sm:px-3 sm:py-1 text-xs sm:text-sm font-black uppercase bg-[#95E616] text-[#0F172A] rounded-full tracking-wider shadow-xs border border-white/50 shrink-0">
                 Samarqand
               </span>
             </div>

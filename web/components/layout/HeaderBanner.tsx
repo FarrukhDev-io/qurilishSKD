@@ -70,25 +70,21 @@ export const HeaderBanner: React.FC<HeaderBannerProps> = React.memo(function Hea
             </p>
           </div>
 
-          {/* RIGHT — Clean Dynamic Stats */}
-          <div className="flex items-center space-x-5 card-3d p-4 sm:p-5 shrink-0">
-            <div className="text-center px-3">
+          {/* RIGHT — Clean Dynamic Stats (3 Columns Grid on Mobile) */}
+          <div className="grid grid-cols-3 divide-x divide-slate-200 w-full lg:w-auto card-3d p-4 sm:p-5 shrink-0">
+            <div className="text-center px-2 sm:px-4">
               <p className="text-xs sm:text-sm text-slate-500 font-extrabold uppercase tracking-wider">{current.stat1Label}</p>
-              <p className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mt-1">{current.stat1Val}</p>
+              <p className="text-xl sm:text-3xl font-extrabold text-[#0F172A] mt-1">{current.stat1Val}</p>
             </div>
 
-            <div className="h-10 w-px bg-slate-200" />
-
-            <div className="text-center px-3">
+            <div className="text-center px-2 sm:px-4">
               <p className="text-xs sm:text-sm text-slate-500 font-extrabold uppercase tracking-wider">{current.stat2Label}</p>
-              <p className="text-[#65A30D] text-2xl sm:text-3xl font-extrabold mt-1">{current.stat2Val}</p>
+              <p className="text-[#65A30D] text-xl sm:text-3xl font-extrabold mt-1">{current.stat2Val}</p>
             </div>
 
-            <div className="h-10 w-px bg-slate-200" />
-
-            <div className="text-center px-3">
+            <div className="text-center px-2 sm:px-4">
               <p className="text-xs sm:text-sm text-slate-500 font-extrabold uppercase tracking-wider">{current.stat3Label}</p>
-              <p className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mt-1">{current.stat3Val}</p>
+              <p className="text-xl sm:text-3xl font-extrabold text-[#0F172A] mt-1">{current.stat3Val}</p>
             </div>
           </div>
 
