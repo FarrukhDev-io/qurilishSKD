@@ -14,7 +14,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
     <div className="space-y-6 text-[#0F172A] overflow-x-hidden">
       
       {/* 1. CLEAN SECTION HEADER */}
-      <div className="p-4 sm:p-6 rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_12px_36px_-6px_rgba(15,23,42,0.06)] space-y-4">
+      <div className="p-4 sm:p-6 card-3d space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200/80 pb-4">
           <div>
             <h2 className="text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5">
@@ -27,7 +27,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
 
           <button
             onClick={onOpenPdfModal}
-            className="px-6 py-3 rounded-full text-xs sm:text-sm font-extrabold bg-[#82C91E] hover:bg-[#65A30D] text-white shadow-md shadow-[#82C91E]/30 transition-all flex items-center justify-center space-x-2 active:scale-95 cursor-pointer min-h-[44px] shrink-0"
+            className="px-6 py-3 btn-3d-lime text-xs sm:text-sm font-extrabold text-white flex items-center justify-center space-x-2 cursor-pointer min-h-[44px] shrink-0"
           >
             <FileText className="w-4.5 h-4.5 text-white" />
             <span>AI PDF Hisobot</span>

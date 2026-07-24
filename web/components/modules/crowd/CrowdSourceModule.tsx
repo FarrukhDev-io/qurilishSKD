@@ -45,14 +45,14 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
   };
 
   return (
-    <div className="p-4 sm:p-6 rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_12px_36px_-6px_rgba(15,23,42,0.06)] space-y-6 text-[#0F172A] transition-all overflow-x-hidden hover:shadow-[0_16px_44px_-8px_rgba(130,201,30,0.12)]">
+    <div className="p-4 sm:p-6 card-3d space-y-6 text-[#0F172A] overflow-x-hidden">
       
       {/* 1. SECTION HEADER VA SPACIOUS UI */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
           <h2 className="text-lg sm:text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5 flex-wrap gap-1">
             <span>SMART CROWD-SOURCING & FUQAROLIK NAZORATI</span>
-            <span className="bg-[#95E616] text-[#0F172A] px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider shadow-xs">
+            <span className="pill-3d-active px-3 py-1 text-xs font-black uppercase tracking-wider">
               AI PHOTO SCANNER
             </span>
           </h2>
@@ -63,7 +63,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
 
         <button
           onClick={onOpenReportModal}
-          className="px-6 py-3 rounded-full text-xs sm:text-sm font-extrabold bg-[#82C91E] text-white hover:bg-[#65A30D] shadow-md shadow-[#82C91E]/30 transition-all flex items-center justify-center space-x-2 active:scale-95 cursor-pointer min-h-[44px]"
+          className="px-6 py-3 btn-3d-lime text-xs sm:text-sm font-extrabold flex items-center justify-center space-x-2 cursor-pointer min-h-[44px]"
         >
           <UploadCloud className="w-5 h-5 text-white" />
           <span>Yangi Muammo Yuborish</span>

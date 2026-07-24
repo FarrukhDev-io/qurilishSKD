@@ -47,14 +47,14 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
   });
 
   return (
-    <div className="p-4 sm:p-6 rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_12px_36px_-6px_rgba(15,23,42,0.06)] space-y-6 text-[#0F172A] transition-all overflow-x-hidden hover:shadow-[0_16px_44px_-8px_rgba(130,201,30,0.12)]">
+    <div className="p-4 sm:p-6 card-3d space-y-6 text-[#0F172A] overflow-x-hidden">
       
       {/* 1. SECTION HEADER VA SPACIOUS UI */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
           <h2 className="text-lg sm:text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5 flex-wrap gap-1">
             <span>SUN'IY YO'LDOSH TASVIRLARI TAHLILI</span>
-            <span className="bg-[#95E616] text-[#0F172A] px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider shadow-xs">
+            <span className="pill-3d-active px-3 py-1 text-xs font-black uppercase tracking-wider">
               BEFORE / AFTER SLIDER
             </span>
           </h2>
@@ -67,7 +67,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
         <div className="flex items-center space-x-2 flex-wrap gap-2.5">
           
           {/* Select Project Dropdown */}
-          <div className="flex items-center space-x-2 px-3.5 py-2 rounded-full bg-slate-50 border border-slate-200 text-xs sm:text-sm min-h-[44px]">
+          <div className="flex items-center space-x-2 px-3.5 py-2 rounded-full slot-3d-inset text-xs sm:text-sm min-h-[44px]">
             <span className="text-xs text-slate-500 font-bold">Ob'ekt:</span>
             <select
               value={selectedProject.id}
@@ -86,12 +86,12 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
           </div>
 
           {/* DUAL-VIEW MODE SWITCHER KAPSULA PILL */}
-          <div className="flex items-center space-x-1.5 bg-slate-50 p-1 sm:p-1.5 rounded-full border border-slate-200/80 text-xs sm:text-sm overflow-x-auto no-scrollbar">
+          <div className="flex items-center space-x-1.5 slot-3d-inset p-1 sm:p-1.5 text-xs sm:text-sm overflow-x-auto no-scrollbar">
             <button
               onClick={() => setViewMode('slider')}
               className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${
                 viewMode === 'slider'
-                  ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
+                  ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -103,7 +103,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
               onClick={() => setViewMode('side_by_side')}
               className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${
                 viewMode === 'side_by_side'
-                  ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
+                  ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >

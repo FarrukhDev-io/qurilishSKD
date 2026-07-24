@@ -175,7 +175,7 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
             <div className="sticky bottom-0 bg-white pt-3 pb-2 border-t border-slate-100 mt-2 z-10">
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-full font-extrabold text-sm bg-[#82C91E] hover:bg-[#65A30D] text-white transition-all shadow-md shadow-[#82C91E]/30 active:scale-95 cursor-pointer flex items-center justify-center space-x-2 min-h-[44px]"
+                className="w-full py-3.5 btn-3d-lime font-extrabold text-sm text-white cursor-pointer flex items-center justify-center space-x-2 min-h-[44px]"
               >
                 <AlertTriangle className="w-5 h-5 text-white" />
                 <span>Murojaatni Yuborish</span>

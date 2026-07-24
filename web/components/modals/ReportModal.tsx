@@ -157,7 +157,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose }) => 
               <button
                 onClick={handleDownload}
                 disabled={isGenerating}
-                className="px-6 py-3.5 rounded-full text-xs sm:text-sm font-extrabold bg-[#82C91E] hover:bg-[#65A30D] text-white transition-all shadow-md shadow-[#82C91E]/30 flex items-center space-x-2 disabled:opacity-50 active:scale-95 cursor-pointer min-h-[44px]"
+                className="px-6 py-3.5 btn-3d-lime text-xs sm:text-sm font-extrabold text-white flex items-center space-x-2 disabled:opacity-50 cursor-pointer min-h-[44px]"
               >
                 {isGenerating ? (
                   <>

@@ -44,7 +44,7 @@ export const Navbar = React.memo(function Navbar({
           </div>
 
           {/* 2. Markazda (Desktop >= lg): 4 ta toza, yirik 3D navigatsiya havolasi */}
-          <nav className="hidden lg:flex items-center space-x-1.5 bg-slate-100 p-1.5 rounded-full border border-slate-200/90 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)]">
+          <nav className="hidden lg:flex items-center space-x-1.5 slot-3d-inset p-1.5">
             <button
               onClick={() => setActiveTab('map')}
               className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
@@ -94,13 +94,13 @@ export const Navbar = React.memo(function Navbar({
           <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
             
             {/* 3D Tactile Role Switcher (Desktop >= sm) */}
-            <div className="hidden sm:flex items-center bg-slate-100 p-1.5 rounded-full border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] text-xs sm:text-sm font-extrabold gap-1">
+            <div className="hidden sm:flex items-center slot-3d-inset p-1.5 text-xs sm:text-sm font-extrabold gap-1">
               <button
                 onClick={() => setActiveRole('hokimiyat')}
                 className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer min-h-[36px] ${
                   activeRole === 'hokimiyat'
                     ? 'pill-3d-active'
-                    : 'pill-3d-inactive'
+                    : 'text-slate-600 hover:text-slate-900 font-extrabold'
                 }`}
               >
                 Hokimiyat
@@ -110,7 +110,7 @@ export const Navbar = React.memo(function Navbar({
                 className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer min-h-[36px] ${
                   activeRole === 'fuqaro'
                     ? 'pill-3d-active'
-                    : 'pill-3d-inactive'
+                    : 'text-slate-600 hover:text-slate-900 font-extrabold'
                 }`}
               >
                 Fuqaro
@@ -120,7 +120,7 @@ export const Navbar = React.memo(function Navbar({
                 className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer min-h-[36px] ${
                   activeRole === 'pudratchi'
                     ? 'pill-3d-active'
-                    : 'pill-3d-inactive'
+                    : 'text-slate-600 hover:text-slate-900 font-extrabold'
                 }`}
               >
                 Pudratchi
@@ -130,18 +130,18 @@ export const Navbar = React.memo(function Navbar({
             {/* 3D Muammo Bildirish Button */}
             <button
               onClick={onOpenReportModal}
-              className="hidden md:flex items-center space-x-1.5 px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold btn-3d-rose cursor-pointer min-h-[44px]"
+              className="hidden md:flex items-center space-x-1.5 px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold bg-rose-50 text-rose-600 border border-rose-200 hover:bg-rose-100 transition-all shadow-xs cursor-pointer min-h-[44px]"
             >
-              <AlertTriangle className="w-4 h-4 text-rose-600" />
+              <AlertTriangle className="w-4 h-4 text-rose-500" />
               <span>Muammo Bildirish</span>
             </button>
 
             {/* 3D Tactile AI PDF Hisobot Button */}
             <button
               onClick={onOpenPdfModal}
-              className="hidden sm:flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-extrabold btn-3d-lime cursor-pointer min-h-[44px]"
+              className="hidden sm:flex items-center space-x-2 px-5 py-2.5 btn-3d-lime text-xs sm:text-sm font-extrabold cursor-pointer min-h-[44px]"
             >
-              <FileText className="w-4 h-4" />
+              <FileText className="w-4 h-4 text-white" />
               <span>AI PDF Hisobot</span>
             </button>
 

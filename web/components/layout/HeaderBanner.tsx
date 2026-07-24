@@ -56,8 +56,7 @@ export const HeaderBanner: React.FC<HeaderBannerProps> = React.memo(function Hea
           {/* LEFT — Title & Subtitle */}
           <div className="space-y-2.5 max-w-3xl">
             <div className="flex items-center space-x-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#82C91E] animate-pulse" />
-              <span className="text-sm font-black text-[#82C91E] uppercase tracking-wider">
+              <span className="pill-3d-active px-3 py-1 text-xs font-black uppercase tracking-wider">
                 {current.badge}
               </span>
             </div>
@@ -72,7 +71,7 @@ export const HeaderBanner: React.FC<HeaderBannerProps> = React.memo(function Hea
           </div>
 
           {/* RIGHT — Clean Dynamic Stats */}
-          <div className="flex items-center space-x-5 bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 shrink-0">
+          <div className="flex items-center space-x-5 card-3d p-4 sm:p-5 shrink-0">
             <div className="text-center px-3">
               <p className="text-xs sm:text-sm text-slate-500 font-extrabold uppercase tracking-wider">{current.stat1Label}</p>
               <p className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mt-1">{current.stat1Val}</p>

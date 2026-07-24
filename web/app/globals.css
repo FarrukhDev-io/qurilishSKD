@@ -215,55 +215,53 @@ body {
 .btn-lime-primary      { will-change: transform, box-shadow; }
 .leaflet-container     { will-change: contents; }
 
-/* ─── 3D Tactile Elevation & Gloss Styles ─── */
+/* ─── 3D Tactile Design Tokens ─── */
 .btn-3d-lime {
-  background-color: #82c91e;
+  background-color: #82C91E;
   color: #ffffff;
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.45), inset 0 -2px 4px rgba(0, 0, 0, 0.18), 0 8px 20px rgba(130, 201, 30, 0.35);
-  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 9999px;
+  font-weight: 700;
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.45), inset 0 -2px 3px rgba(0, 0, 0, 0.18), 0 8px 20px rgba(130, 201, 30, 0.35);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-3d-lime:hover {
-  background-color: #76b81b;
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.55), inset 0 -2px 4px rgba(0, 0, 0, 0.22), 0 10px 24px rgba(130, 201, 30, 0.45);
   transform: translateY(-2px);
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.5), inset 0 -2px 3px rgba(0, 0, 0, 0.18), 0 12px 25px rgba(130, 201, 30, 0.45);
 }
 
 .btn-3d-lime:active {
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(130, 201, 30, 0.25);
   transform: translateY(1px);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.25);
+}
+
+.card-3d {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.9), 0 10px 30px rgba(15, 23, 42, 0.06);
+  transition: all 0.25s ease;
+}
+
+.card-3d:hover {
+  border-color: rgba(130, 201, 30, 0.5);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.9), 0 16px 36px rgba(130, 201, 30, 0.16);
+  transform: translateY(-3px);
 }
 
 .pill-3d-active {
-  background-color: #82c91e;
+  background-color: #82C91E;
   color: #ffffff;
-  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.4), inset 0 -1.5px 2px rgba(0, 0, 0, 0.15), 0 6px 16px rgba(130, 201, 30, 0.35);
-  transition: all 0.15s ease;
+  font-weight: 800;
+  border-radius: 9999px;
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.45), inset 0 -2px 3px rgba(0, 0, 0, 0.18), 0 6px 18px rgba(130, 201, 30, 0.35);
+  transition: all 0.2s ease;
 }
 
-.pill-3d-inactive {
-  background-color: #f1f5f9;
-  color: #475569;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 -1px 2px rgba(255, 255, 255, 0.8);
-  transition: all 0.15s ease;
+.slot-3d-inset {
+  background-color: rgba(241, 245, 249, 0.9);
+  border-radius: 9999px;
+  box-shadow: inset 0 2.5px 5px rgba(15, 23, 42, 0.09), inset 0 -1px 2px rgba(255, 255, 255, 0.8);
 }
 
-.pill-3d-inactive:hover {
-  background-color: #e2e8f0;
-  color: #0f172a;
-}
-
-.btn-3d-rose {
-  background-color: #fff1f2;
-  color: #e11d48;
-  border: 1px solid #fecdd3;
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6), inset 0 -2px 4px rgba(225, 29, 72, 0.1), 0 6px 16px rgba(244, 63, 94, 0.15);
-  transition: all 0.15s ease;
-}
-
-.btn-3d-rose:hover {
-  background-color: #ffe4e6;
-  color: #be123c;
-  transform: translateY(-1px);
-}
 
