@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @layer base {
-  :root {
-    --bg-main: #f8fafc;
+:root {
+    --bg-main: #f4f6f9;
     --bg-card: #ffffff;
     --bg-card-hover: #f7fee7;
     --border-color: #e2e8f0;
@@ -13,30 +13,86 @@
     --brand-lime-hover: #65a30d;
     --brand-lime-badge: #95e616;
     --brand-lime-surface: #f7fee7;
-    --shadow-soft: 0 4px 20px rgba(15, 23, 42, 0.05);
-    --shadow-hover: 0 10px 30px rgba(130, 201, 30, 0.15);
+    --shadow-soft: 0 4px 20px rgba(15, 23, 42, 0.04);
+    --shadow-hover: 0 12px 32px rgba(130, 201, 30, 0.14);
+    
+    /* Surface Elevation Shadows */
+    --elevation-0: 0 0 0 1px rgba(15, 23, 42, 0.03);
+    --elevation-1: 0 2px 8px -2px rgba(15, 23, 42, 0.05), 0 1px 3px 0 rgba(15, 23, 42, 0.03);
+    --elevation-2: 0 8px 24px -4px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+    --elevation-3: 0 16px 36px -6px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+    --elevation-4: 0 24px 48px -8px rgba(15, 23, 42, 0.12), 0 8px 20px -4px rgba(15, 23, 42, 0.06);
   }
 }
 
 body {
-  background-color: var(--bg-main);
+  background-color: #f4f6f9;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(130, 201, 30, 0.07) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 15% 70%, rgba(147, 51, 234, 0.03) 0%, transparent 45%);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
 }
 
-/* Startup Base Style Rounded Cards */
-.startup-card {
+/* Global Grid Surface Background Pattern Overlay */
+.global-grid-bg {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Surface Elevation Classes */
+.surface-elevation-0 {
+  box-shadow: var(--elevation-0);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.surface-elevation-1 {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: var(--elevation-1);
+}
+
+.surface-elevation-2 {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: var(--elevation-2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.surface-elevation-2:hover {
+  border-color: rgba(130, 201, 30, 0.4);
+  box-shadow: var(--elevation-3), 0 0 20px rgba(130, 201, 30, 0.1);
+  transform: translateY(-2px);
+}
+
+.surface-elevation-3 {
   background: #ffffff;
   border: 1px solid #e2e8f0;
+  box-shadow: var(--elevation-3);
+}
+
+.surface-elevation-4 {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: var(--elevation-4);
+}
+
+/* Startup Base Style Rounded Cards */
+.startup-card {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: 24px;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+  box-shadow: var(--elevation-2);
   transition: all 0.25s ease;
 }
 
 .startup-card:hover {
   border-color: rgba(130, 201, 30, 0.4);
-  box-shadow: 0 10px 30px rgba(130, 201, 30, 0.12);
+  box-shadow: var(--elevation-3), 0 0 24px rgba(130, 201, 30, 0.12);
   transform: translateY(-2px);
 }
 

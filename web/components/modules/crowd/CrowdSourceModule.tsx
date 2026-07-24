@@ -45,7 +45,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
   };
 
   return (
-    <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6 text-[#0F172A] transition-all overflow-x-hidden">
+    <div className="p-4 sm:p-6 rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_12px_36px_-6px_rgba(15,23,42,0.06)] space-y-6 text-[#0F172A] transition-all overflow-x-hidden hover:shadow-[0_16px_44px_-8px_rgba(130,201,30,0.12)]">
       
       {/* 1. SECTION HEADER VA SPACIOUS UI */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
