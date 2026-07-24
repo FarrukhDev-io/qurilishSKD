@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { X, FileText, Download, CheckCircle2, ShieldCheck, Sparkles, AlertTriangle } from 'lucide-react';
-import { EXECUTIVE_STATS, SAMARQAND_PROJECTS } from '../data/samarqandProjects';
+import { EXECUTIVE_STATS, SAMARQAND_PROJECTS } from '../../data/samarqandProjects';
 import confetti from 'canvas-confetti';
 
 interface ReportModalProps {

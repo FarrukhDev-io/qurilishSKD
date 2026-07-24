@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { ProjectData } from '../data/samarqandProjects';
+import { ProjectData } from '../../../data/samarqandProjects';
 import { Sliders, Cpu, Grid2X2, RefreshCw, AlertCircle, Snowflake, Sun } from 'lucide-react';
-import { useSatelliteData } from '../hooks/useSatelliteData';
+import { useSatelliteData } from '../../../hooks/useSatelliteData';
 
 export interface SatelliteSliderModuleProps {
   projects?: ProjectData[];

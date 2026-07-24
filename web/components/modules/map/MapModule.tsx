@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { ProjectData } from '../data/samarqandProjects';
-import { getLightModeBadgeStyle } from '../services/gisService';
+import { ProjectData } from '../../../data/samarqandProjects';
+import { getLightModeBadgeStyle } from '../../../services/gisService';
 import { Layers, Filter, Activity, Info, ChevronDown, ChevronUp, AlertCircle, ShieldAlert, CheckCircle2, Building2 } from 'lucide-react';
 
 export interface MapModuleProps {
@@ -188,7 +188,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
           </button>
         </div>
 
-        {/* Status Filters (With Professional Lucide Icons) */}
+        {/* Status Filters */}
         <div className="flex items-center space-x-2">
           <span className="text-xs text-slate-500 font-bold flex items-center space-x-1">
             <Filter className="w-3.5 h-3.5" />
@@ -283,7 +283,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
       {/* Leaflet Map Canvas */}
       <div ref={mapContainerRef} className="w-full h-full z-10" />
 
-      {/* Floating Selected Project Detail Drawer (Bottom Light Mode) */}
+      {/* Floating Selected Project Detail Drawer */}
       {selectedProject && (
         <div className="absolute bottom-4 left-4 right-4 z-20 md:right-auto md:w-96 bg-white/95 backdrop-blur-md p-4.5 rounded-2xl border border-slate-200 shadow-lg space-y-3">
           
@@ -301,7 +301,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
             </div>
           </div>
 
-          {/* InSAR Deformation Warning Card (Minimalist Light Mode) */}
+          {/* InSAR Deformation Warning Card */}
           <div className={`p-3 rounded-xl border text-xs flex items-start space-x-2.5 ${
             selectedProject.insarDeformation.status === 'danger'
               ? 'bg-rose-50 border-rose-200 text-rose-900'

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ProjectData, EXECUTIVE_STATS } from '../data/samarqandProjects';
+import { ProjectData, EXECUTIVE_STATS } from '../../../data/samarqandProjects';
 import { Building2, DollarSign, AlertOctagon, Activity, FileText, PieChart, BarChart3, ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 interface AnalyticsModuleProps {
@@ -81,7 +81,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
       {/* Main Charts & Analytics Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        {/* Planned vs AI Sentinel Progress Bars (2 Cols) */}
+        {/* Planned vs AI Sentinel Progress Bars */}
         <div className="lg:col-span-2 p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-5">
           <div className="flex items-center justify-between">
             <div>
@@ -133,14 +133,12 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
 
                   {/* Visual Dual Progress Bar */}
                   <div className="space-y-1">
-                    {/* Planned bar */}
                     <div className="relative w-full h-2 bg-slate-200 rounded-full overflow-hidden">
                       <div
                         className="absolute top-0 bottom-0 left-0 bg-slate-400 rounded-full"
                         style={{ width: `${project.plannedProgress}%` }}
                       />
                     </div>
-                    {/* Actual AI Sentinel bar */}
                     <div className="relative w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
                       <div
                         className={`absolute top-0 bottom-0 left-0 rounded-full transition-all duration-700 ${
@@ -164,7 +162,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
 
         </div>
 
-        {/* Side Panel: Crowd-Source & YUNESKO Bufer Zonasi Warning Card */}
+        {/* Side Panel */}
         <div className="space-y-6">
           
           {/* YUNESKO Bufer Zonasi Ogohlantirish Kartasi */}

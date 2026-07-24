@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, AlertTriangle, MapPin, CheckCircle2, Sparkles, Camera, Construction, Trash2, Building2, Volume2, ShieldAlert } from 'lucide-react';
+import { X, AlertTriangle, MapPin, CheckCircle2, Sparkles, Camera, Construction, Trash2, Building2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface IssueReportModalProps {

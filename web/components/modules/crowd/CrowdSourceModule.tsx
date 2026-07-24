@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Camera, MapPin, CheckCircle2, AlertTriangle, Users, ShieldCheck, Construction, Trash2, Building2, AlertCircle, ShieldAlert } from 'lucide-react';
+import { Camera, MapPin, CheckCircle2, AlertTriangle, Users, ShieldCheck, Construction, Trash2, Building2, AlertCircle } from 'lucide-react';
 
 interface CrowdSourceModuleProps {
   onOpenReportModal: () => void;
@@ -176,7 +176,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           </div>
         </div>
 
-        {/* Right: AI Scanner Canvas Frame (2 Cols) */}
+        {/* Right: AI Scanner Canvas Frame */}
         <div className="lg:col-span-2 relative h-[390px] rounded-3xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm flex flex-col justify-between p-6">
           
           {/* Top Status Bar & EXIF Verified Badge */}
