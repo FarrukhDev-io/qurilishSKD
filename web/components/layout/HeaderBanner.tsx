@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Satellite, Cpu, Keyboard, Building2 } from 'lucide-react';
+import { Building2 } from 'lucide-react';
 
 export const HeaderBanner = React.memo(function HeaderBanner() {
   return (
@@ -13,44 +13,9 @@ export const HeaderBanner = React.memo(function HeaderBanner() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-10">
 
-          {/* LEFT — Badges + Hero Title + Description */}
-          <div className="space-y-4 flex-1 min-w-0">
+          {/* LEFT — Hero Title + Description */}
+          <div className="space-y-3 flex-1 min-w-0">
 
-            {/* 2. BADGE ROW */}
-            <div className="flex flex-wrap items-center gap-2.5">
-
-              {/* Badge 1 — Sentinel Live (animated pulse) */}
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 text-xs font-extrabold text-[#82C91E] shadow-xs">
-                <Satellite className="w-4 h-4 text-[#82C91E] shrink-0" />
-                <span className="flex h-2 w-2 relative shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#82C91E] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#82C91E]"></span>
-                </span>
-                <span>Sentinel-2 Live Synchronized</span>
-              </div>
-
-              {/* Badge 2 — AI Confidence */}
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-extrabold text-[#0F172A] shadow-xs">
-                <Cpu className="w-4 h-4 text-[#82C91E] shrink-0" />
-                <span>94.2% AI Model Confidence</span>
-              </div>
-
-              {/* Badge 3 — Hotkeys (sm+ only) */}
-              <div className="hidden sm:inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#0F172A] text-white text-xs font-mono font-bold shadow-sm">
-                <Keyboard className="w-4 h-4 text-[#82C91E] shrink-0" />
-                <span>
-                  <span className="text-[#82C91E] font-black">M</span>
-                  <span className="text-slate-500 mx-1">·</span>
-                  <span className="text-[#82C91E] font-black">S</span>
-                  <span className="text-slate-500 mx-1">·</span>
-                  <span className="text-[#82C91E] font-black">C</span>
-                  <span className="text-slate-500 mx-1">·</span>
-                  <span className="text-[#82C91E] font-black">A</span>
-                  <span className="text-slate-400 ml-1.5">modul almashtirgich</span>
-                </span>
-              </div>
-
-            </div>
 
             {/* 3. HERO TITLE BLOCK */}
             <div className="space-y-2">
