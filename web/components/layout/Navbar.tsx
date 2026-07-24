@@ -30,7 +30,7 @@ export const Navbar = React.memo(function Navbar({
           
           {/* 1. Chap tomonda: Yirik QurilishSKD Logo va Samarqand Pill Badge */}
           <div className="flex items-center space-x-2.5 sm:space-x-3 shrink-0">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl btn-hyper-3d flex items-center justify-center">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#82C91E] flex items-center justify-center border border-white/40 shadow-[0_8px_16px_rgba(130,201,30,0.35)] transition-all btn-3d-lime">
               <Satellite className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
             <div className="flex items-center space-x-2">
@@ -44,12 +44,12 @@ export const Navbar = React.memo(function Navbar({
           </div>
 
           {/* 2. Markazda (Desktop >= lg): 4 ta toza, yirik 3D navigatsiya havolasi */}
-          <nav className="hidden lg:flex items-center space-x-1.5 slot-embedded-3d p-1.5 rounded-full">
+          <nav className="hidden lg:flex items-center space-x-1.5 bg-slate-100 p-1.5 rounded-full border border-slate-200/90 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)]">
             <button
               onClick={() => setActiveTab('map')}
               className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'map'
-                  ? 'btn-hyper-3d text-white'
+                  ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
               }`}
             >
@@ -60,7 +60,7 @@ export const Navbar = React.memo(function Navbar({
               onClick={() => setActiveTab('slider')}
               className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'slider'
-                  ? 'btn-hyper-3d text-white'
+                  ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
               }`}
             >
@@ -71,7 +71,7 @@ export const Navbar = React.memo(function Navbar({
               onClick={() => setActiveTab('crowd')}
               className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'crowd'
-                  ? 'btn-hyper-3d text-white'
+                  ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
               }`}
             >
@@ -82,7 +82,7 @@ export const Navbar = React.memo(function Navbar({
               onClick={() => setActiveTab('analytics')}
               className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'analytics'
-                  ? 'btn-hyper-3d text-white'
+                  ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
               }`}
             >
@@ -93,14 +93,14 @@ export const Navbar = React.memo(function Navbar({
           {/* 3. O'ng tomonda: Actions & Mobile Hamburger Toggle */}
           <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
             
-            {/* Hyper-3D Tactile Role Switcher (Desktop >= sm) */}
-            <div className="hidden sm:flex items-center slot-embedded-3d p-1.5 rounded-full text-xs sm:text-sm font-extrabold gap-1">
+            {/* 3D Tactile Role Switcher (Desktop >= sm) */}
+            <div className="hidden sm:flex items-center bg-slate-100 p-1.5 rounded-full border border-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] text-xs sm:text-sm font-extrabold gap-1">
               <button
                 onClick={() => setActiveRole('hokimiyat')}
                 className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer min-h-[36px] ${
                   activeRole === 'hokimiyat'
-                    ? 'btn-hyper-3d text-white font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900 font-extrabold'
+                    ? 'pill-3d-active'
+                    : 'pill-3d-inactive'
                 }`}
               >
                 Hokimiyat
@@ -109,8 +109,8 @@ export const Navbar = React.memo(function Navbar({
                 onClick={() => setActiveRole('fuqaro')}
                 className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer min-h-[36px] ${
                   activeRole === 'fuqaro'
-                    ? 'btn-hyper-3d text-white font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900 font-extrabold'
+                    ? 'pill-3d-active'
+                    : 'pill-3d-inactive'
                 }`}
               >
                 Fuqaro
@@ -119,29 +119,29 @@ export const Navbar = React.memo(function Navbar({
                 onClick={() => setActiveRole('pudratchi')}
                 className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer min-h-[36px] ${
                   activeRole === 'pudratchi'
-                    ? 'btn-hyper-3d text-white font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900 font-extrabold'
+                    ? 'pill-3d-active'
+                    : 'pill-3d-inactive'
                 }`}
               >
                 Pudratchi
               </button>
             </div>
 
-            {/* Hyper-3D Muammo Bildirish Button */}
+            {/* 3D Muammo Bildirish Button */}
             <button
               onClick={onOpenReportModal}
-              className="hidden md:flex items-center space-x-1.5 px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold btn-rose-3d text-white cursor-pointer min-h-[44px]"
+              className="hidden md:flex items-center space-x-1.5 px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold btn-3d-rose cursor-pointer min-h-[44px]"
             >
-              <AlertTriangle className="w-4 h-4 text-white" />
+              <AlertTriangle className="w-4 h-4 text-rose-600" />
               <span>Muammo Bildirish</span>
             </button>
 
-            {/* Hyper-3D Tactile AI PDF Hisobot Button */}
+            {/* 3D Tactile AI PDF Hisobot Button */}
             <button
               onClick={onOpenPdfModal}
-              className="hidden sm:flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-extrabold btn-hyper-3d text-white cursor-pointer min-h-[44px]"
+              className="hidden sm:flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-extrabold btn-3d-lime cursor-pointer min-h-[44px]"
             >
-              <FileText className="w-4 h-4 text-white" />
+              <FileText className="w-4 h-4" />
               <span>AI PDF Hisobot</span>
             </button>
 
