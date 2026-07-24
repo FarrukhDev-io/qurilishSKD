@@ -30,14 +30,14 @@ export const Navbar = React.memo(function Navbar({
           
           {/* 1. Chap tomonda: Yirik QurilishSKD Logo va Samarqand Pill Badge */}
           <div className="flex items-center space-x-2.5 sm:space-x-3 shrink-0">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#82C91E] flex items-center justify-center shadow-md shadow-[#82C91E]/30 transition-transform hover:scale-105">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#82C91E] flex items-center justify-center shadow-md shadow-[#82C91E]/30 transition-transform hover:scale-105">
               <Satellite className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
             <div className="flex items-center space-x-2">
-              <div className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]" aria-label="Qurilish SKD - Samarqand Qurilish Monitoring Platformasi">
+              <div className="text-2xl sm:text-3xl font-black tracking-tight text-[#0F172A]" aria-label="Qurilish SKD - Samarqand Qurilish Monitoring Platformasi">
                 Qurilish<span className="text-[#82C91E]"> SKD</span>
               </div>
-              <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-black uppercase bg-[#95E616] text-[#0F172A] rounded-full tracking-wider shadow-xs">
+              <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 text-xs sm:text-sm font-black uppercase bg-[#95E616] text-[#0F172A] rounded-full tracking-wider shadow-xs">
                 Samarqand
               </span>
             </div>
@@ -47,7 +47,7 @@ export const Navbar = React.memo(function Navbar({
           <nav className="hidden lg:flex items-center space-x-1.5 bg-slate-100 p-1.5 rounded-full border border-slate-200 shadow-inner">
             <button
               onClick={() => setActiveTab('map')}
-              className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
+              className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'map'
                   ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30 scale-[1.02]'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white'
@@ -58,7 +58,7 @@ export const Navbar = React.memo(function Navbar({
 
             <button
               onClick={() => setActiveTab('slider')}
-              className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
+              className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'slider'
                   ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30 scale-[1.02]'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white'
@@ -69,7 +69,7 @@ export const Navbar = React.memo(function Navbar({
 
             <button
               onClick={() => setActiveTab('crowd')}
-              className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
+              className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'crowd'
                   ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30 scale-[1.02]'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white'
@@ -80,7 +80,7 @@ export const Navbar = React.memo(function Navbar({
 
             <button
               onClick={() => setActiveTab('analytics')}
-              className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
+              className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'analytics'
                   ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30 scale-[1.02]'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white'
@@ -94,7 +94,7 @@ export const Navbar = React.memo(function Navbar({
           <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
             
             {/* Compact Role Switcher (Desktop >= sm) */}
-            <div className="hidden sm:flex items-center bg-slate-100 p-1 rounded-full border border-slate-200 text-xs font-bold">
+            <div className="hidden sm:flex items-center bg-slate-100 p-1 rounded-full border border-slate-200 text-xs sm:text-sm font-extrabold">
               <button
                 onClick={() => setActiveRole('hokimiyat')}
                 className={`px-3 py-1.5 rounded-full transition-all cursor-pointer min-h-[36px] ${
@@ -130,7 +130,7 @@ export const Navbar = React.memo(function Navbar({
             {/* Muammo Bildirish Button (Hidden on very small mobile screens) */}
             <button
               onClick={onOpenReportModal}
-              className="hidden md:flex items-center space-x-1.5 px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold bg-rose-50 text-rose-600 border border-rose-200 hover:bg-rose-100 transition-all shadow-xs active:scale-95 cursor-pointer min-h-[44px]"
+              className="hidden md:flex items-center space-x-1.5 px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold bg-rose-50 text-rose-600 border border-rose-200 hover:bg-rose-100 transition-all shadow-xs active:scale-95 cursor-pointer min-h-[44px]"
             >
               <AlertTriangle className="w-4 h-4 text-rose-500" />
               <span>Muammo Bildirish</span>
