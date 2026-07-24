@@ -110,3 +110,16 @@ Ushbu hujjat [Startup Base](https://startupbase.uz/) platformasining zamonaviy, 
 
 ## 6. XULOSA
 SKDqurilish platformasidagi barcha yangi frontend komponentlar, xaritalar, dashboardlar va mobil ko'rinishlar **ushbu Light Mode (Startup Base) dizayn yo'riqnomasiga** qat'iy rioya qilgan holda ishlab chiqiladi.
+
+
+
+
+  ──────
+  ### 📱 Mobil Moslashuvchanlik (Responsiveness) 6 ta Qismi:
+
+  1. 📲 1-Qism: Navbar.tsx va Header Banner (Mobil menyu, yirik touch pill tugmalar, 0 ta sig'may qolish)
+  2. 🗺 2-Qism: MapModule.tsx (Mobil ekrandagi Leaflet touch-gestures, moslashuvchan xarita balandligi, mobil Bottom-Sheet popup)
+  3. 📸 3-Qism: CrowdSourceModule.tsx & IssueReportModal.tsx (Mobil smartfon kamerasi foto-skaner paneli va mobil modal forma)
+  4. 🛰 4-Qism: SatelliteSliderModule.tsx (Mobil touch-drag slider harakati va mobil vertikal Side-by-Side grid)
+  5. 📊 5-Qism: AnalyticsModule.tsx (Mobil 1-ustunli KPI kartalar gridi va moslashuvchan progress barlar)
+  6. 📄 6-Qism: ReportModal.tsx (Mobil PDF Hisobot modal ekrani va to'liq mobil sheet)

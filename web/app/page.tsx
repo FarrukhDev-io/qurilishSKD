@@ -84,11 +84,11 @@ export default function Home() {
   }, [switchTab]);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col font-sans selection:bg-[#82C91E] selection:text-white relative">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col font-sans selection:bg-[#82C91E] selection:text-white relative overflow-x-hidden">
       
       {/* FLOATING DEMO TOAST NOTIFICATION BANNER */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-md bg-[#0F172A] text-white px-5 py-3 rounded-2xl shadow-2xl border border-slate-700 flex items-center space-x-3 animate-bounce">
+        <div className="fixed bottom-6 right-4 sm:right-6 z-50 max-w-sm sm:max-w-md bg-[#0F172A] text-white px-4 sm:px-5 py-3 rounded-2xl shadow-2xl border border-slate-700 flex items-center space-x-3 animate-bounce">
           <div className="p-2 rounded-xl bg-[#82C91E] text-white shrink-0">
             <Info className="w-4 h-4" />
           </div>
@@ -115,7 +115,7 @@ export default function Home() {
       <HeaderBanner />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
         
         {/* Dynamic Tab Module Render */}
         {activeTab === 'map' && (
