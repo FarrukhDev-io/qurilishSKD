@@ -28,14 +28,14 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 gap-3">
           
-          {/* 1. Chap tomonda: Yirik SKDqurilish Logo va Samarqand Pill Badge */}
+          {/* 1. Chap tomonda: Yirik QurilishSKD Logo va Samarqand Pill Badge */}
           <div className="flex items-center space-x-2.5 sm:space-x-3 shrink-0">
             <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#82C91E] flex items-center justify-center shadow-md shadow-[#82C91E]/30 transition-transform hover:scale-105">
               <Satellite className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
             <div className="flex items-center space-x-2">
               <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]">
-                SKD<span className="text-[#82C91E]">qurilish</span>
+                Qurilish<span className="text-[#82C91E]"> SKD</span>
               </h1>
               <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-black uppercase bg-[#95E616] text-[#0F172A] rounded-full tracking-wider shadow-xs">
                 Samarqand
