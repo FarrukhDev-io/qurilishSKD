@@ -221,30 +221,23 @@ export const MapModule: React.FC<MapModuleProps> = ({
   return (
     <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4 sm:space-y-6 text-[#0F172A] overflow-x-hidden">
 
-      {/* SECTION HEADER + LIVE FILTER COUNTERS */}
+      {/* SECTION HEADER + FILTER COUNTERS */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
-          <h2 className="text-lg sm:text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5 flex-wrap gap-1">
-            <span>SAMARQAND GIS MONITORINGI</span>
-            <span className="bg-[#95E616] text-[#0F172A] px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider shadow-xs">
-              SENTINEL-1/2 RADAR
-            </span>
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] tracking-tight">
+            Samarqand GIS Xaritasi va Monitoringi
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 font-bold mt-1">
-            Canvas Mode 60 FPS GIS xarita va Sentinel InSAR radar poydevor cho'kish monitoringi
+          <p className="text-xs sm:text-sm text-slate-500 font-semibold mt-1">
+            Qurilish ob'ektlarining aniq joylashuvi, bajarilish foizi va poydevor cho'kish ko'rsatkichlari
           </p>
         </div>
 
-        {/* Filter Pills (live counters, horizontal scroll) */}
+        {/* Filter Pills */}
         <div className="flex items-center space-x-2 w-full md:w-auto" role="group" aria-label="Loyiha filtrlari">
-          <span className="text-xs text-slate-500 font-bold hidden sm:flex items-center space-x-1 shrink-0">
-            <Filter className="w-4 h-4 text-[#82C91E]" />
-            <span>Filter:</span>
-          </span>
           <div className="flex items-center space-x-1.5 bg-slate-100 p-1.5 rounded-full border border-slate-200 overflow-x-auto no-scrollbar w-full md:w-auto py-1">
             {([
               { key: 'all' as const, label: `Barchasi (${totalCount})`, icon: null },
-              { key: 'red_flag' as const, label: `Red Flag (${redFlagCount})`, icon: <AlertCircle className="w-4 h-4 text-rose-500" /> },
+              { key: 'red_flag' as const, label: `Kechikayotgan (${redFlagCount})`, icon: <AlertCircle className="w-4 h-4 text-rose-500" /> },
               { key: 'unesco_warning' as const, label: `YUNESKO (${unescoCount})`, icon: <ShieldAlert className="w-4 h-4 text-amber-500" /> },
               { key: 'on_schedule' as const, label: `Rejada (${onScheduleCount})`, icon: <CheckCircle2 className="w-4 h-4 text-[#82C91E]" /> },
             ]).map(({ key, label, icon }) => (
@@ -252,7 +245,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
                 key={key}
                 onClick={() => setFilterStatus(key)}
                 aria-pressed={filterStatus === key}
-                className={`px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${
+                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[40px] ${
                   filterStatus === key
                     ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
                     : 'text-slate-600 hover:text-slate-900'
