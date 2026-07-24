@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Camera, MapPin, CheckCircle2, AlertTriangle, Users, ShieldCheck, Construction, Trash2, Building2, AlertCircle } from 'lucide-react';
+import { Camera, MapPin, CheckCircle2, AlertTriangle, Users, ShieldCheck, Construction, Trash2, Building2, AlertCircle, UploadCloud } from 'lucide-react';
 
 interface CrowdSourceModuleProps {
   onOpenReportModal: () => void;
@@ -47,59 +47,61 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
   return (
     <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6 text-[#0F172A] transition-all">
       
-      {/* Header Bar */}
+      {/* 1. SECTION HEADER VA SPACIOUS UI */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
-          <h2 className="text-lg font-extrabold text-[#0F172A] flex items-center space-x-2">
-            <Camera className="w-5 h-5 text-[#82C91E]" />
-            <span>Smart Crowd-Sourcing & AI Photo Scanner Simulator</span>
+          <h2 className="text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5">
+            <span>SMART CROWD-SOURCING & FUQAROLIK NAZORATI</span>
+            <span className="bg-[#95E616] text-[#0F172A] px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider shadow-xs">
+              AI PHOTO SCANNER
+            </span>
           </h2>
-          <p className="text-xs text-slate-500 font-medium mt-0.5">
-            Fuqarolik nazorati, GPS Geofencing va YOLOv8 Computer Vision foto skaneri
+          <p className="text-sm text-slate-500 font-bold mt-1">
+            Fuqarolik nazorati, GPS Geofence EXIF Match va YOLOv8 Computer Vision foto skaneri
           </p>
         </div>
 
         <button
           onClick={onOpenReportModal}
-          className="px-5 py-2.5 rounded-full text-xs font-extrabold bg-[#82C91E] text-white hover:bg-[#65A30D] shadow-md shadow-[#82C91E]/30 transition-all flex items-center space-x-2 active:scale-95 cursor-pointer"
+          className="px-6 py-3 rounded-full text-sm font-extrabold bg-[#82C91E] text-white hover:bg-[#65A30D] shadow-md shadow-[#82C91E]/30 transition-all flex items-center space-x-2 active:scale-95 cursor-pointer"
         >
-          <AlertTriangle className="w-4 h-4" />
+          <UploadCloud className="w-5 h-5 text-white" />
           <span>Yangi Muammo Yuborish</span>
         </button>
       </div>
 
-      {/* Auto-Clustering Indicator Feed Card */}
-      <div className="p-4 rounded-2xl bg-[#F7FEE7] border border-[#82C91E]/40 shadow-xs flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center space-x-3">
-          <div className="p-2.5 rounded-full bg-[#82C91E] text-white shadow-sm">
-            <Users className="w-5 h-5" />
+      {/* 2. AUTO-CLUSTERING INDICATOR FEED CARD */}
+      <div className="p-5 rounded-3xl bg-[#F7FEE7] border border-[#82C91E]/40 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center space-x-3.5">
+          <div className="p-3 rounded-2xl bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30 shrink-0">
+            <Users className="w-6 h-6 text-white" />
           </div>
           <div>
-            <div className="flex items-center space-x-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-white text-[#65A30D] border border-[#82C91E]/30 shadow-xs">
+            <div className="flex items-center space-x-2.5">
+              <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-white text-[#65A30D] border border-[#82C91E]/30 shadow-xs">
                 AI Auto-Clustering Active
               </span>
-              <span className="text-xs font-mono font-extrabold text-[#0F172A]">#CLK-8821</span>
+              <span className="text-sm font-mono font-extrabold text-[#0F172A]">#CLK-8821 • 5 ta biriktirilgan murojaat</span>
             </div>
-            <p className="text-xs font-extrabold text-[#0F172A] mt-1 flex items-center space-x-1">
+            <p className="text-sm font-extrabold text-[#0F172A] mt-1 flex items-center space-x-1.5">
               <AlertTriangle className="w-4 h-4 text-amber-600 inline mr-1" />
               <span>5 ta fuqaro murojaati 1 ta Klaster Murojaatga biriktirildi (#CLK-8821)</span>
             </p>
-            <p className="text-[11px] text-slate-600 font-medium mt-0.5">
+            <p className="text-xs text-slate-600 font-bold mt-0.5">
               Joylashuv: Registon Bufer Zonasi • Bir xil geo-poligonda 5 marta foto signal tushgan
             </p>
           </div>
         </div>
 
-        <div className="flex items-center space-x-2">
-          <span className="px-3.5 py-1.5 rounded-full bg-white text-[#65A30D] border border-[#82C91E]/40 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs">
+        <div className="flex items-center space-x-2 shrink-0">
+          <span className="px-4 py-2 rounded-full bg-white text-[#65A30D] border border-[#82C91E]/40 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs">
             <CheckCircle2 className="w-4 h-4 text-[#82C91E]" />
-            <span>Hokimiyatga Yuborilgan</span>
+            <span>Inspeksiyaga Yuborilgan</span>
           </span>
         </div>
       </div>
 
-      {/* Interactive AI Photo Scanner Area */}
+      {/* 3. INTERACTIVE AI PHOTO SCANNER AREA */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Left: Sample Selector */}
@@ -109,109 +111,110 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
             <span>Namuna Foto Qoidabuzarliklar:</span>
           </h3>
 
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             <button
               onClick={() => { setSelectedSample('fence'); handleScan(); }}
-              className={`w-full p-3.5 rounded-2xl text-left transition-all border ${
+              className={`w-full p-4 rounded-2xl text-left transition-all border cursor-pointer ${
                 selectedSample === 'fence'
                   ? 'bg-[#F7FEE7] border-[#82C91E] text-[#0F172A] shadow-sm'
-                  : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                  : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
               }`}
             >
-              <div className="flex justify-between items-center text-xs font-extrabold">
-                <span className="flex items-center space-x-1.5">
+              <div className="flex justify-between items-center text-sm font-extrabold">
+                <span className="flex items-center space-x-2">
                   <Construction className="w-4 h-4 text-rose-500" />
                   <span>Xavfsizlik To'sig'i Yo'qligi</span>
                 </span>
-                <span className="text-[10px] text-rose-600 font-mono font-bold">96.8%</span>
+                <span className="text-xs text-rose-600 font-mono font-black">96.8%</span>
               </div>
-              <p className="text-[11px] text-slate-500 mt-1 font-medium">Registon Bufer Zonasi, qurilish maydoni</p>
+              <p className="text-xs text-slate-500 mt-1 font-bold">Registon Bufer Zonasi, qurilish maydoni</p>
             </button>
 
             <button
               onClick={() => { setSelectedSample('waste'); handleScan(); }}
-              className={`w-full p-3.5 rounded-2xl text-left transition-all border ${
+              className={`w-full p-4 rounded-2xl text-left transition-all border cursor-pointer ${
                 selectedSample === 'waste'
                   ? 'bg-[#F7FEE7] border-[#82C91E] text-[#0F172A] shadow-sm'
-                  : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                  : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
               }`}
             >
-              <div className="flex justify-between items-center text-xs font-extrabold">
-                <span className="flex items-center space-x-1.5">
+              <div className="flex justify-between items-center text-sm font-extrabold">
+                <span className="flex items-center space-x-2">
                   <Trash2 className="w-4 h-4 text-amber-500" />
                   <span>Noqonuniy Qurilish Chiqindisi</span>
                 </span>
-                <span className="text-[10px] text-amber-600 font-mono font-bold">93.4%</span>
+                <span className="text-xs text-amber-600 font-mono font-black">93.4%</span>
               </div>
-              <p className="text-[11px] text-slate-500 mt-1 font-medium">Silk Road Samarkand, 2-Zona</p>
+              <p className="text-xs text-slate-500 mt-1 font-bold">Silk Road Samarkand, 2-Zona</p>
             </button>
 
             <button
               onClick={() => { setSelectedSample('height'); handleScan(); }}
-              className={`w-full p-3.5 rounded-2xl text-left transition-all border ${
+              className={`w-full p-4 rounded-2xl text-left transition-all border cursor-pointer ${
                 selectedSample === 'height'
                   ? 'bg-[#F7FEE7] border-[#82C91E] text-[#0F172A] shadow-sm'
-                  : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                  : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
               }`}
             >
-              <div className="flex justify-between items-center text-xs font-extrabold">
-                <span className="flex items-center space-x-1.5">
+              <div className="flex justify-between items-center text-sm font-extrabold">
+                <span className="flex items-center space-x-2">
                   <Building2 className="w-4 h-4 text-rose-500" />
                   <span>YUNESKO Balandlik Me'yori</span>
                 </span>
-                <span className="text-[10px] text-rose-600 font-mono font-bold">98.9%</span>
+                <span className="text-xs text-rose-600 font-mono font-black">98.9%</span>
               </div>
-              <p className="text-[11px] text-slate-500 mt-1 font-medium">Tarixiy markaz, 12m limit oshilgan</p>
+              <p className="text-xs text-slate-500 mt-1 font-bold">Tarixiy markaz, 12m limit oshilgan</p>
             </button>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+          <div className="p-4.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
             <div className="flex items-center space-x-2 text-[#65A30D] font-extrabold">
               <ShieldCheck className="w-4 h-4 text-[#82C91E]" />
               <span>GPS Geofence & EXIF Verification</span>
             </div>
-            <p className="text-[11px] text-slate-500 leading-relaxed font-medium">
+            <p className="text-xs text-slate-600 leading-relaxed font-bold">
               Foto yuborilganda smartfon GPS koordinatalari va EXIF meta-ma'lumotlari avtomatik ravishda qurilish poligoni bilan solishtiriladi.
             </p>
           </div>
         </div>
 
         {/* Right: AI Scanner Canvas Frame */}
-        <div className="lg:col-span-2 relative h-[390px] rounded-3xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm flex flex-col justify-between p-6">
+        <div className="lg:col-span-2 relative h-[410px] rounded-3xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm flex flex-col justify-between p-6">
           
           {/* Top Status Bar & EXIF Verified Badge */}
           <div className="relative z-10 flex items-center justify-between flex-wrap gap-2">
-            <span className="px-3.5 py-1 text-xs font-extrabold rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/30 shadow-xs inline-flex items-center space-x-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#82C91E]" />
+            <span className="bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 rounded-full px-4 py-1.5 text-xs font-extrabold flex items-center space-x-1.5 shadow-xs">
+              <MapPin className="w-4 h-4 text-[#82C91E]" />
               <span>{current.location}</span>
             </span>
 
-            <span className="px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200 text-xs font-mono font-extrabold shadow-xs">
+            <span className="px-3.5 py-1.5 rounded-full bg-white text-slate-800 border border-slate-200 text-xs font-mono font-extrabold shadow-xs">
               YOLOv8 AI Scanner Active
             </span>
           </div>
 
-          {/* Scanning Animation Line */}
+          {/* Animated Lime Scanning Line */}
           {isScanning && (
-            <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#82C91E] to-transparent animate-pulse shadow-md z-20 top-1/2" />
+            <div className="absolute left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-[#82C91E] to-transparent animate-pulse shadow-md z-20 top-1/2" />
           )}
 
           {/* AI Bounding Box Overlay */}
           <div className="relative z-10 my-auto text-center">
             <div
-              className="relative mx-auto rounded-2xl border-2 border-[#82C91E] bg-white/95 p-5 shadow-lg transition-all duration-300"
-              style={{ width: '88%', minHeight: '180px' }}
+              className="relative mx-auto rounded-3xl border-2 border-[#82C91E] bg-white/95 backdrop-blur-md p-6 shadow-xl transition-all duration-300"
+              style={{ width: '88%', minHeight: '190px' }}
             >
-              <div className="absolute -top-3 left-4 px-3 py-0.5 bg-[#82C91E] text-white font-mono text-[10px] font-extrabold rounded-full shadow-xs">
-                YOLOv8 Detection Box • {current.confidence} AI Confidence
+              <div className="absolute -top-3.5 left-5 px-4 py-1 bg-[#82C91E] text-white font-mono text-xs font-black rounded-full shadow-sm flex items-center space-x-1">
+                <Camera className="w-3.5 h-3.5 inline mr-1" />
+                <span>YOLOv8 Detection Box • {current.confidence} AI Confidence</span>
               </div>
 
-              <div className="flex flex-col justify-center items-center h-full pt-3 space-y-2">
-                <span className="text-sm font-extrabold text-[#0F172A] flex items-center space-x-1.5">
-                  <AlertCircle className="w-4 h-4 text-rose-500 inline mr-1" />
+              <div className="flex flex-col justify-center items-center h-full pt-4 space-y-3">
+                <span className="text-base font-extrabold text-[#0F172A] flex items-center space-x-2">
+                  <AlertCircle className="w-5 h-5 text-rose-500 inline mr-1" />
                   <span>{current.violation}</span>
                 </span>
-                <span className="px-3 py-1 rounded-full bg-rose-50 text-rose-700 font-mono text-xs border border-rose-200 font-bold">
+                <span className="px-4 py-1.5 rounded-full bg-rose-50 text-rose-700 font-mono text-xs border border-rose-200 font-black">
                   Status: {current.status}
                 </span>
               </div>
@@ -219,7 +222,7 @@ export const CrowdSourceModule: React.FC<CrowdSourceModuleProps> = ({ onOpenRepo
           </div>
 
           {/* Bottom Bar Info */}
-          <div className="relative z-10 flex items-center justify-between text-xs text-slate-500 font-mono pt-2 border-t border-slate-200 font-bold">
+          <div className="relative z-10 flex items-center justify-between text-xs text-slate-500 font-mono pt-3 border-t border-slate-200 font-bold">
             <span>Model: YOLOv8x-Seg Fine-tuned</span>
             <span className="text-[#65A30D] font-extrabold">Auto-Forwarded to Inspeksiya API</span>
           </div>

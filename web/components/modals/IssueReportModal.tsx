@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, AlertTriangle, MapPin, CheckCircle2, Sparkles, Camera, Construction, Trash2, Building2 } from 'lucide-react';
+import { X, AlertTriangle, MapPin, CheckCircle2, Sparkles, Camera, UploadCloud, Construction, Trash2, Building2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface IssueReportModalProps {
@@ -45,22 +45,22 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden transition-all text-[#0F172A]">
+      <div className="relative w-full max-w-xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden transition-all text-[#0F172A]">
         
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 shadow-xs">
-              <AlertTriangle className="w-5 h-5" />
+        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-200 bg-slate-50">
+          <div className="flex items-center space-x-3.5">
+            <div className="p-2.5 rounded-2xl bg-rose-50 text-rose-600 border border-rose-200 shadow-xs">
+              <AlertTriangle className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-base font-extrabold text-[#0F172A]">Qurilish Qoidabuzarligini Bildirish</h3>
-              <p className="text-xs text-slate-500 font-medium">Smart Crowd-Sourcing & GPS Geofence Verification</p>
+              <h3 className="text-lg font-extrabold text-[#0F172A]">Qurilish Qoidabuzarligini Bildirish</h3>
+              <p className="text-xs text-slate-500 font-bold mt-0.5">Smart Crowd-Sourcing & GPS Geofence Verification</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors"
+            className="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -68,35 +68,35 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
 
         {submitted ? (
           <div className="p-8 text-center space-y-4">
-            <div className="w-14 h-14 mx-auto rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 flex items-center justify-center text-[#65A30D] shadow-sm">
-              <CheckCircle2 className="w-8 h-8 text-[#82C91E] animate-bounce" />
+            <div className="w-16 h-16 mx-auto rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 flex items-center justify-center text-[#65A30D] shadow-sm">
+              <CheckCircle2 className="w-9 h-9 text-[#82C91E] animate-bounce" />
             </div>
-            <h4 className="text-lg font-extrabold text-[#0F172A]">Murojaatingiz Qabul Qilindi!</h4>
-            <p className="text-xs text-slate-600 font-medium leading-relaxed">
+            <h4 className="text-xl font-extrabold text-[#0F172A]">Murojaatingiz Qabul Qilindi!</h4>
+            <p className="text-xs text-slate-600 font-bold leading-relaxed">
               Murojaatingiz AI tomonidan tasdiqlandi va mas'ul Samarqand Qurilish Nazorati inspektoriga avtomatik yo'naltirildi.
             </p>
-            <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-mono font-extrabold text-[#65A30D]">
+            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-mono font-extrabold text-[#65A30D]">
               Murojaat ID: #CLK-8821 (1 ta Klaster Murojaatga biriktirildi)
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="p-6 space-y-4 text-xs font-sans">
+          <form onSubmit={handleSubmit} className="p-6 space-y-5 text-sm font-sans">
             
             {/* GPS Geofence & EXIF Badge */}
-            <div className="p-3 rounded-2xl bg-[#F7FEE7] border border-[#82C91E]/40 flex items-center justify-between text-[#65A30D] shadow-xs">
+            <div className="bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 rounded-full px-4 py-2 text-xs font-extrabold flex items-center justify-between shadow-xs">
               <div className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4 text-[#82C91E]" />
-                <span className="font-extrabold">{locationName}</span>
+                <span>{locationName}</span>
               </div>
             </div>
 
             {/* Category Select */}
-            <div className="space-y-1.5">
-              <label className="block text-slate-700 font-extrabold">Muammo Turi:</label>
+            <div className="space-y-2">
+              <label className="block text-slate-800 font-extrabold text-xs uppercase tracking-wider">Muammo Turi:</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 font-bold focus:outline-none focus:border-[#82C91E] transition-colors"
+                className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 font-bold focus:outline-none focus:border-[#82C91E] transition-colors text-xs sm:text-sm"
               >
                 <option value="xavfsizlik">Xavfsizlik to'sig'i yoki kaska yo'qligi</option>
                 <option value="chiqindi">Ruxsat etilmagan qurilish chiqindisi</option>
@@ -105,41 +105,46 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
               </select>
             </div>
 
-            {/* Photo Upload / Scanner Area */}
-            <div className="space-y-1.5">
-              <label className="block text-slate-700 font-extrabold">Fotosurat Yuklash & AI Skaner:</label>
+            {/* Photo Upload / Scanner Dragzone */}
+            <div className="space-y-2">
+              <label className="block text-slate-800 font-extrabold text-xs uppercase tracking-wider">Fotosurat Yuklash & AI Skaner:</label>
               
-              <div className="relative p-4 rounded-2xl bg-slate-50 border border-dashed border-slate-300 hover:border-[#82C91E] transition-all text-center space-y-2">
+              <div className="relative p-5 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 hover:border-[#82C91E] transition-all text-center space-y-3">
                 
                 {aiVerified ? (
-                  <div className="p-3 rounded-xl bg-[#F7FEE7] border border-[#82C91E]/40 text-left space-y-1">
+                  <div className="p-4 rounded-2xl bg-[#F7FEE7] border border-[#82C91E]/40 text-left space-y-1.5">
                     <div className="flex items-center justify-between text-[#65A30D] font-extrabold">
-                      <span className="flex items-center space-x-1">
+                      <span className="flex items-center space-x-1.5">
                         <Sparkles className="w-4 h-4 text-[#82C91E]" />
                         <span>AI YOLOv8 Skaner Natijasi:</span>
                       </span>
-                      <span className="text-xs font-mono font-extrabold text-[#65A30D]">96.8% Ishonch</span>
+                      <span className="text-xs font-mono font-black text-[#65A30D]">96.8% Ishonch</span>
                     </div>
-                    <p className="text-[11px] text-slate-700 font-medium flex items-center space-x-1">
-                      <AlertTriangle className="w-3.5 h-3.5 text-rose-500 inline mr-1" />
+                    <p className="text-xs text-slate-700 font-bold flex items-center space-x-1">
+                      <AlertTriangle className="w-4 h-4 text-rose-500 inline mr-1.5" />
                       <span>Xavfsizlik to'sig'i mavjud emas (Registon Bufer Zonasi poligonida aniqlandi).</span>
                     </p>
                   </div>
                 ) : isAnalyzing ? (
-                  <div className="py-4 space-y-2">
-                    <Sparkles className="w-6 h-6 mx-auto text-[#82C91E] animate-spin" />
+                  <div className="py-5 space-y-2.5">
+                    <Sparkles className="w-7 h-7 mx-auto text-[#82C91E] animate-spin" />
                     <p className="text-xs text-[#65A30D] font-extrabold">AI Computer Vision Rasm Tahlil Qilmoqda...</p>
                   </div>
                 ) : (
                   <>
-                    <Camera className="w-8 h-8 mx-auto text-slate-400" />
-                    <p className="text-slate-500 text-xs font-medium">
-                      Rasm yuklang yoki kameradan oling (EXIF joylashuvi avtomatik tekshiriladi)
-                    </p>
+                    <UploadCloud className="w-10 h-10 mx-auto text-[#82C91E]" />
+                    <div>
+                      <p className="text-slate-700 text-xs sm:text-sm font-extrabold">
+                        Rasm yuklang yoki shu yerga tashlang
+                      </p>
+                      <p className="text-slate-500 text-xs font-medium mt-0.5">
+                        EXIF va GPS koordinatalar avtomatik tekshiriladi
+                      </p>
+                    </div>
                     <button
                       type="button"
                       onClick={handleSimulateScan}
-                      className="px-4 py-2 rounded-full text-xs font-extrabold bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 hover:bg-[#ECFCCB] transition-all cursor-pointer inline-flex items-center space-x-1.5"
+                      className="px-5 py-2.5 rounded-full text-xs font-extrabold bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/40 hover:bg-[#ECFCCB] transition-all cursor-pointer inline-flex items-center space-x-2 shadow-xs"
                     >
                       <Camera className="w-4 h-4 text-[#82C91E]" />
                       <span>Namuna Rasmni AI bilan Skaner Qilish</span>
@@ -151,24 +156,24 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
             </div>
 
             {/* Description Textarea */}
-            <div className="space-y-1.5">
-              <label className="block text-slate-700 font-extrabold">Tafsilotlar (Izoh):</label>
+            <div className="space-y-2">
+              <label className="block text-slate-800 font-extrabold text-xs uppercase tracking-wider">Tafsilotlar (Izoh):</label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Muammo haqida qo'shimcha ma'lumot qoldiring..."
                 rows={3}
-                className="w-full px-3.5 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 font-medium focus:outline-none focus:border-[#82C91E] transition-colors"
+                className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 font-bold focus:outline-none focus:border-[#82C91E] transition-colors text-xs sm:text-sm"
               />
             </div>
 
-            {/* Submit Button */}
+            {/* Startup Base Lime Submit Button */}
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full py-3 rounded-full font-extrabold text-xs bg-[#82C91E] hover:bg-[#65A30D] text-white transition-all shadow-md shadow-[#82C91E]/30 active:scale-95 cursor-pointer flex items-center justify-center space-x-2"
+                className="w-full py-3.5 rounded-full font-extrabold text-sm bg-[#82C91E] hover:bg-[#65A30D] text-white transition-all shadow-md shadow-[#82C91E]/30 active:scale-95 cursor-pointer flex items-center justify-center space-x-2"
               >
-                <AlertTriangle className="w-4 h-4" />
+                <AlertTriangle className="w-5 h-5" />
                 <span>Murojaatni Yuborish</span>
               </button>
             </div>
