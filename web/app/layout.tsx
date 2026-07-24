@@ -29,6 +29,13 @@ export default function RootLayout({
       lang="uz"
       className={`${outfit.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://server.arcgisonline.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://basemaps.cartocdn.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://unpkg.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://server.arcgisonline.com" />
+        <link rel="dns-prefetch" href="https://basemaps.cartocdn.com" />
+      </head>
       <body className="min-h-full flex flex-col font-body bg-[#F4F6F9] text-[#0F172A] relative">
         {/* Subtle Ambient Background Mesh Lights */}
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">

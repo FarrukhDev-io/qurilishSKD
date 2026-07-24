@@ -111,8 +111,10 @@ export const MapModule: React.FC<MapModuleProps> = ({
         attribution: tileConfig.attribution,
         subdomains: tileConfig.subdomains as any,
         maxZoom: tileConfig.maxZoom || 19,
-        keepBuffer: 8,
+        keepBuffer: 12,
         updateWhenIdle: false,
+        updateWhenZooming: true,
+        crossOrigin: 'anonymous',
       }).addTo(mapInstance);
 
       // Labels Overlay for Satellite Mode
@@ -120,6 +122,8 @@ export const MapModule: React.FC<MapModuleProps> = ({
         subdomains: 'abcd',
         maxZoom: 19,
         pane: 'shadowPane',
+        keepBuffer: 12,
+        crossOrigin: 'anonymous',
       }).addTo(mapInstance);
 
       const layerGroup = L.layerGroup().addTo(mapInstance);
