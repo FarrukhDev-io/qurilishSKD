@@ -5,16 +5,18 @@ import { ProjectData } from '../data/samarqandProjects';
 import { getLightModeBadgeStyle, convertProjectsToGeoJSON } from '../services/gisService';
 import { Layers, Filter, Activity, Info, ChevronDown, ChevronUp, AlertTriangle } from 'lucide-react';
 
-interface MapModuleProps {
+export interface MapModuleProps {
   projects: ProjectData[];
   selectedProject: ProjectData;
   onSelectProject: (proj: ProjectData) => void;
+  theme?: 'light' | 'dark';
 }
 
 export const MapModule: React.FC<MapModuleProps> = ({
   projects,
   selectedProject,
   onSelectProject,
+  theme = 'light',
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
