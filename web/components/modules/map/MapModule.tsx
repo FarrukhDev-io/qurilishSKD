@@ -33,7 +33,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
   const isInitializedRef = useRef(false);
 
   const [filterStatus, setFilterStatus] = useState<'all' | 'red_flag' | 'unesco_warning' | 'on_schedule'>('all');
-  const [activeLayer, setActiveLayer] = useState<'optical' | 'insar' | 'standard'>('optical');
+  const [activeLayer, setActiveLayer] = useState<'optical' | 'insar' | 'standard'>('standard');
   const [isLegendOpen, setIsLegendOpen] = useState(false);
 
   // Live filter counters
@@ -42,14 +42,14 @@ export const MapModule: React.FC<MapModuleProps> = ({
   const unescoCount = projects.filter((p) => p.status === 'unesco_warning').length;
   const onScheduleCount = projects.filter((p) => p.status === 'on_schedule').length;
 
-  // High-Definition HD Tile URL Helper (Esri 4K Satellite + CartoDB Retina)
+  // High-Definition HD Tile URL Helper (CartoDB Positron Clean White Map + Esri 4K Satellite)
   const getTileConfig = useCallback((layer: 'optical' | 'insar' | 'standard') => {
     switch (layer) {
       case 'standard':
         return {
-          url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+          url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
           subdomains: 'abcd',
-          attribution: '&copy; OpenStreetMap &copy; CARTO Voyager HD',
+          attribution: '&copy; OpenStreetMap &copy; CARTO Positron HD',
           maxZoom: 20,
           hasLabels: false,
         };
@@ -73,13 +73,14 @@ export const MapModule: React.FC<MapModuleProps> = ({
     }
   }, []);
 
-  // Map Initialization (60 FPS Hardware Acceleration)
+  // Map Initialization (60 FPS Hardware Acceleration & Responsive ResizeObserver)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const container = mapContainerRef.current;
     if (!container || isInitializedRef.current) return;
 
     let mapInstance: any = null;
+    let resizeObserver: ResizeObserver | null = null;
 
     import('leaflet').then((L) => {
       if (isInitializedRef.current || !container) return;
@@ -93,7 +94,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
 
       mapInstance = L.map(container, {
         center: [39.658, 66.98],
-        zoom: 12,
+        zoom: 13,
         zoomControl: false,
         preferCanvas: true,
         touchZoom: true,
@@ -106,36 +107,50 @@ export const MapModule: React.FC<MapModuleProps> = ({
 
       L.control.zoom({ position: 'bottomleft' }).addTo(mapInstance);
 
-      const tileConfig = getTileConfig('optical');
+      const tileConfig = getTileConfig('standard');
       const tl = L.tileLayer(tileConfig.url, {
         attribution: tileConfig.attribution,
         subdomains: tileConfig.subdomains as any,
-        maxZoom: tileConfig.maxZoom || 19,
-        keepBuffer: 12,
-        updateWhenIdle: false,
-        updateWhenZooming: true,
+        maxZoom: tileConfig.maxZoom || 20,
+        keepBuffer: 8,
+        updateWhenIdle: true,
+        updateWhenZooming: false,
         crossOrigin: 'anonymous',
       }).addTo(mapInstance);
 
-      // Labels Overlay for Satellite Mode
-      const labelLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
-        maxZoom: 19,
-        pane: 'shadowPane',
-        keepBuffer: 12,
-        crossOrigin: 'anonymous',
-      }).addTo(mapInstance);
+      if (tileConfig.hasLabels) {
+        const labelLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+          subdomains: 'abcd',
+          maxZoom: 19,
+          pane: 'shadowPane',
+          keepBuffer: 8,
+          crossOrigin: 'anonymous',
+        }).addTo(mapInstance);
+        labelLayerRef.current = labelLayer;
+      }
 
       const layerGroup = L.layerGroup().addTo(mapInstance);
 
       mapInstanceRef.current = mapInstance;
       tileLayerRef.current = tl;
-      labelLayerRef.current = labelLayer;
       layerGroupRef.current = layerGroup;
       isInitializedRef.current = true;
+
+      // Dynamic resize handler for smooth responsive transitions
+      if (window.ResizeObserver) {
+        resizeObserver = new ResizeObserver(() => {
+          if (mapInstanceRef.current) {
+            mapInstanceRef.current.invalidateSize();
+          }
+        });
+        resizeObserver.observe(container);
+      }
     });
 
     return () => {
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
@@ -160,15 +175,18 @@ export const MapModule: React.FC<MapModuleProps> = ({
       }
       if (labelLayerRef.current) {
         map.removeLayer(labelLayerRef.current);
+        labelLayerRef.current = null;
       }
 
       const tileConfig = getTileConfig(activeLayer);
       const newTileLayer = L.tileLayer(tileConfig.url, {
         attribution: tileConfig.attribution,
         subdomains: tileConfig.subdomains as any,
-        maxZoom: tileConfig.maxZoom || 19,
+        maxZoom: tileConfig.maxZoom || 20,
         keepBuffer: 8,
-        updateWhenIdle: false,
+        updateWhenIdle: true,
+        updateWhenZooming: false,
+        crossOrigin: 'anonymous',
       }).addTo(map);
 
       if (tileConfig.hasLabels) {
@@ -253,6 +271,15 @@ export const MapModule: React.FC<MapModuleProps> = ({
     });
   }, [projects, filterStatus, activeLayer, selectedProject, onSelectProject]);
 
+  // Smooth Pan & FlyTo when selecting a project
+  useEffect(() => {
+    if (!selectedProject || !mapInstanceRef.current) return;
+    mapInstanceRef.current.flyTo(selectedProject.coordinates, 15, {
+      animate: true,
+      duration: 0.8,
+    });
+  }, [selectedProject]);
+
   return (
     <div className="p-3.5 sm:p-6 card-3d space-y-4 sm:space-y-6 text-[#0F172A] overflow-x-hidden max-w-full">
 
@@ -303,9 +330,9 @@ export const MapModule: React.FC<MapModuleProps> = ({
           {/* Layer Switcher (Top Right) */}
           <div className="absolute top-3 right-3 z-20 flex items-center space-x-1.5 bg-white/95 backdrop-blur-md p-1.5 rounded-full border border-slate-200 shadow-md" role="group" aria-label="Xarita qatlami">
             {([
+              { key: 'standard', label: 'Standart Oq Xarita', shortLabel: 'Oq Xarita', icon: <MapIcon className="w-4 h-4" /> },
               { key: 'optical', label: 'Sentinel-2 Optik', shortLabel: 'Optik', icon: <Satellite className="w-4 h-4" /> },
               { key: 'insar', label: 'InSAR Radar Heatmap', shortLabel: 'InSAR', icon: <Radio className="w-4 h-4" /> },
-              { key: 'standard', label: 'Standard Xarita', shortLabel: 'Xarita', icon: <MapIcon className="w-4 h-4" /> },
             ] as const).map(({ key, label, shortLabel, icon }) => (
               <button
                 key={key}
