@@ -262,7 +262,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
               left: 0,
             }}
           >
-            <div className="w-11 h-11 min-h-[44px] min-w-[44px] rounded-full bg-[#82C91E] text-white border-2 border-white flex items-center justify-center shadow-2xl font-bold text-xs hover:scale-110 transition-transform ring-4 ring-[#82C91E]/30">
+            <div className="w-11 h-11 min-h-[44px] min-w-[44px] rounded-full bg-[#82C91E] text-white border-2 border-white flex items-center justify-center shadow-2xl font-bold text-xs transition-transform ring-4 ring-[#82C91E]/30">
               <Sliders className="w-5 h-5 text-white rotate-90" />
             </div>
           </div>

@@ -30,7 +30,7 @@ export const Navbar = React.memo(function Navbar({
           
           {/* 1. Chap tomonda: Yirik QurilishSKD Logo va Samarqand Pill Badge */}
           <div className="flex items-center space-x-2.5 sm:space-x-3 shrink-0">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#82C91E] flex items-center justify-center border border-white/40 shadow-[0_8px_16px_rgba(130,201,30,0.35)] transition-transform hover:scale-105 btn-3d-lime">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#82C91E] flex items-center justify-center border border-white/40 shadow-[0_8px_16px_rgba(130,201,30,0.35)] transition-all btn-3d-lime">
               <Satellite className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
             <div className="flex items-center space-x-2">
@@ -49,7 +49,7 @@ export const Navbar = React.memo(function Navbar({
               onClick={() => setActiveTab('map')}
               className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'map'
-                  ? 'pill-3d-active scale-[1.02]'
+                  ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
               }`}
             >
@@ -60,7 +60,7 @@ export const Navbar = React.memo(function Navbar({
               onClick={() => setActiveTab('slider')}
               className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'slider'
-                  ? 'pill-3d-active scale-[1.02]'
+                  ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
               }`}
             >
@@ -71,7 +71,7 @@ export const Navbar = React.memo(function Navbar({
               onClick={() => setActiveTab('crowd')}
               className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'crowd'
-                  ? 'pill-3d-active scale-[1.02]'
+                  ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
               }`}
             >
@@ -82,7 +82,7 @@ export const Navbar = React.memo(function Navbar({
               onClick={() => setActiveTab('analytics')}
               className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap min-h-[44px] ${
                 activeTab === 'analytics'
-                  ? 'pill-3d-active scale-[1.02]'
+                  ? 'pill-3d-active'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
               }`}
             >

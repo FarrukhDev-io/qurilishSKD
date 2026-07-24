@@ -73,7 +73,7 @@ export const IssueReportModal: React.FC<IssueReportModalProps> = ({ isOpen, onCl
         {submitted ? (
           <div className="p-8 text-center space-y-4">
             <div className="w-16 h-16 mx-auto rounded-full bg-[#F7FEE7] border border-[#82C91E]/40 flex items-center justify-center text-[#82C91E] shadow-sm">
-              <CheckCircle2 className="w-9 h-9 text-[#82C91E] animate-bounce" />
+              <CheckCircle2 className="w-9 h-9 text-[#82C91E]" />
             </div>
             <h4 className="text-xl font-extrabold text-[#0F172A]">Murojaatingiz Qabul Qilindi!</h4>
             <p className="text-xs text-slate-600 font-bold leading-relaxed">
