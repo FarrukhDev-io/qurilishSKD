@@ -34,9 +34,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Satellite className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
             <div className="flex items-center space-x-2">
-              <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]">
+              <div className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#0F172A]" aria-label="Qurilish SKD - Samarqand Qurilish Monitoring Platformasi">
                 Qurilish<span className="text-[#82C91E]"> SKD</span>
-              </h1>
+              </div>
               <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-black uppercase bg-[#95E616] text-[#0F172A] rounded-full tracking-wider shadow-xs">
                 Samarqand
               </span>

@@ -111,3 +111,44 @@ body {
 .leaflet-popup-tip {
   background: #ffffff !important;
 }
+
+/* ─── Custom Animations (Tailwind v4 compatible) ─── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeInUp 0.22s ease-out both;
+}
+
+.animate-slideInUp {
+  animation: slideInUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
