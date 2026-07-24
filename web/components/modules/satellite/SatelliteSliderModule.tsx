@@ -47,7 +47,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
   });
 
   return (
-    <div className="w-full p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6 text-[#0F172A] transition-all overflow-x-hidden">
+    <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6 text-[#0F172A] transition-all overflow-x-hidden">
       
       {/* 1. SECTION HEADER VA SPACIOUS UI */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
@@ -138,7 +138,7 @@ export const SatelliteSliderModule: React.FC<SatelliteSliderModuleProps> = ({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className="relative w-full h-[calc(100vh-340px)] min-h-[380px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-100 select-none touch-none"
+          className="relative w-full h-[360px] sm:h-[460px] lg:h-[480px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-100 select-none touch-none"
         >
           {/* BASELINE IMAGE */}
           <div className="absolute inset-0 w-full h-full">
