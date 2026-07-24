@@ -11,33 +11,33 @@ interface AnalyticsModuleProps {
 
 export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOpenPdfModal }) => {
   return (
-    <div className="space-y-6 text-[#0F172A]">
+    <div className="space-y-6 text-[#0F172A] overflow-x-hidden">
       
       {/* 1. SECTION HEADER VA SPACIOUS UI */}
-      <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+      <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
           <div>
-            <h2 className="text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5">
+            <h2 className="text-lg sm:text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5 flex-wrap gap-1">
               <span>IJRO DASHBOARD & ANALITIKA</span>
               <span className="bg-[#95E616] text-[#0F172A] px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider shadow-xs">
                 EXECUTIVE KPI & REPORT
               </span>
             </h2>
-            <p className="text-sm text-slate-500 font-bold mt-1">
+            <p className="text-xs sm:text-sm text-slate-500 font-bold mt-1">
               Asosiy hokimiyat KPI ko'rsatkichlari, Sentinel progress solishtirmasi hamda YUNESKO bufer zonasi ogohlantirish paneli
             </p>
           </div>
 
           <button
             onClick={onOpenPdfModal}
-            className="px-6 py-3 rounded-full text-sm font-extrabold bg-[#82C91E] text-white hover:bg-[#65A30D] shadow-md shadow-[#82C91E]/30 transition-all flex items-center space-x-2 active:scale-95 cursor-pointer"
+            className="px-6 py-3 rounded-full text-xs sm:text-sm font-extrabold bg-[#82C91E] text-white hover:bg-[#65A30D] shadow-md shadow-[#82C91E]/30 transition-all flex items-center justify-center space-x-2 active:scale-95 cursor-pointer min-h-[44px]"
           >
             <FileText className="w-5 h-5 text-white" />
             <span>AI PDF Hisobot Generatsiyasi</span>
           </button>
         </div>
 
-        {/* 2. EXECUTIVE KPI CARDS GRID */}
+        {/* 2. EXECUTIVE KPI CARDS GRID (100% Mobile Responsive) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
           
           {/* KPI 1: Ob'ektlar Soni */}
@@ -47,7 +47,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
               <span>Jami Ob'ektlar</span>
             </div>
             <div className="mt-3 flex items-baseline justify-between">
-              <span className="text-3xl font-extrabold text-[#0F172A] tracking-tight">{EXECUTIVE_STATS.totalProjects} ta</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">{EXECUTIVE_STATS.totalProjects} ta</span>
               <span className="text-xs font-extrabold text-[#65A30D] bg-[#F7FEE7] border border-[#82C91E]/30 px-2.5 py-0.5 rounded-full flex items-center shadow-xs">
                 <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" /> +12% bu chorak
               </span>
@@ -62,7 +62,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
               <span>Red Flag (Kechikish)</span>
             </div>
             <div className="mt-3 flex items-baseline justify-between">
-              <span className="text-3xl font-extrabold text-rose-700 tracking-tight">{EXECUTIVE_STATS.redFlagsCount} ta</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-rose-700 tracking-tight">{EXECUTIVE_STATS.redFlagsCount} ta</span>
               <span className="text-xs font-extrabold text-rose-700 bg-white border border-rose-200 px-2.5 py-0.5 rounded-full shadow-xs">
                 Kechikish Xavfi
               </span>
@@ -77,7 +77,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
               <span>Kuzatilayotgan Byudjet</span>
             </div>
             <div className="mt-3 flex items-baseline justify-between">
-              <span className="text-3xl font-extrabold text-[#0F172A] tracking-tight">{EXECUTIVE_STATS.monitoredBudget}</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">{EXECUTIVE_STATS.monitoredBudget}</span>
               <span className="text-xs font-extrabold text-[#65A30D] bg-white border border-[#82C91E]/30 px-2.5 py-0.5 rounded-full shadow-xs">
                 100% Shaffof
               </span>
@@ -92,7 +92,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
               <span>AI Model Aniqligi</span>
             </div>
             <div className="mt-3 flex items-baseline justify-between">
-              <span className="text-3xl font-extrabold text-purple-800 tracking-tight">{EXECUTIVE_STATS.aiModelConfidence}</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-purple-800 tracking-tight">{EXECUTIVE_STATS.aiModelConfidence}</span>
               <span className="text-xs font-extrabold text-purple-700 bg-white border border-purple-200 px-2.5 py-0.5 rounded-full shadow-xs">
                 YOLOv8 + InSAR
               </span>
@@ -107,11 +107,11 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Planned vs AI Sentinel Progress Bars */}
-        <div className="lg:col-span-2 p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-5">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+        <div className="lg:col-span-2 p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 pb-4 gap-3">
             <div>
-              <h3 className="text-lg font-extrabold text-[#0F172A] flex items-center space-x-2.5">
-                <BarChart3 className="w-5 h-5 text-[#82C91E]" />
+              <h3 className="text-base sm:text-lg font-extrabold text-[#0F172A] flex items-center space-x-2.5">
+                <BarChart3 className="w-5 h-5 text-[#82C91E] shrink-0" />
                 <span>Rejadagi Progress va AI Sentinel Amaldagi Tahlil Solishtirmasi</span>
               </h3>
               <p className="text-xs text-slate-500 font-bold mt-1">Asosiy yirik qurilish ob'ektlari kesimida</p>
@@ -119,7 +119,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
             
             <button
               onClick={onOpenPdfModal}
-              className="px-4 py-2 rounded-full text-xs font-extrabold bg-[#82C91E] text-white hover:bg-[#65A30D] shadow-md shadow-[#82C91E]/30 transition-all flex items-center space-x-1.5 active:scale-95 cursor-pointer"
+              className="px-4 py-2 rounded-full text-xs font-extrabold bg-[#82C91E] text-white hover:bg-[#65A30D] shadow-md shadow-[#82C91E]/30 transition-all flex items-center justify-center space-x-1.5 active:scale-95 cursor-pointer shrink-0 min-h-[44px]"
             >
               <FileText className="w-4 h-4" />
               <span>Hisobot Olish</span>
@@ -131,10 +131,10 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
               const diff = project.actualProgress - project.plannedProgress;
               return (
                 <div key={project.id} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
-                  <div className="flex items-center justify-between text-xs sm:text-sm">
-                    <div className="flex items-center space-x-2.5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs sm:text-sm gap-1 sm:gap-2">
+                    <div className="flex items-center space-x-2.5 flex-wrap gap-1">
                       <span className="font-extrabold text-[#0F172A]">{project.name}</span>
-                      <span className={`px-2.5 py-0.5 rounded-full text-xs font-extrabold ${
+                      <span className={`px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-extrabold ${
                         project.status === 'red_flag'
                           ? 'bg-rose-50 text-rose-700 border border-rose-200'
                           : project.status === 'unesco_warning'
@@ -145,7 +145,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
                       </span>
                     </div>
 
-                    <div className="font-mono text-xs sm:text-sm flex items-center space-x-3 font-extrabold">
+                    <div className="font-mono text-xs sm:text-sm flex items-center space-x-3 font-extrabold justify-between sm:justify-end">
                       <span className="text-slate-500">Reja: <strong className="text-slate-800">{project.plannedProgress}%</strong></span>
                       <span className="text-[#65A30D]">AI Amal: <strong className="text-[#65A30D]">{project.actualProgress}%</strong></span>
                       <span className={`px-2.5 py-0.5 rounded-full text-xs font-black ${
@@ -176,7 +176,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
                     </div>
                   </div>
                   
-                  <div className="flex justify-between items-center text-xs text-slate-500 pt-0.5 font-bold">
+                  <div className="flex justify-between items-center text-xs text-slate-500 pt-0.5 font-bold flex-wrap gap-1">
                     <span>Pudratchi: {project.contractor}</span>
                     <span>AI Sur'at: {project.aiVelocity}</span>
                   </div>
@@ -191,9 +191,9 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
         <div className="space-y-6">
           
           {/* YUNESKO Bufer Zonasi Ogohlantirish Kartasi (Och sariq bg-amber-50 border-amber-200) */}
-          <div className="p-5 rounded-3xl bg-amber-50 border border-amber-200 text-amber-900 shadow-sm space-y-3">
+          <div className="p-4 sm:p-5 rounded-3xl bg-amber-50 border border-amber-200 text-amber-900 shadow-sm space-y-3">
             <div className="flex items-center space-x-2 text-amber-800 font-extrabold text-sm">
-              <ShieldAlert className="w-5 h-5 text-amber-600" />
+              <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0" />
               <span>YUNESKO Bufer Zonasi Ogohlantirish Paneli</span>
             </div>
             <p className="text-xs text-amber-900/90 leading-relaxed font-bold">
@@ -204,9 +204,9 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
             </div>
           </div>
 
-          <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
             <h3 className="text-base font-extrabold text-[#0F172A] flex items-center space-x-2">
-              <PieChart className="w-5 h-5 text-[#82C91E]" />
+              <PieChart className="w-5 h-5 text-[#82C91E] shrink-0" />
               <span>Fuqarolar Murojaati va AI Klaster Tahlili</span>
             </h3>
 
@@ -229,7 +229,7 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
 
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
               <div className="flex items-center space-x-2 text-xs font-extrabold text-[#65A30D]">
-                <ShieldCheck className="w-4 h-4 text-[#82C91E]" />
+                <ShieldCheck className="w-4 h-4 text-[#82C91E] shrink-0" />
                 <span>Smart Geofence & EXIF Proof</span>
               </div>
               <p className="text-xs text-slate-500 leading-relaxed font-bold">
@@ -238,14 +238,14 @@ export const AnalyticsModule: React.FC<AnalyticsModuleProps> = ({ projects, onOp
             </div>
           </div>
 
-          <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm text-center space-y-3.5">
+          <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm text-center space-y-3.5">
             <h4 className="text-base font-extrabold text-[#0F172A]">Shahar Hokimligi Rasmiy Hisobotini Yuklash</h4>
             <p className="text-xs text-slate-500 font-bold">
               Sentinel-2, InSAR Radar va Crowd-Sourcing ma'lumotlari asosida tayyorlangan rasmiy PDF hisoboti.
             </p>
             <button
               onClick={onOpenPdfModal}
-              className="w-full py-3.5 rounded-full text-xs sm:text-sm font-extrabold bg-[#82C91E] hover:bg-[#65A30D] text-white transition-all shadow-md shadow-[#82C91E]/30 cursor-pointer active:scale-95 flex items-center justify-center space-x-2"
+              className="w-full py-3.5 rounded-full text-xs sm:text-sm font-extrabold bg-[#82C91E] hover:bg-[#65A30D] text-white transition-all shadow-md shadow-[#82C91E]/30 cursor-pointer active:scale-95 flex items-center justify-center space-x-2 min-h-[44px]"
             >
               <FileText className="w-4 h-4" />
               <span>AI PDF Hisobot Generatsiya Qilish</span>
