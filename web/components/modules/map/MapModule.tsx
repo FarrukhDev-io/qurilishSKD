@@ -3,11 +3,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { ProjectData } from '../../../data/samarqandProjects';
 import { getLightModeBadgeStyle } from '../../../services/gisService';
-import { Layers, Filter, Activity, Info, ChevronDown, ChevronUp, AlertCircle, ShieldAlert, CheckCircle2, Building2, X } from 'lucide-react';
+import { Filter, Activity, Info, ChevronDown, ChevronUp, AlertCircle, ShieldAlert, CheckCircle2, Building2, X, Satellite, Radio, Map as MapIcon } from 'lucide-react';
 
 export interface MapModuleProps {
   projects: ProjectData[];
-  selectedProject: ProjectData;
+  selectedProject: ProjectData | null;
   onSelectProject: (proj: ProjectData | null) => void;
   theme?: 'light' | 'dark';
 }
@@ -22,8 +22,14 @@ export const MapModule: React.FC<MapModuleProps> = ({
   const layerGroupRef = useRef<any>(null);
 
   const [filterStatus, setFilterStatus] = useState<'all' | 'red_flag' | 'unesco_warning' | 'on_schedule'>('all');
-  const [activeLayer, setActiveLayer] = useState<'optical' | 'insar' | 'unesco'>('optical');
+  const [activeLayer, setActiveLayer] = useState<'optical' | 'insar' | 'standard'>('optical');
   const [isLegendOpen, setIsLegendOpen] = useState(false);
+
+  // Dynamic filter counters
+  const totalCount = projects.length;
+  const redFlagCount = projects.filter((p) => p.status === 'red_flag').length;
+  const unescoCount = projects.filter((p) => p.status === 'unesco_warning').length;
+  const onScheduleCount = projects.filter((p) => p.status === 'on_schedule').length;
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -51,12 +57,16 @@ export const MapModule: React.FC<MapModuleProps> = ({
           bounceAtZoomLimits: true,
         });
 
-        L.control.zoom({ position: 'bottomright' }).addTo(map);
+        L.control.zoom({ position: 'bottomleft' }).addTo(map);
 
-        // CartoDB Positron Light Mode Tile Layer
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        // Base Tile Layer according to activeLayer state
+        const tileUrl = activeLayer === 'standard'
+          ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+
+        const tileLayer = L.tileLayer(tileUrl, {
           attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-          subdomains: 'abcd',
+          subdomains: activeLayer === 'standard' ? 'abc' : 'abcd',
           maxZoom: 19,
         }).addTo(map);
 
@@ -65,13 +75,29 @@ export const MapModule: React.FC<MapModuleProps> = ({
         layerGroupRef.current = layerGroup;
 
         mapInstanceRef.current = map;
+        (map as any)._tileLayerInstance = tileLayer;
       }
 
       const map = mapInstanceRef.current;
       const layerGroup = layerGroupRef.current;
       if (!map || !layerGroup) return;
 
-      // Clear existing markers and polygons in LayerGroup without re-creating map
+      // Update Tile Layer if changed
+      if ((map as any)._tileLayerInstance) {
+        map.removeLayer((map as any)._tileLayerInstance);
+      }
+      const newTileUrl = activeLayer === 'standard'
+        ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+      
+      const newTileLayer = L.tileLayer(newTileUrl, {
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+        subdomains: activeLayer === 'standard' ? 'abc' : 'abcd',
+        maxZoom: 19,
+      }).addTo(map);
+      (map as any)._tileLayerInstance = newTileLayer;
+
+      // Clear existing markers and polygons in LayerGroup
       layerGroup.clearLayers();
 
       // Filter projects
@@ -80,25 +106,23 @@ export const MapModule: React.FC<MapModuleProps> = ({
         return p.status === filterStatus;
       });
 
-      // Draw UNESCO Buffer Zone Overlay if active layer is unesco or optical
-      if (activeLayer === 'unesco' || activeLayer === 'optical') {
-        const unescoPolygon = L.polygon([
-          [39.6580, 66.9710],
-          [39.6585, 66.9800],
-          [39.6510, 66.9810],
-          [39.6500, 66.9720]
-        ], {
-          renderer: L.canvas(),
-          color: '#F59E0B',
-          fillColor: '#F59E0B',
-          fillOpacity: 0.12,
-          dashArray: '5, 8',
-          weight: 2
-        }).addTo(layerGroup);
-        unescoPolygon.bindTooltip("YUNESKO Tarixiy Markaz Bufer Zonasi", { permanent: false, direction: "top" });
-      }
+      // Draw UNESCO Buffer Zone Overlay if active layer is unesco/optical/insar
+      const unescoPolygon = L.polygon([
+        [39.6580, 66.9710],
+        [39.6585, 66.9800],
+        [39.6510, 66.9810],
+        [39.6500, 66.9720]
+      ], {
+        renderer: L.canvas(),
+        color: '#F59E0B',
+        fillColor: '#F59E0B',
+        fillOpacity: 0.12,
+        dashArray: '5, 8',
+        weight: 2
+      }).addTo(layerGroup);
+      unescoPolygon.bindTooltip("YUNESKO Tarixiy Markaz Bufer Zonasi", { permanent: false, direction: "top" });
 
-      // Plot projects with Canvas rendering & Light Mode styling
+      // Plot projects with Canvas rendering & Clean Light Mode styling
       filtered.forEach((project) => {
         let color = '#82C91E'; // Lime Green
         if (project.status === 'red_flag') {
@@ -107,7 +131,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
           color = '#F59E0B'; // Amber
         }
 
-        // Custom Minimalist Pin Marker Icon
+        // Custom Pin Marker Icon
         const customIcon = L.divIcon({
           className: 'custom-map-marker',
           html: `
@@ -127,15 +151,15 @@ export const MapModule: React.FC<MapModuleProps> = ({
           onSelectProject(project);
         });
 
-        // Add Geofence Polygon
+        // Add Geofence Polygon (Weight: 3, FillOpacity: 0.15)
         if (project.polygon && project.polygon.length > 0) {
           const polyColor = activeLayer === 'insar' && project.insarDeformation.status === 'danger' ? '#EF4444' : color;
           const polygon = L.polygon(project.polygon, {
             renderer: L.canvas(), // Canvas Mode
             color: polyColor,
             fillColor: polyColor,
-            fillOpacity: selectedProject && selectedProject.id === project.id ? 0.35 : 0.18,
-            weight: selectedProject && selectedProject.id === project.id ? 2.5 : 1.5,
+            fillOpacity: selectedProject && selectedProject.id === project.id ? 0.35 : 0.15,
+            weight: 3, // Clean boundary line weight
           }).addTo(layerGroup);
 
           polygon.on('click', () => {
@@ -149,7 +173,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
   return (
     <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4 sm:space-y-6 text-[#0F172A] overflow-x-hidden">
       
-      {/* 1. SECTION HEADER VA SPACIOUS UI */}
+      {/* 1. SECTION HEADER VA LIVE FILTER COUNTERS */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
           <h2 className="text-lg sm:text-xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5 flex-wrap gap-1">
@@ -163,10 +187,10 @@ export const MapModule: React.FC<MapModuleProps> = ({
           </p>
         </div>
 
-        {/* Status Filter Capsule Pills (Gorizontal Scrollable) */}
+        {/* Status Filter Capsule Pills (Live Counters) */}
         <div className="flex items-center space-x-2 w-full md:w-auto">
           <span className="text-xs text-slate-500 font-bold hidden sm:flex items-center space-x-1 shrink-0">
-            <Filter className="w-4 h-4" />
+            <Filter className="w-4 h-4 text-[#82C91E]" />
             <span>Filter:</span>
           </span>
 
@@ -179,7 +203,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Barchasi ({projects.length})
+              Barchasi ({totalCount})
             </button>
             <button
               onClick={() => setFilterStatus('red_flag')}
@@ -190,7 +214,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
               }`}
             >
               <AlertCircle className="w-4 h-4 text-rose-500" />
-              <span>Red Flag Kechikish</span>
+              <span>Red Flag Kechikish ({redFlagCount})</span>
             </button>
             <button
               onClick={() => setFilterStatus('unesco_warning')}
@@ -201,7 +225,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
               }`}
             >
               <ShieldAlert className="w-4 h-4 text-amber-500" />
-              <span>YUNESKO Zonasi</span>
+              <span>YUNESKO Zonasi ({unescoCount})</span>
             </button>
             <button
               onClick={() => setFilterStatus('on_schedule')}
@@ -212,64 +236,66 @@ export const MapModule: React.FC<MapModuleProps> = ({
               }`}
             >
               <CheckCircle2 className="w-4 h-4 text-[#82C91E]" />
-              <span>Rejada</span>
+              <span>Rejada ({onScheduleCount})</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* 2. LEAFLET MAP CONTAINER (Responsive Height) */}
+      {/* 2. LEAFLET MAP CONTAINER */}
       <div className="relative w-full h-[380px] sm:h-[480px] lg:h-[540px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50">
         
-        {/* Layer Switcher Pill Overlay (Horizontal Scroll on Mobile) */}
-        <div className="absolute top-3 left-3 z-20 flex items-center space-x-1 bg-white/95 backdrop-blur-md p-1 sm:p-1.5 rounded-full border border-slate-200 shadow-sm max-w-[calc(100%-60px)] sm:max-w-none overflow-x-auto no-scrollbar">
+        {/* 🗺 MAP LAYER SWITCHER (QATLAM ALMASHTIRGICH - Top Right) */}
+        <div className="absolute top-3 right-3 z-20 flex items-center space-x-1.5 bg-white/95 backdrop-blur-md p-1.5 rounded-full border border-slate-200 shadow-md">
           <button
             onClick={() => setActiveLayer('optical')}
-            className={`px-3 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
+            className={`px-3.5 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
               activeLayer === 'optical'
                 ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
-                : 'text-slate-600 hover:text-slate-900'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
-            <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            <span>Sentinel-2 Optik</span>
+            <Satellite className="w-4 h-4" />
+            <span className="hidden sm:inline">Sentinel-2 Optik</span>
+            <span className="sm:hidden">Optik</span>
           </button>
           
           <button
             onClick={() => setActiveLayer('insar')}
-            className={`px-3 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
+            className={`px-3.5 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
               activeLayer === 'insar'
-                ? 'bg-rose-500 text-white shadow-md'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
-            <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            <span>Sentinel-1 InSAR</span>
+            <Radio className="w-4 h-4" />
+            <span className="hidden sm:inline">InSAR Radar Heatmap</span>
+            <span className="sm:hidden">InSAR</span>
           </button>
 
           <button
-            onClick={() => setActiveLayer('unesco')}
-            className={`px-3 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
-              activeLayer === 'unesco'
-                ? 'bg-amber-500 text-white shadow-md'
-                : 'text-slate-600 hover:text-slate-900'
+            onClick={() => setActiveLayer('standard')}
+            className={`px-3.5 py-2 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[38px] ${
+              activeLayer === 'standard'
+                ? 'bg-[#82C91E] text-white shadow-md shadow-[#82C91E]/30'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
-            <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            <span>YUNESKO Zonasi</span>
+            <MapIcon className="w-4 h-4" />
+            <span className="hidden sm:inline">Standard Xarita</span>
+            <span className="sm:hidden">Xarita</span>
           </button>
         </div>
 
-        {/* 3. CLEAN MAP VISUAL LEGEND (Top Right) */}
-        <div className="absolute top-3 right-3 z-20 bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-xs max-w-[160px] sm:max-w-xs transition-all">
+        {/* 3. INSAR RADAR CHO'KISH INDIKATORI IZOHI (Top Left Legend Overlay) */}
+        <div className="absolute top-3 left-3 z-20 bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-xs max-w-[200px] sm:max-w-xs transition-all">
           <button
             onClick={() => setIsLegendOpen(!isLegendOpen)}
             className="w-full px-3 py-2 sm:px-4 sm:py-2.5 bg-slate-50 flex items-center justify-between font-extrabold text-slate-800 border-b border-slate-200 hover:bg-slate-100 transition-colors min-h-[38px]"
           >
             <span className="flex items-center space-x-1.5">
               <Info className="w-3.5 h-3.5 text-[#82C91E] shrink-0" />
-              <span className="hidden sm:inline">GIS Xarita Legendasi</span>
-              <span className="sm:hidden">Legenda</span>
+              <span>InSAR Cho'kish Izohi</span>
             </span>
             {isLegendOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
@@ -277,20 +303,16 @@ export const MapModule: React.FC<MapModuleProps> = ({
           {isLegendOpen && (
             <div className="p-3 space-y-2 text-[11px] sm:text-xs text-slate-700 font-bold">
               <div className="flex items-center space-x-2">
-                <AlertCircle className="w-3.5 h-3.5 text-rose-500 shrink-0" />
-                <span>Red Flag: Kechikish (-14%)</span>
+                <CheckCircle2 className="w-4 h-4 text-[#82C91E] shrink-0" />
+                <span>0mm dan -2mm gacha: Barqaror poydevor</span>
               </div>
               <div className="flex items-center space-x-2">
-                <ShieldAlert className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                <span>YUNESKO Balandlik</span>
+                <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
+                <span>-5mm va undan ko'p: XAVFLI CHO'KISH (Red Flag)</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#82C91E] shrink-0" />
-                <span>Reja bo'yicha</span>
-              </div>
-              <div className="flex items-center space-x-2 pt-1 border-t border-slate-100">
-                <Activity className="w-3.5 h-3.5 text-rose-600 shrink-0" />
-                <span>InSAR Radar (&lt; -5mm)</span>
+              <div className="flex items-center space-x-2 pt-1 border-t border-slate-100 text-slate-500">
+                <Building2 className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                <span>YUNESKO Tarixiy Bufer Zonasi</span>
               </div>
             </div>
           )}
@@ -299,77 +321,49 @@ export const MapModule: React.FC<MapModuleProps> = ({
         {/* Leaflet Map Canvas Container */}
         <div ref={mapContainerRef} className="w-full h-full z-10" />
 
-        {/* 📱 RESPONSIVE BOTTOM-SHEET DRAWER (Mobile Bottom Drawer / Desktop Floating Card) */}
+        {/* 📱 REFACTORED POPUP & BOTTOM-SHEET DRAWER */}
         {selectedProject && (
-          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 z-20 md:right-auto md:w-96 bg-white/98 backdrop-blur-md p-4 sm:p-5 rounded-3xl border border-slate-200 shadow-2xl space-y-3 max-h-[75vh] overflow-y-auto animate-fadeIn">
+          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 z-20 md:right-auto md:w-96 bg-white/98 backdrop-blur-md p-4 sm:p-5 rounded-3xl border border-slate-200 shadow-2xl space-y-3.5 max-h-[75vh] overflow-y-auto animate-fadeIn">
             
             {/* Mobile Handle Bar */}
             <div className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto md:hidden mb-1"></div>
 
+            {/* 1. Ob'ekt Nomi, ID (#SAM-001) va Status Badge */}
             <div className="flex items-start justify-between">
               <div>
-                <span className="text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-                  {selectedProject.category}
-                </span>
-                <h3 className="text-sm sm:text-base font-extrabold text-[#0F172A] mt-1 line-clamp-1">{selectedProject.name}</h3>
-                <p className="text-xs text-slate-500 font-bold">{selectedProject.contractor}</p>
+                <div className="flex items-center space-x-2">
+                  <span className="text-[10px] uppercase tracking-wider font-mono font-black px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                    ID: {selectedProject.id.toUpperCase()}
+                  </span>
+                  <span className="text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-0.5 rounded-full bg-[#F7FEE7] text-[#65A30D] border border-[#82C91E]/30">
+                    {selectedProject.category}
+                  </span>
+                </div>
+                <h3 className="text-base sm:text-lg font-extrabold text-[#0F172A] mt-1.5 line-clamp-1">{selectedProject.name}</h3>
               </div>
               
               <div className="flex items-center space-x-2 shrink-0">
-                <div className={`px-2.5 py-1 rounded-full text-xs ${getLightModeBadgeStyle(selectedProject.status).badgeClass}`}>
+                <div className={`px-3 py-1 rounded-full text-xs ${getLightModeBadgeStyle(selectedProject.status).badgeClass}`}>
                   <span>{selectedProject.statusText}</span>
                 </div>
                 <button
                   onClick={() => onSelectProject(null)}
-                  className="p-1 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+                  className="p-1 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
             </div>
 
-            {/* InSAR Radar Poydevor Cho'kish Paneli */}
-            <div className={`p-3 sm:p-3.5 rounded-2xl border text-xs flex items-start space-x-3 shadow-xs ${
-              selectedProject.insarDeformation.status === 'danger'
-                ? 'bg-rose-50 border-rose-200 text-rose-900'
-                : selectedProject.insarDeformation.status === 'warning'
-                ? 'bg-amber-50 border-amber-200 text-amber-900'
-                : 'bg-[#F7FEE7] border-[#82C91E]/40 text-[#0F172A]'
-            }`}>
-              <Activity className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 ${
-                selectedProject.insarDeformation.status === 'danger' ? 'text-rose-600' : 'text-[#82C91E]'
-              }`} />
-              <div className="space-y-0.5">
-                <div className="font-extrabold flex items-center justify-between">
-                  <span>Sentinel-1 InSAR Radar:</span>
-                  <span className="font-mono text-xs sm:text-sm ml-2 font-black text-rose-700">{selectedProject.insarDeformation.valueMm} mm</span>
-                </div>
-                <p className="text-[11px] sm:text-xs text-slate-700 font-medium leading-relaxed">{selectedProject.insarDeformation.details}</p>
+            {/* 2. AI Progress Bar (Reja vs AI Sentinel foizlari) */}
+            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+              <div className="flex justify-between items-center text-xs font-extrabold">
+                <span className="text-slate-600">Rejadagi Progress: <strong className="text-slate-900">{selectedProject.plannedProgress}%</strong></span>
+                <span className="text-[#65A30D]">AI Sentinel Amaldagi: <strong className="text-[#65A30D]">{selectedProject.actualProgress}%</strong></span>
               </div>
-            </div>
-
-            {/* UNESCO Height Check */}
-            {selectedProject.unescoZone && (
-              <div className="p-2.5 sm:p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs">
-                <div className="flex items-center justify-between font-extrabold">
-                  <span className="flex items-center space-x-1">
-                    <Building2 className="w-4 h-4 text-amber-600" />
-                    <span>YUNESKO Limiti: {selectedProject.maxAllowedHeight}m</span>
-                  </span>
-                  <span className="text-rose-600 font-mono font-black">Joriy: {selectedProject.currentHeight}m</span>
-                </div>
-              </div>
-            )}
-
-            {/* Progress Bar */}
-            <div className="space-y-1.5">
-              <div className="flex justify-between text-xs font-extrabold">
-                <span className="text-slate-500">Reja: <span className="text-[#0F172A]">{selectedProject.plannedProgress}%</span></span>
-                <span className="text-slate-500">AI Sentinel: <span className="text-[#65A30D]">{selectedProject.actualProgress}%</span></span>
-              </div>
-              <div className="relative w-full h-2.5 sm:h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+              <div className="relative w-full h-3 bg-slate-200 rounded-full overflow-hidden border border-slate-300">
                 <div
-                  className="absolute top-0 bottom-0 left-0 bg-slate-300 rounded-full"
+                  className="absolute top-0 bottom-0 left-0 bg-slate-400 rounded-full"
                   style={{ width: `${selectedProject.plannedProgress}%` }}
                 />
                 <div
@@ -383,15 +377,48 @@ export const MapModule: React.FC<MapModuleProps> = ({
               </div>
             </div>
 
-            {/* Quick Metrics Grid */}
-            <div className="grid grid-cols-2 gap-2 text-xs pt-0.5">
-              <div className="bg-slate-50 p-2.5 rounded-2xl border border-slate-200 flex justify-between">
-                <span className="text-slate-500 font-bold">Byudjet:</span>
-                <span className="font-extrabold text-emerald-600">{selectedProject.budget}</span>
+            {/* 3. InSAR Poydevor Cho'kish Ko'rsatkichi va Insoniy Vizual Izoh */}
+            <div className={`p-3.5 rounded-2xl border text-xs flex items-start space-x-3 shadow-xs ${
+              selectedProject.insarDeformation.status === 'danger'
+                ? 'bg-rose-50 border-rose-200 text-rose-900'
+                : selectedProject.insarDeformation.status === 'warning'
+                ? 'bg-amber-50 border-amber-200 text-amber-900'
+                : 'bg-[#F7FEE7] border-[#82C91E]/40 text-[#0F172A]'
+            }`}>
+              <Activity className={`w-5 h-5 shrink-0 mt-0.5 ${
+                selectedProject.insarDeformation.status === 'danger' ? 'text-rose-600' : 'text-[#82C91E]'
+              }`} />
+              <div className="space-y-1 w-full">
+                <div className="font-extrabold flex items-center justify-between">
+                  <span>Sentinel-1 InSAR Poydevor:</span>
+                  <span className="font-mono text-sm font-black text-rose-700">{selectedProject.insarDeformation.valueMm} mm</span>
+                </div>
+                <div className="text-[11px] font-bold flex items-center space-x-1">
+                  {selectedProject.insarDeformation.status === 'danger' ? (
+                    <span className="text-rose-700 flex items-center space-x-1">
+                      <AlertCircle className="w-3.5 h-3.5 inline mr-1 text-rose-600" />
+                      <span>-5mm va undan ko'p: XAVFLI CHO'KISH (Red Flag Alert)</span>
+                    </span>
+                  ) : (
+                    <span className="text-[#65A30D] flex items-center space-x-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 inline mr-1 text-[#82C91E]" />
+                      <span>0mm dan -2mm gacha: Barqaror poydevor</span>
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed pt-0.5">{selectedProject.insarDeformation.details}</p>
               </div>
-              <div className="bg-slate-50 p-2.5 rounded-2xl border border-slate-200 flex justify-between">
-                <span className="text-slate-500 font-bold">AI Sur'at:</span>
-                <span className="font-extrabold text-[#65A30D]">{selectedProject.aiVelocity}</span>
+            </div>
+
+            {/* 4. Pudratchi Nomi va Byudjet Ko'rsatkichi */}
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                <span className="text-slate-500 font-bold block text-[11px]">Pudratchi Tashkilot:</span>
+                <span className="font-extrabold text-[#0F172A] truncate block mt-0.5">{selectedProject.contractor}</span>
+              </div>
+              <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                <span className="text-slate-500 font-bold block text-[11px]">Ajratilgan Byudjet:</span>
+                <span className="font-extrabold text-emerald-600 block mt-0.5">{selectedProject.budget}</span>
               </div>
             </div>
 
