@@ -215,22 +215,22 @@ export const MapModule: React.FC<MapModuleProps> = ({
   }, [projects, filterStatus, activeLayer, selectedProject, onSelectProject]);
 
   return (
-    <div className="rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_12px_36px_-6px_rgba(15,23,42,0.06)] overflow-hidden transition-all duration-300 hover:shadow-[0_16px_44px_-8px_rgba(130,201,30,0.12)] p-4 sm:p-6 space-y-4 sm:space-y-6 text-[#0F172A]">
+    <div className="p-3.5 sm:p-6 card-3d space-y-4 sm:space-y-6 text-[#0F172A] overflow-x-hidden max-w-full">
 
-      {/* ── SECTION HEADER & FILTERS ────────────────────────────────────────────── */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+      {/* ── SECTION HEADER & FILTERS (100% RESPONSIVE) ────────────────────────────── */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 border-b border-slate-200 pb-3.5 sm:pb-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] tracking-tight flex items-center space-x-2.5">
-            <span>Samarqand GIS Xaritasi va Monitoringi</span>
+          <h2 className="text-lg sm:text-2xl font-extrabold text-[#0F172A] tracking-tight">
+            Samarqand GIS Xaritasi va Monitoringi
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 font-semibold mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 font-semibold mt-0.5 sm:mt-1">
             Qurilish ob'ektlarining aniq joylashuvi, bajarilish foizi va poydevor cho'kish ko'rsatkichlari
           </p>
         </div>
 
-        {/* Status Filter Pills */}
-        <div className="flex items-center space-x-2 w-full md:w-auto" role="group" aria-label="Loyiha filtrlari">
-          <div className="flex items-center space-x-1.5 slot-3d-inset p-1 sm:p-1.5 overflow-x-auto no-scrollbar w-full md:w-auto">
+        {/* Status Filter Pills (Touch-Friendly Horizontal Scroll) */}
+        <div className="flex items-center space-x-2 w-full md:w-auto overflow-x-auto no-scrollbar max-w-full py-0.5" role="group" aria-label="Loyiha filtrlari">
+          <div className="flex items-center space-x-1.5 slot-3d-inset p-1 sm:p-1.5 overflow-x-auto no-scrollbar w-full md:w-auto shrink-0">
             {([
               { key: 'all' as const, label: `Barchasi (${totalCount})`, icon: null },
               { key: 'red_flag' as const, label: `Kechikayotgan (${redFlagCount})`, icon: <AlertCircle className="w-4 h-4 text-rose-500" /> },
@@ -241,7 +241,7 @@ export const MapModule: React.FC<MapModuleProps> = ({
                 key={key}
                 onClick={() => setFilterStatus(key)}
                 aria-pressed={filterStatus === key}
-                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[40px] ${
+                className={`px-3.5 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer whitespace-nowrap min-h-[44px] shrink-0 ${
                   filterStatus === key
                     ? 'pill-3d-active'
                     : 'text-slate-600 hover:text-slate-900'
@@ -255,11 +255,11 @@ export const MapModule: React.FC<MapModuleProps> = ({
         </div>
       </div>
 
-      {/* ── MAIN LAYOUT: MAP + DEDICATED SIDEBAR (OUTSIDE MAP) ─────────────────── */}
-      <div className="flex flex-col lg:flex-row gap-6">
+      {/* ── MAIN LAYOUT: MAP + DEDICATED SIDEBAR (100% MOBILE RESPONSIVE STACK) ─── */}
+      <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
 
-        {/* 1. CLEAN MAP CONTAINER (NO OVERLAPPING MODAL INSIDE) */}
-        <div className="flex-1 relative w-full h-[420px] sm:h-[500px] lg:h-[560px] rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50">
+        {/* 1. CLEAN MAP CONTAINER */}
+        <div className="flex-1 relative w-full h-[320px] sm:h-[480px] lg:h-[560px] rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50">
 
           {/* Layer Switcher (Top Right) */}
           <div className="absolute top-3 right-3 z-20 flex items-center space-x-1.5 bg-white/95 backdrop-blur-md p-1.5 rounded-full border border-slate-200 shadow-md" role="group" aria-label="Xarita qatlami">
