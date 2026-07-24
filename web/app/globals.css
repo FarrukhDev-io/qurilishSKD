@@ -112,6 +112,36 @@ body {
   background: #ffffff !important;
 }
 
+/* Toast slide-up animation */
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade-in for modals and drawers */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* No scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Leaflet custom marker reset */
+.custom-map-marker { background: transparent !important; border: none !important; }
+
+/* Scan line animation for crowd module */
+@keyframes scanLine {
+  0%   { top: 10%; opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { top: 90%; opacity: 0; }
+}
+
 /* ─── Custom Animations (Tailwind v4 compatible) ─── */
 @keyframes fadeInUp {
   from {
