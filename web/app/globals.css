@@ -152,3 +152,9 @@ body {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* ─── Performance: GPU Compositing Hints ─── */
+.animate-ping          { will-change: transform, opacity; }
+.animate-pulse         { will-change: opacity; }
+.startup-card          { will-change: transform; }
+.btn-lime-primary      { will-change: transform, box-shadow; }
+.leaflet-container     { will-change: contents; }

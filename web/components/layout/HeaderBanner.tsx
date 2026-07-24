@@ -3,7 +3,7 @@
 import React from 'react';
 import { Satellite, Cpu, Keyboard, Building2 } from 'lucide-react';
 
-export const HeaderBanner: React.FC = () => {
+export const HeaderBanner = React.memo(function HeaderBanner() {
   return (
     <div className="bg-white border-b border-slate-200 shadow-sm overflow-x-hidden">
 
@@ -129,4 +129,4 @@ export const HeaderBanner: React.FC = () => {
       </div>
     </div>
   );
-};
+});

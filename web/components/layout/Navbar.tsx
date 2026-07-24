@@ -13,14 +13,14 @@ export interface NavbarProps {
   onOpenPdfModal: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({
+export const Navbar = React.memo(function Navbar({
   activeRole,
   setActiveRole,
   activeTab,
   setActiveTab,
   onOpenReportModal,
   onOpenPdfModal,
-}) => {
+}: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -271,4 +271,4 @@ export const Navbar: React.FC<NavbarProps> = ({
 
     </header>
   );
-};
+});
